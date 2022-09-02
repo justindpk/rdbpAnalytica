@@ -1,16 +1,18 @@
 const axios = require('axios');
 
-async function getDataFromUrl(url) {
-    const data = await axios.get(url)
-    return data.data
+async function duckDatabaseParser(database_name, database_url) {
+    let response = await axios.get(database_url)
+    response = response.data.replace(database_name + ' = ', '')
+    return [database_name, JSON.parse(response)]
 }
 
-function parseAllDucks(name, data) {
-    data = data.replace(name + ' = ', '')
-    data = JSON.parse(data)
-    console.log(data)
-    return data
+
+function main(databases) {
+    for (let [name, database] of databases) {
+        console.log(name, database)
+    }
 }
+
 
 URLS = {
     'allDucks': 'https://duck.art/rarity-data/v7/allDucks.js',
@@ -20,6 +22,11 @@ URLS = {
 }
 
 
+const promises = []
 for (const [database_name, database_url] of Object.entries(URLS)) {
-    getDataFromUrl(database_url).then(data => { parseAllDucks(database_name, data)})
+    const promise = duckDatabaseParser(database_name, database_url); promises.push(promise);
 }
+
+Promise.all(promises).then((values) => {
+    main(values)
+})
