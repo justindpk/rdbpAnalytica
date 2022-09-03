@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from "axios";
 
 async function duckDatabaseParser(database_name, database_url) {
     let response = await axios.get(database_url)
@@ -14,8 +14,8 @@ function main(databases) {
 }
 
 
-URLS = {
-    'allDucks': 'https://duck.art/rarity-data/v7/allDucks.js',
+const URLS = {
+    'allDucks': 'https://duck.art/rarity-daat/v7/allDucks.js',
     'globalRarity': 'https://duck.art/rarity-data/v7/globalRarity.js',
     'allBackpacks': 'https://duck.art/rarity-data/v7/allBackpacks.js',
     'backpackRarity': 'https://duck.art/rarity-data/v7/backpackRarity.js',
