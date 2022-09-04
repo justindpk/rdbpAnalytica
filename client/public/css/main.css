@@ -1,0 +1,75 @@
+/* || GLOBAL */
+.body{
+  margin: 4%;
+  margin-top: 4%;
+  font-family: 'Readex Pro';
+  color: #400000;
+  background: #FFFBC1;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 59px;
+}
+
+@media screen and (max-width: 1000px) {
+	body { margin:0; }
+	h1 { font-size:50px }
+	h2 { font-size:24px }
+	p { font-size:18px }
+	.number { top: 0; width:24px; height:24px }
+	.block { padding:40px 20px; width:100%; ; border: 0; border-bottom: 2px solid #400000; border-top: 2px solid #400000; margin: 0; margin-top: -2px}
+}
+
+/* || HEADER */
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 100%;
+	background: #ffe233;
+	text-align: left;
+	border-bottom: 3px solid #400000;
+    -webkit-box-shadow: 0 6px 8px -8px #400000;
+    -moz-box-shadow: 0 6px 8px -8px #400000;
+    box-shadow: 0 6px 8px -8px #400000;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	box-sizing: border-box;
+	padding: 0 10px;
+}
+
+.header .analyticaLogo {
+	padding: 5px;
+	height: 80px;
+	margin-left: 8px;
+}
+
+.header .links{
+    justify-content: flex-end;
+    padding-top: 1.3em;
+}
+
+.header .analyticaLogo img {
+	max-height: 100%;
+}
+
+.logoAndTitle{
+    text-align: left;
+    display: flex;
+}
+
+.analyticaTitle {
+	margin: 15px 602px 0px 0px;
+	display: flex;
+}
+.analyticaTitle a {
+	text-decoration: none;
+	font-family: 'Readex Pro';
+	font-size: 36px;
+	padding: 8px;
+	font-weight: lighter;
+	transition: all .1s;
+}
