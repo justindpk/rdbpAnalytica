@@ -143,7 +143,6 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	font-family: 'Readex Pro';
 	font-size: 36px;
 	padding: 8px;
-	font-weight: lighter;
 	transition: all .1s;
 }
 /* || HEADER */
@@ -172,11 +171,71 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
     text-align: left;
     display: flex;
     background: #ffffff;
-    border-bottom: 2px solid #400000;
+    border-bottom: 4px solid #400000;
 }
 
 .search{
     display: flex;
     margin: 25px;
+}
+/* || FILTER BAR */
+
+
+/* || DUCK TABLE */
+.duckTable{
+    display: flex;
+    width: 100%;
+    border-bottom: 2px solid #400000;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    color: #400000;
+    width: 100%;
+}
+  th,
+  td {
+    padding: 10px 15px;
+    vertical-align: middle;
+    border-right: 1px solid #400000;
+    border-bottom: 1px solid #400000;
+}
+  thead {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+}
+  tbody tr:nth-child(even) {
+    background: #f0f0f2;
+}
+  td {
+    border-bottom: 1px solid #400000;
+    border-right: 1px solid #400000;
+    text-align: center;
+    background: #FFFCDB;
+    font-size: 16px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+  .book-title {
+    color: #400000;
+    display: block;
+}
+
+.duckImage {
+	width: 60px;
+	height:60px;
+	border-radius: 2px;
+	border: 1px solid #400000;
+	box-sizing: border-box;
+	flex-shrink: 0;
+	transition: all .1s;
+}
+.duckIcon {
+	width: 30px;
+	height: 30px;
+    margin-top: 5px;
 }
 
