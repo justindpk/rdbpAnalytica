@@ -78,6 +78,39 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	background: #FF7533;
 	color: white;
 }
+.button.yellow {
+	background: #FFE233;
+	color: #400000;
+}
+.button.teal {
+	background: #5EDBC4;
+	color: #400000;
+}
+.button.pink {
+	background: #FF7EA7;
+	color: #400000;
+}
+.button.purple {
+	background: #643188;
+	color: #400000;
+}
+.button.green {
+	background: #CCE675;
+	color: #400000;
+}
+.button.cotton {
+	background: #8081ff;
+	color: #400000;
+}
+.button.lightPurple {
+	background: #C594FF;
+	color: #400000;
+}
+.button.skyBlue {
+	background: #81D8FF;
+	color: #400000;
+}
+
 
 @media screen and (max-width: 1000px) {
 	body { margin:0; }
@@ -238,4 +271,15 @@ table {
 	height: 30px;
     margin-top: 5px;
 }
-
+.duckButtonIcon{
+    width: 30px;
+	height: 30px;
+}
+.buttonIcon {
+	width: 60px;
+	height: 60px;
+}
+.backpackIcon {
+	width: 35px;
+	height: 35px;
+}
