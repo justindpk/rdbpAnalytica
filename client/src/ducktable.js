@@ -32,15 +32,15 @@ function columnConfig(columnName=null, duckKey=null, rowOverride=false) {
 
 const homeConfig = [
     columnConfig("Rank", "rank"),
-    columnConfig(`<img class="duckIcon" src="/client/public/img/duckIcon.svg" alt="">`, "img"),
+    columnConfig(`<img class="duckIcon" src="/client/public/img/duckIcon.svg">`, "img"),
     columnConfig("Number", "id"),
     columnConfig("Version", "version"),
     columnConfig("Parties", "parties"),
     columnConfig("Rank Change", "rarityChange"),
     columnConfig("Owner", "bludmoneyy", true),
     columnConfig("Days Owned", "184", true),
-    columnConfig("Opensea", `<img src="/client/public/img/opensea.svg" alt="">`, true),
-    columnConfig("Looksrare", `<img src="/client/public/img/looksrare.svg" alt="">`, true),
+    columnConfig("Opensea", `<img src="/client/public/img/opensea.svg">`, true),
+    columnConfig("Looksrare", `<img src="/client/public/img/looksrare.svg">`, true),
 ]
 
 const imageSuffixes = ['.png', '.jpg', '.jpeg', '.gif', '.svg'];
@@ -76,7 +76,7 @@ function loadTableData(duckData, start, stop, config) {
                 }
 
             } else if (duck.hasOwnProperty(column.key) && imageSuffixes.some(suffix => String(duck[column.key]).endsWith(suffix))) {
-                duckRow += `<td><img class="duckIcon" src="${duck[column.key]}" alt=""></td>`;
+                duckRow += `<td><img class="duckIcon" src="${duck[column.key]}"></td>`;
             } else {
                 duckRow += `<td><strong class="rowTitle">${duck[column.key]}</strong></td>`;
             }
