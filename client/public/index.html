@@ -21,8 +21,8 @@
     <body class="body">
         <div class="header">
             <div class="logoAndTitle">
-                <a class="analyticaLogo" href="/">
-                    <img src="/client/public/img/analyticaBerryLeafDuck.png" />
+                <a class="analyticaLogo" href="#top">
+                    <img src="/client/public/img/analyticaStrawberryDuck.png" />
                 </a>
                 <div class="analyticaTitle">
                     <a> RDBP Analytica </a>
@@ -39,7 +39,8 @@
 
         <div class="doubleHeader">
             <div class="screenerTitle">
-                <a> Duck Screener </a>
+                <!-- change to onClick duck/trait/backpack screener -->
+                <a id="screenerTitle"> Duck Screener </a>
             </div>
         </div>
 
@@ -51,15 +52,14 @@
             <button class="button row yellow"> <img class="duckButtonIcon" src="/client/public/img/duckIcon.svg"> </button>
             <button class="button row red"> Traits </button>
             <button class="button row lightPurple"> <img class="backpackIcon" src="/client/public/img/backpack.png"> </button>
-                <!--
-                <button class="button purple"> <img class="buttonIcon" src="/client/public/img/itemChest.png"> </button>
-                <button class="button teal"> <img class="buttonIcon" src="/client/public/img/emptyPaint.png"> </button>
-                <button class="button pink"> <img class="buttonIcon" src="/client/public/img/emptyWater.png"> </button>
-                <button class="button skyBlue"> <img class="buttonIcon" src="/client/public/img/itemEgg.png"> </button>
-                <button class="button green"> <img class="buttonIcon" src="/client/public/img/itemSeed.png"> </button>
-                <button class="button cotton"> <img class="buttonIcon" src="/client/public/img/sandBag.png"> </button>
-                -->
-            
+            <!--
+            <button class="button purple"> <img class="buttonIcon" src="/client/public/img/itemChest.png"> </button>
+            <button class="button teal"> <img class="buttonIcon" src="/client/public/img/emptyPaint.png"> </button>
+            <button class="button pink"> <img class="buttonIcon" src="/client/public/img/emptyWater.png"> </button>
+            <button class="button skyBlue"> <img class="buttonIcon" src="/client/public/img/itemEgg.png"> </button>
+            <button class="button green"> <img class="buttonIcon" src="/client/public/img/itemSeed.png"> </button>
+            <button class="button cotton"> <img class="buttonIcon" src="/client/public/img/sandBag.png"> </button>
+            -->
         </div>
 
         <div class="duckTable">
@@ -71,7 +71,7 @@
                     <th scope="col">Number</th>
                     <th scope="col">Version</th>
                     <th scope="col">Parties</th>
-                    <th scope="col">Rank CHG%</th>
+                    <th scope="col">Rank CHG</th>
                     <th scope="col">Owner</th>
                     <th scope="col">Days Owned</th>
                     <th scope="col">Opensea</th>
@@ -79,43 +79,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableData"></tbody>
-                <!--
-                <tbody>
-                    <tr>
-                    <td>
-                        <strong class="rowTitle">1</strong>
-                    </td>
-                    <td>
-                        <img class="duckImage" src="/client/public/img/9017.png">
-                    </td>
-                    <td>
-                    <strong class="rowTitle">9017</strong>
-                    </td>
-                    <td>
-                    <strong class="rowTitle">7</strong>
-                    </td>
-                    <td>
-                    <strong class="rowTitle">6</strong>
-                    </td>
-                    <td>
-                    <strong class="rowTitle">0%</strong>
-                    </td>
-                    <td>
-                    <strong class="rowTitle">bludmoneyy</strong>
-                    </td>
-                    <td>
-                    <strong class="rowTitle">184</strong>
-                    </td>
-                    <td>
-                    <a href="https://opensea.io/collection/rubber-duck-bath-party" class="rowTitle"><img src="/client/public/img/opensea.svg"></a>
-                    </td>
-                    <td>
-                    <a href="https://opensea.io/collection/rubber-duck-bath-party" class="rowTitle"><img src="/client/public/img/looksrare.svg"></a>
-                    </td>
-                    </tr>
-                </tbody>
-                -->
-                </table>
+            </table>
         </div>
     </body>
 </html>
