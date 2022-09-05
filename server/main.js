@@ -1,22 +1,28 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
 
-async function duckDatabaseParser(database_name, database_url) {
-    let response = await axios.get(database_url)
-    response = response.data.replace(database_name + ' = ', '')
-    return JSON.parse(response)
+async function updateLocalDatabases(database_name, database_url) {
+    async function getWriteDB() {
+        let response = await axios.get(database_url);
+        response = response.data.replace(database_name + ' = ', '');
+        fs.writeFileSync(databaseFilepath, response);
+    }
+
+    const databaseFilepath = `./databases/${database_name}.json`
+    if (!fs.existsSync(databaseFilepath)) {
+        await getWriteDB();
+    }
+    let stat = fs.statSync(databaseFilepath);
+    if (Date.now() - stat.mtimeMs > 604800000) {
+        await getWriteDB();
+    }
 }
 
-
-// function main(databases) {
-//     for (let [name, database] of databases) {
-//         console.log(name, database)
-//     }
-// }
 
 const URLS = {
     'allDucks': 'https://duck.art/rarity-data/v7/allDucks.js',
@@ -25,25 +31,33 @@ const URLS = {
     'backpackRarity': 'https://duck.art/rarity-data/v7/backpackRarity.js',
 }
 
+for (let [databaseName, url] of Object.entries(URLS)) {
+    updateLocalDatabases(databaseName, url).catch((err) => {
+        console.log(err)
+    });
+}
+let parsedDucks = [];
+let allDucks = JSON.parse(fs.readFileSync("./databases/allDucks.json").toString());
+console.log(allDucks);
+for (const duck of allDucks) {
+    let duckData = {
+        "id": duck.duck,
+        "rank": duck.history[0].rank,
+        "versions": duck.history.length,
+        "rarityChange": (duck.history.length < 2) ? 0 : duck.history[0].rank - duck.history[1].rank,
+        "img": duck.history[0].image,
+        "parties": duck.attributes[0].value
+    };
+    parsedDucks.push(duckData)
+}
 
-// const promises = []
-// for (const [database_name, database_url] of Object.entries(URLS)) {
-//     const promise = duckDatabaseParser(database_name, database_url);
-//     promises.push(promise);
-// }
 
-// Promise.all(promises).then((values) => {
-//     main(values)
-// })
 app.use(cors(
     {'Access-Control-Allow-Origin': '*'}
 ));
 
 app.get('/', (req, res) => {
-    duckDatabaseParser('allDucks', URLS['allDucks']).then((value) => {
-    console.log(value); res.send(value) }).catch((error) => {
-        res.send(error)
-    })
+    res.send(parsedDucks);
 });
 
 app.listen(port, () => {
