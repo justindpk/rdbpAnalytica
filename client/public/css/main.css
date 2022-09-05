@@ -70,6 +70,11 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	padding: 16px 30px 12px;
 	background: #f7f2f2;
 }
+.button.row{
+    margin-top: 20px;
+    margin-right: 5px;
+    display: flex;
+}
 .button.red {
 	background: #FF426E;
 	color: white;
@@ -218,8 +223,20 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 
 .search{
     display: flex;
-    margin: 25px;
+    margin: 25px 5px 25px 25px;
+    max-height: 50px;
 }
+
+.duckIcon {
+	width: 30px;
+	height: 30px;
+    margin-top: 5px;
+}
+.backpackIcon {
+	width: 35px;
+	height: 35px;
+}
+
 /* || FILTER BAR */
 
 
@@ -275,11 +292,6 @@ table {
 	flex-shrink: 0;
 	transition: all .1s;
 }
-.duckIcon {
-	width: 30px;
-	height: 30px;
-    margin-top: 5px;
-}
 .duckButtonIcon{
     width: 30px;
 	height: 30px;
@@ -288,7 +300,4 @@ table {
 	width: 60px;
 	height: 60px;
 }
-.backpackIcon {
-	width: 35px;
-	height: 35px;
-}
+
