@@ -1,5 +1,5 @@
 window.onload = () => {
-    fetch('http://localhost:3000').then(res => res.json()).then(data => {
+    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
         loadTableData(data);
     });
 };

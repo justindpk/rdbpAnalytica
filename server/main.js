@@ -4,7 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 
 const app = express();
-const port = 3000;
+const port = 3005;
 
 async function updateLocalDatabases(database_name, database_url) {
     const databaseFilepath = `./databases/${database_name}.json`
@@ -35,10 +35,11 @@ const URLS = {
 
 
 async function parseAllDucks() {
-for (let [databaseName, url] of Object.entries(URLS)) {
-    updateLocalDatabases(databaseName, url).catch((err) => {
-        console.log(err)
-    })}
+    for (let [databaseName, url] of Object.entries(URLS)) {
+        updateLocalDatabases(databaseName, url).catch((err) => {
+            console.log(err)
+        })
+    }
 
 
     let parsedDucks = [];
@@ -62,7 +63,7 @@ app.use(cors(
     {'Access-Control-Allow-Origin': '*'}
 ));
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     parseAllDucks().then((data) => res.send(data)).catch((err) => {
         console.log(err);
     })
