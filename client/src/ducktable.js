@@ -1,16 +1,19 @@
-const initial_load = 100;
+const initialLoad = 100;
+const amountToLoad = 50
 let counter = 0;
 
 window.onload = () => {
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-        loadTableData(data, 0, initial_load);
+        loadTableData(data, 0, initialLoad);
     });
 };
 window.onscroll = function (ev) {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.95) {
         console.log("loading more ducks");
         fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-            loadTableData(data, initial_load + counter * 30, initial_load + (counter + 1) * 30);
+            loadTableData(data,
+                initialLoad + counter * amountToLoad,
+                initialLoad + (counter + 1) * amountToLoad);
             counter++;
         });
 
