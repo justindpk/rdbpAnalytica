@@ -82,7 +82,6 @@ function loadTableData(duckData, start, stop, config) {
             }
         }
         duckRow += '</tr>';
-        console.log(duckRow);
         duckTable += duckRow;
     }
     if (start === 0) {
