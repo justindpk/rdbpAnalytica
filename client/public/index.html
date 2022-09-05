@@ -4,23 +4,111 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title> RDBP Analyitca</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300&amp;family=Syncopate:wght@400;700&amp;display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&amp;" rel="stylesheet">
+        <link href="/client/public/css/main.css" rel="stylesheet" media="all">
+        <script src="../src/main.js"></script>
+		<title> RDBP Analytica </title>
+        <meta name="description" content="A project based on the NFT collection Rubber Duck Bath Party, focused on providing duck metrics.">
+        <link rel="shortcut icon" href="/client/public/img/strawduck.svg">
     </head>
-    <script src="../src/main.js"></script>
 </html>
 
-<body style="text-align:center;" id="body">
-    <h1> RDBP Analytica</h1>
-    <h2> Welcome to RDBP Analytica</h2>
-    <div id="content">
-        <p> This is the home page for RDBP Analytica</p>
+<body class="body">
+    <div class="header">
+        <div class="logoAndTitle">
+            <a class="analyticaLogo" href="/">
+                <img src="/client/public/img/analyticaBerryLeafDuck.png" />
+            </a>
+            <div class="analyticaTitle">
+                <a> RDBP Analytica </a>
+            </div>
+        </div>
+        <div class="links">
+            <a class="socialMediaSvg" href="https://duck.art/" target="_blank"><img class="darkDuckIcon" src="/client/public/img/darkDuck.png"></a>
+            <a class="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank"><img src="/client/public/img/opensea.svg"></a>
+            <a class="socialMediaSvg" href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank"><img src="/client/public/img/looksrare.svg"></a>
+            <a class="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank"><img src="/client/public/img/twitter.svg"></a>
+            <a class="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank"><img src="/client/public/img/discord.svg"></a>
+        </div>
     </div>
-    <button onclick="">
-        Click to display random duck
-    </button>
-    <div id="nav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-        </ul>
+
+    <div class="doubleHeader">
+        <div class="screenerTitle">
+            <a> Duck Screener </a>
+        </div>
+    </div>
+
+    <div class="filterBar">
+        <div class="search">
+            <!-- replace -->
+            <input type="input" placeholder="Search" class="search-field" />
+            <button class="button yellow"> <img class="duckButtonIcon" src="/client/public/img/duckIcon.svg"> </button>
+            <button class="button red"> Traits </button>
+            <button class="button lightPurple"> <img class="backpackIcon" src="/client/public/img/backpack.png"> </button>
+            <!--
+            <button class="button purple"> <img class="buttonIcon" src="/client/public/img/itemChest.png"> </button>
+            <button class="button teal"> <img class="buttonIcon" src="/client/public/img/emptyPaint.png"> </button>
+            <button class="button pink"> <img class="buttonIcon" src="/client/public/img/emptyWater.png"> </button>
+            <button class="button skyBlue"> <img class="buttonIcon" src="/client/public/img/itemEgg.png"> </button>
+            <button class="button green"> <img class="buttonIcon" src="/client/public/img/itemSeed.png"> </button>
+            <button class="button cotton"> <img class="buttonIcon" src="/client/public/img/sandBag.png"> </button>
+            -->
+        </div>
+    </div>
+
+    <div class="duckTable">
+        <table class="sortable">
+            <thead>
+              <tr>
+                <th scope="col">Rank</th>
+                <th scope="col"><img class="duckIcon" src="/client/public/img/duckIcon.svg"> </th>
+                <th scope="col">Number</th>
+                <th scope="col">Version</th>
+                <th scope="col">Parties</th>
+                <th scope="col">Rarity CHG%</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Days Owned</th>
+                <th scope="col">Opensea</th>
+                <th scope="col">Looksrare</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong class="rowTitle">1</strong>
+                </td>
+                <td>
+                    <img class="duckImage" src="/client/public/img/9017.png">
+                </td>
+                <td>
+                <strong class="rowTitle">9017</strong>
+                </td>
+                <td>
+                <strong class="rowTitle">7</strong>
+                </td>
+                <td>
+                <strong class="rowTitle">6</strong>
+                </td>
+                <td>
+                <strong class="rowTitle">0%</strong>
+                </td>
+                <td>
+                <strong class="rowTitle">bludmoneyy</strong>
+                </td>
+                <td>
+                <strong class="rowTitle">184</strong>
+                </td>
+                <td>
+                <a href="https://opensea.io/collection/rubber-duck-bath-party" class="rowTitle"><img src="/client/public/img/opensea.svg"></a>
+                </td>
+                <td>
+                <a href="https://opensea.io/collection/rubber-duck-bath-party" class="rowTitle"><img src="/client/public/img/looksrare.svg"></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 </body>
