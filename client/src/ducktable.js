@@ -5,11 +5,12 @@ window.onload = () => {
 };
 
 function loadTableData(duckData) {
+    const itemsToDisplay = 100;
     // console.log(duckData);
     const tableBody = document.getElementById('tableData');
     let duckRow = '';
     let ducks = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < itemsToDisplay; i++) {
         ducks.push(duckData[i]);
     }
     /*
@@ -49,7 +50,6 @@ function loadTableData(duckData) {
                     <a href="https://opensea.io/collection/rubber-duck-bath-party" class="rowTitle"><img src="/client/public/img/looksrare.svg"></a>
                     </td>
                     </tr>`;
-        console.log(duckRow);
         tableBody.innerHTML = duckRow;
     }
 }
