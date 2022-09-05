@@ -38,13 +38,12 @@ for (let [databaseName, url] of Object.entries(URLS)) {
 }
 let parsedDucks = [];
 let allDucks = JSON.parse(fs.readFileSync("./databases/allDucks.json").toString());
-console.log(allDucks);
 for (const duck of allDucks) {
     let duckData = {
         "id": duck.duck,
         "rank": duck.history[0].rank,
-        "versions": duck.history.length,
-        "rarityChange": (duck.history.length < 2) ? 0 : duck.history[0].rank - duck.history[1].rank,
+        "version": duck.history.length,
+        "rarityChange": (duck.history.length < 2) ? 0 : duck.history[1].rank - duck.history[0].rank,
         "img": duck.history[0].image,
         "parties": duck.attributes[0].value
     };

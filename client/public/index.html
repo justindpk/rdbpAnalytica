@@ -14,23 +14,7 @@
         <meta name="description" content="A project based on the NFT collection Rubber Duck Bath Party, focused on providing duck metrics.">
         <link rel="shortcut icon" href="/client/public/img/strawduck.svg">
 
-        <script>
-            
-            window.onload = () => {
-                loadTableData();
-            };
-            
-            function loadTableData(/*duckData*/) {
-                const tableBody = document.getElementById('tableData');
-                let duckRow = '';
-                let ducks = [0];
-                for (let duck of ducks) {
-                    duckRow += `<tr><td> hi </tr></td>`;
-                console.log(duckRow);
-                tableBody.innerHTML = duckRow;
-                }
-            }
-        </script>
+        <script src="../src/ducktable.js"> </script>
     </head>
 
 
