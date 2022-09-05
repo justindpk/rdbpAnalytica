@@ -1,5 +1,5 @@
 const initialLoad = 100;
-const amountToLoad = 50
+const amountToLoad = 50;
 let counter = 0;
 
 window.onload = () => {
