@@ -22,11 +22,11 @@ window.onscroll = function () {
     }
 };
 
-function columnConfig(columnName=null, duckKey=null, rowOverride=false) {
+function columnConfig(columnName=null, duckKey=null, innerTagOverride=false) {
     return {
         headerName: columnName,
         key: duckKey,
-        override: rowOverride
+        tagOverride: innerTagOverride
     }
 }
 
@@ -65,13 +65,13 @@ function loadTableData(duckData, start, stop, config) {
     for (let duck of ducks) {
         let duckRow = '<tr>';
         for (let column of config) {
-            if (column.override) {
+            if (column.tagOverride) {
                 if (column.key.includes(".img") || column.key.includes(".svg")) {
                     duckRow += `<td><a href="https://opensea.io/collection/rubber-duck-bath-party" class="rowTitle">
                                 ${column.key}
                                 </a></td>`;
                 } else {
-                    console.log("rowOverride", column.override);
+                    console.log("rowOverride", column.tagOverride);
                     duckRow += `<td><strong class="rowTitle">${column.key}</strong></td>`;
                 }
 
