@@ -9,7 +9,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300&amp;family=Syncopate:wght@400;700&amp;display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&amp;" rel="stylesheet">
         <link href="/client/public/css/main.css" rel="stylesheet" media="all">
-        <script src="../src/main.js"></script>
         <title> RDBP Analytica </title>
         <meta name="description" content="A project based on the NFT collection Rubber Duck Bath Party, focused on providing duck metrics.">
         <link rel="shortcut icon" href="/client/public/img/strawduck.svg">
@@ -21,6 +20,7 @@
     <body class="body">
         <div class="header">
             <div class="logoAndTitle">
+
                 <a class="analyticaLogo" href="#top">
                     <img src="/client/public/img/analyticaStrawberryDuck.png" />
                 </a>
@@ -47,7 +47,7 @@
         <div class="filterBar">
             <div class="search">
                 <!-- replace -->
-                <input type="input" placeholder="Search" class="search-field" />
+                <input type="text" placeholder="Search" class="search-field" />
             </div>
             <button class="button row yellow"> <img class="duckButtonIcon" src="/client/public/img/duckIcon.svg"> </button>
             <button class="button row red"> Traits </button>
@@ -64,20 +64,7 @@
 
         <div class="duckTable">
             <table class="sortable">
-                <thead>
-                    <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col"><img class="duckIcon" src="/client/public/img/duckIcon.svg"> </th>
-                    <th scope="col">Number</th>
-                    <th scope="col">Version</th>
-                    <th scope="col">Parties</th>
-                    <th scope="col">Rank CHG</th>
-                    <th scope="col">Owner</th>
-                    <th scope="col">Days Owned</th>
-                    <th scope="col">Opensea</th>
-                    <th scope="col">Looksrare</th>
-                    </tr>
-                </thead>
+                <thead id="tableHeader"></thead>
                 <tbody id="tableData"></tbody>
             </table>
         </div>
