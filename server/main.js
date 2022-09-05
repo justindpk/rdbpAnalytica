@@ -15,14 +15,14 @@ async function updateLocalDatabases(database_name, database_url) {
         fs.writeFileSync(databaseFilepath, response);
     }
 
-    // if (!fs.existsSync(databaseFilepath)) {
-    //     await getWriteDB();
-    // }
-    // let stat = fs.statSync(databaseFilepath);
-    // if (Date.now() - stat.mtimeMs > 604800000) {
-    //     await getWriteDB();
-    // }
-    await getWriteDB();
+    let stat = fs.statSync(databaseFilepath);
+    if (!fs.existsSync(databaseFilepath)) {
+        await getWriteDB();
+    } else if (Date.now() - stat.mtimeMs > 604800000) {
+        await getWriteDB();
+    } else {
+        console.log(`Database ${database_name} is up to date`);
+    }
 }
 
 

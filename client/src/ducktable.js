@@ -13,7 +13,7 @@ function loadTableData(duckData) {
         ducks.push(duckData[i]);
     }
     /*
-        idrank version rarityChange img parties
+        id rank version rarityChange img parties
     */
 
     for (let duck of ducks) {
