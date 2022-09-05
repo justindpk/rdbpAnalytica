@@ -125,6 +125,7 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	body { margin-top:0 }
 	.doubleHeader { width: 240%; }
 }
+/* || GLOBAL */
 
 
 /* || HEADER */
@@ -177,6 +178,12 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	font-size: 36px;
 	padding: 8px;
 	transition: all .1s;
+}
+.darkDuckIcon {
+	width: 25px;
+	height: 25px;
+    margin-bottom: 2px;
+    margin-right: 5px;
 }
 /* || HEADER */
 
