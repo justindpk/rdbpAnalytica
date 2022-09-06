@@ -155,6 +155,17 @@ const homeConfig = [
     columnConfig().setHeaderStatic("Looksrare").setColumnType('img').setColumnSrc("/client/public/img/looksrare.svg").setColumnHref("https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6")
 ]
 
+const traitConfig = [
+    columnConfig().setHeaderStatic("Heads").setColumnType("heads").setColumnSrc("/client/public/img/heads/").setColumnKey("heads").appendKeyToSrc(),
+    columnConfig().setHeaderStatic("Eyes").setColumnType("eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").appendKeyToSrc(),
+    columnConfig().setHeaderStatic("Necks").setColumnType("beaks").setColumnSrc("/client/public/img/beaks/").setColumnKey("beaks").appendKeyToSrc(),
+    columnConfig().setHeaderStatic("Heads").setColumnType("necks").setColumnSrc("/client/public/img/necks/").setColumnKey("necks").appendKeyToSrc(),
+    columnConfig().setHeaderStatic("Shirts").setColumnType("shirts").setColumnSrc("/client/public/img/shirts/").setColumnKey("necks").appendKeyToSrc(),
+    columnConfig().setHeaderStatic("Tattoos").setColumnType("tattoos").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoos").appendKeyToSrc(),
+    columnConfig().setHeaderStatic("Covers").setColumnType("covers").setColumnSrc("/client/public/img/covers/").setColumnKey("covers").appendKeyToSrc(),
+    columnConfig().setHeaderStatic("Backgrounds").setColumnType("backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("backgrounds").appendKeyToSrc()
+]
+
 function loadTableHeader(config) {
     const tableHeader = document.getElementById('tableHeader');
     let header = '<tr>';
@@ -204,4 +215,11 @@ function loadTableData(duckData, start, stop, config, sortBy="rank", ascending=t
     } else {
         tableBody.innerHTML += duckTable;
     }
+}
+
+function generateTraitTable(){
+    loadTableHeader(traitConfig);
+    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+        loadTableData(data, 0, initialLoad, traitConfig);
+    });
 }
