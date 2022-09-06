@@ -126,7 +126,7 @@ function columnConfig() {
 
 const homeConfig = [
     columnConfig().setHeaderStatic("Rank").setColumnKey("rank"),
-    columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckIcon"),
+    columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Number").setColumnKey("id"),
     columnConfig().setHeaderStatic("Version").setColumnKey("version"),
     columnConfig().setHeaderStatic("Parties").setColumnKey("parties"),
@@ -145,7 +145,16 @@ function loadTableHeader(config) {
     }
     header += '</tr>';
     tableHeader.innerHTML = header;
+
+    const headers = tableHeader.querySelectorAll('th');
+    [].forEach.call(headers, function (sortHead, index) {
+        sortHead.addEventListener('click', function () {
+            // This function will sort the column
+            console.log('clicked');
+        });
+    });
 }
+
 
 function loadTableData(duckData, start, stop, config) {
     const tableBody = document.getElementById('tableData');
