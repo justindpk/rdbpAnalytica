@@ -34,48 +34,60 @@ class ColumnConfig {
         this.columnSrc = null;
         this.columnHref = null;
         this.columnClass = null;
+        this.isSortable = false;
+        this.sortClicked = false;
     }
 
     setHeaderType(headerType) {
         this.headerType = headerType;
         return this;
     }
+
     setHeaderStatic(headerName) {
         this.headerName = headerName;
         return this;
     }
+
     setHeaderSrc(src) {
         this.headerSrc = src;
         return this;
     }
+
     setHeaderClass(headerClass) {
         this.headerClass = headerClass;
         return this;
     }
+
     setColumnKey(key) {
         this.columnKey = key;
         return this;
     }
+
     setColumnStatic(value) {
         this.staticColumn = value;
         return this;
     }
+
     setColumnType(type) {
         this.columnType = type;
         return this;
     }
+
     setColumnSrc(src) {
         this.columnSrc = src;
         return this;
     }
+
     setColumnHref(href) {
         this.columnHref = href;
         return this;
     }
+
     setColumnClass(columnClass) {
         this.columnClass = columnClass;
         return this;
     }
+
     getHeaderTag() {
         let tag = `<th scope="col">`
         if (this.headerName) {
@@ -94,6 +106,12 @@ class ColumnConfig {
         return tag;
 
     }
+
+    sortable() {
+        this.isSortable = true;
+        return this;
+    }
+
     getColumnTag(duckData) {
         let tag = `<td>`
         if (this.columnHref) {
@@ -125,12 +143,12 @@ function columnConfig() {
 }
 
 const homeConfig = [
-    columnConfig().setHeaderStatic("Rank").setColumnKey("rank"),
+    columnConfig().setHeaderStatic("Rank").setColumnKey("rank").sortable(),
     columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Number").setColumnKey("id"),
-    columnConfig().setHeaderStatic("Version").setColumnKey("version"),
-    columnConfig().setHeaderStatic("Parties").setColumnKey("parties"),
-    columnConfig().setHeaderStatic("Rank Change").setColumnKey("rarityChange"),
+    columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
+    columnConfig().setHeaderStatic("Version").setColumnKey("version").sortable(),
+    columnConfig().setHeaderStatic("Parties").setColumnKey("parties").sortable(),
+    columnConfig().setHeaderStatic("Rank Change").setColumnKey("rarityChange").sortable(),
     columnConfig().setHeaderStatic("Owner").setColumnStatic("bludmoneyy"),
     columnConfig().setHeaderStatic("Days Owned").setColumnStatic("184"),
     columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party"),
@@ -147,16 +165,26 @@ function loadTableHeader(config) {
     tableHeader.innerHTML = header;
 
     const headers = tableHeader.querySelectorAll('th');
-    [].forEach.call(headers, function (sortHead, index) {
-        sortHead.addEventListener('click', function () {
-            // This function will sort the column
-            console.log('clicked');
-        });
-    });
+    // console.log(headers.length, config.length);
+    for (let i in config) {
+        if (config[i].isSortable) {
+            headers[i].addEventListener('click', () => {
+                config[i].sortClicked = !config[i].sortClicked;
+                fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+                    loadTableData(data, 0, initialLoad, homeConfig, config[i].columnKey, config[i].sortClicked);
+                });
+            })
+        }
+    }
 }
 
 
-function loadTableData(duckData, start, stop, config) {
+function loadTableData(duckData, start, stop, config, sortBy="rank", ascending=true) {
+    if (ascending) {
+        duckData.sort((a, b) => a[sortBy] - b[sortBy]);
+    } else {
+        duckData.sort((a, b) => b[sortBy] - a[sortBy]);
+    }
     const tableBody = document.getElementById('tableData');
     let ducks = [];
     for (let i = start; i < stop; i++) {
