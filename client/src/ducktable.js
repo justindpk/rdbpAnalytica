@@ -1,6 +1,8 @@
 const initialLoad = 100;
 const amountToLoad = 50;
 let counter = 0;
+let sortBy_ = "rank";
+let sortAscending = false;
 
 window.onload = () => {
     loadTableHeader(duckConfig);
@@ -15,7 +17,7 @@ window.onscroll = function () {
             loadTableData(data[0], data[1],
                 initialLoad + counter * amountToLoad,
                 initialLoad + (counter + 1) * amountToLoad,
-                configToUse);
+                configToUse, sortBy_, sortAscending);
             counter++;
         });
 
@@ -133,8 +135,7 @@ class ColumnConfig {
                     filename = '';
                     const columnKey = String(this.columnKey)[0].toUpperCase() + String(this.columnKey).slice(1);
                     for (const traits of Object.values(traitTable[columnKey])) {
-                        // console.log(key);
-                        if (duckData[this.columnKey] === traits.name) {
+                        if (duckData[this.columnKey].toLowerCase() === traits.name.toLowerCase()) {
                             filename = traits.id < 10 ? `0${traits.id}` : traits.id;
                             filename += '.png';
                             break;
@@ -161,7 +162,6 @@ class ColumnConfig {
 }
 
 // <th scope="col"><img class="duckIcon" src="/client/public/img/duckIcon.svg"></th>
-console.log(columnConfig().setHeaderStatic("Rank").setColumnKey("rank").getHeaderTag());
 
 function columnConfig() {
     return new ColumnConfig()
@@ -181,14 +181,17 @@ const duckConfig = [
 ]
 
 const traitConfig = [
+    columnConfig().setHeaderStatic("Rank").setColumnKey("rank").sortable(),
+    columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
     columnConfig().setHeaderStatic("Heads").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Necks").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Heads").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Shirts").setColumnSrc("/client/public/img/shirts/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Necks").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Beaks").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Shirts").setColumnSrc("/client/public/img/shirts/").setColumnKey("shirt").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Tattoos").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Covers").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("backgrounds").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
 ]
 
 function loadTableHeader(config) {
@@ -204,9 +207,11 @@ function loadTableHeader(config) {
     for (let i in config) {
         if (config[i].isSortable) {
             headers[i].addEventListener('click', () => {
+                sortBy_ = config[i].columnKey;
                 config[i].sortClicked = !config[i].sortClicked;
+                sortAscending = !sortAscending;
                 fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-                    loadTableData(data[0], data[1], 0, initialLoad, homeConfig, config[i].columnKey, config[i].sortClicked);
+                    loadTableData(data[0], data[1], 0, initialLoad, configToUse, config[i].columnKey, config[i].sortClicked);
                 });
             })
         }
@@ -227,7 +232,6 @@ function loadTableData(duckData, traitData, start, stop, config, sortBy = "rank"
     }
     let duckTable = "";
     for (let duck of ducks) {
-        console.log(duck.traits);
         let duckRow = '<tr>';
         for (let column of config) {
             duckRow += column.getColumnTag(duck, traitData);
