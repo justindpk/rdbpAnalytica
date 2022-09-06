@@ -3,9 +3,9 @@ const amountToLoad = 50;
 let counter = 0;
 
 window.onload = () => {
-    loadTableHeader(homeConfig);
+    loadTableHeader(duckConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-        loadTableData(data, 0, initialLoad, homeConfig);
+        loadTableData(data, 0, initialLoad, duckConfig);
     });
 };
 window.onscroll = function () {
@@ -15,7 +15,7 @@ window.onscroll = function () {
             loadTableData(data,
                 initialLoad + counter * amountToLoad,
                 initialLoad + (counter + 1) * amountToLoad,
-                homeConfig);
+                duckConfig);
             counter++;
         });
 
@@ -158,7 +158,7 @@ function columnConfig() {
     return new ColumnConfig()
 }
 
-const homeConfig = [
+const duckConfig = [
     columnConfig().setHeaderStatic("Rank").setColumnKey("rank").sortable(),
     columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
@@ -237,5 +237,12 @@ function generateTraitTable(){
     loadTableHeader(traitConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
         loadTableData(data, 0, initialLoad, traitConfig);
+    });
+}
+
+function generateDuckTable(){
+    loadTableHeader(duckConfig);
+    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+        loadTableData(data, 0, initialLoad, duckConfig);
     });
 }
