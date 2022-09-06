@@ -20,8 +20,9 @@
     <body class="body">
         <div class="header">
             <div class="logoAndTitle">
-                <a class="analyticaLogo" href="/">
-                    <img src="/client/public/img/analyticaBerryLeafDuck.png"/>
+
+                <a class="analyticaLogo" href="#top">
+                    <img src="/client/public/img/analyticaStrawberryDuck.png" />
                 </a>
                 <div class="analyticaTitle">
                     <a> RDBP Analytica </a>
@@ -38,7 +39,8 @@
 
         <div class="doubleHeader">
             <div class="screenerTitle">
-                <a> Duck Screener </a>
+                <!-- change to onClick duck/trait/backpack screener -->
+                <a id="screenerTitle"> Duck Screener </a>
             </div>
         </div>
 
@@ -50,20 +52,19 @@
             <button class="button row yellow"> <img class="duckButtonIcon" src="/client/public/img/duckIcon.svg"> </button>
             <button class="button row red"> Traits </button>
             <button class="button row lightPurple"> <img class="backpackIcon" src="/client/public/img/backpack.png"> </button>
-                <!--
-                <button class="button purple"> <img class="buttonIcon" src="/client/public/img/itemChest.png"> </button>
-                <button class="button teal"> <img class="buttonIcon" src="/client/public/img/emptyPaint.png"> </button>
-                <button class="button pink"> <img class="buttonIcon" src="/client/public/img/emptyWater.png"> </button>
-                <button class="button skyBlue"> <img class="buttonIcon" src="/client/public/img/itemEgg.png"> </button>
-                <button class="button green"> <img class="buttonIcon" src="/client/public/img/itemSeed.png"> </button>
-                <button class="button cotton"> <img class="buttonIcon" src="/client/public/img/sandBag.png"> </button>
-                -->
-            
+            <!--
+            <button class="button purple"> <img class="buttonIcon" src="/client/public/img/itemChest.png"> </button>
+            <button class="button teal"> <img class="buttonIcon" src="/client/public/img/emptyPaint.png"> </button>
+            <button class="button pink"> <img class="buttonIcon" src="/client/public/img/emptyWater.png"> </button>
+            <button class="button skyBlue"> <img class="buttonIcon" src="/client/public/img/itemEgg.png"> </button>
+            <button class="button green"> <img class="buttonIcon" src="/client/public/img/itemSeed.png"> </button>
+            <button class="button cotton"> <img class="buttonIcon" src="/client/public/img/sandBag.png"> </button>
+            -->
         </div>
 
         <div class="duckTable">
             <table class="sortable">
-                <thead id="tableHeader"> </thead>
+                <thead id="tableHeader"></thead>
                 <tbody id="tableData"></tbody>
             </table>
         </div>
