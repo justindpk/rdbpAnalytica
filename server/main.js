@@ -45,13 +45,20 @@ async function parseAllDucks() {
     let parsedDucks = [];
     let allDucks = JSON.parse(fs.readFileSync("./databases/allDucks.json").toString());
     for (const duck of allDucks) {
+        let attributes = [];
+        for (const [key, value] of Object.entries(duck.attributes)) {
+            if (key > 0) {
+                attributes.push(value);
+            }
+        }
         let duckData = {
             "id": duck.duck,
             "rank": duck.history[0].rank,
             "version": duck.history.length,
             "rarityChange": (duck.history.length < 2) ? 0 : duck.history[1].rank - duck.history[0].rank,
             "img": duck.history[0].image,
-            "parties": duck.attributes[0].value
+            "parties": duck.attributes[0].value,
+            "traits": attributes,
         };
         parsedDucks.push(duckData);
     }
