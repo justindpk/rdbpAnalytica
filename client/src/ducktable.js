@@ -156,7 +156,7 @@ function loadTableData(duckData, start, stop, config) {
     let duckTable = "";
     for (let duck of ducks) {
         let duckRow = '<tr>';
-
+        for (let column of config) {
             duckRow += column.getColumnTag(duck);
         }
         duckRow += '</tr>';
