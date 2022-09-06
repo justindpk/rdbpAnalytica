@@ -7,6 +7,7 @@ const app = express();
 const port = 3005;
 
 async function updateLocalDatabases(database_name, database_url) {
+    console.log("Updating " + database_name + " database");
     const databaseFilepath = `./databases/${database_name}.json`
 
     async function getWriteDB() {
@@ -15,13 +16,15 @@ async function updateLocalDatabases(database_name, database_url) {
         fs.writeFileSync(databaseFilepath, response);
     }
 
-    let stat = fs.statSync(databaseFilepath);
     if (!fs.existsSync(databaseFilepath)) {
         await getWriteDB();
-    } else if (Date.now() - stat.mtimeMs > 604800000) {
-        await getWriteDB();
     } else {
-        console.log(`Database ${database_name} is up to date`);
+        let stat = fs.statSync(databaseFilepath);
+        if (Date.now() - stat.mtimeMs > 604800000) {
+            await getWriteDB();
+        } else {
+            console.log(`Database ${database_name} is up to date`);
+        }
     }
 }
 
@@ -31,6 +34,7 @@ const URLS = {
     'globalRarity': 'https://duck.art/rarity-data/v7/globalRarity.js',
     'allBackpacks': 'https://duck.art/rarity-data/v7/allBackpacks.js',
     'backpackRarity': 'https://duck.art/rarity-data/v7/backpackRarity.js',
+    'traits': 'https://duck.art/rarity-data/traits.js',
 }
 
 
@@ -44,13 +48,8 @@ async function parseAllDucks() {
 
     let parsedDucks = [];
     let allDucks = JSON.parse(fs.readFileSync("./databases/allDucks.json").toString());
+
     for (const duck of allDucks) {
-        let attributes = [];
-        for (const [key, value] of Object.entries(duck.attributes)) {
-            if (key > 0) {
-                attributes.push(value);
-            }
-        }
         let duckData = {
             "id": duck.duck,
             "rank": duck.history[0].rank,
@@ -58,8 +57,22 @@ async function parseAllDucks() {
             "rarityChange": (duck.history.length < 2) ? 0 : duck.history[1].rank - duck.history[0].rank,
             "img": duck.history[0].image,
             "parties": duck.attributes[0].value,
-            "traits": attributes,
+            "background": null,
+            "body": null,
+            "tattoo": null,
+            "head": null,
+            "shirt": null,
+            "neck": null,
+            "beak": null,
+            "eyes": null,
+            "cover": null,
+
         };
+        for (let [key, value] of Object.entries(duck.attributes)) {
+            if (key > 0) {
+                duckData[value.trait_type.toLowerCase()] = value.value;
+            }
+        }
         parsedDucks.push(duckData);
     }
     return parsedDucks;
@@ -74,6 +87,10 @@ app.get('/api', (req, res) => {
     parseAllDucks().then((data) => res.send(data)).catch((err) => {
         console.log(err);
     })
+})
+
+app.get('/traits', (req, res) => {
+    res.send(fs.readFileSync("./databases/traits.json").toString());
 })
 
 app.listen(port, () => {
