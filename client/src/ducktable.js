@@ -22,6 +22,7 @@ window.onscroll = function () {
     }
 };
 
+
 class ColumnConfig {
     constructor() {
         this.headerName = null;
@@ -36,6 +37,8 @@ class ColumnConfig {
         this.columnClass = null;
         this.isSortable = false;
         this.sortClicked = false;
+        this.srcType = 'img';
+        this.appendKeySrc = false;
     }
 
     setHeaderType(headerType) {
@@ -124,14 +127,27 @@ class ColumnConfig {
         if (this.staticColumn || this.columnKey && this.columnType !== 'img') {
             tag += `>${this.staticColumn ? this.staticColumn : duckData[this.columnKey]}</${this.columnType}>`
         } else if (this.columnSrc || this.columnType === 'img') {
-            tag += `src="${this.columnSrc ? this.columnSrc : duckData[this.columnKey]}">`
+            if (this.appendKeySrc) {
+                tag += `src="${this.columnSrc}${duckData[this.columnKey]}"`
+            } else {
+                tag += `src="${this.columnSrc ? this.columnSrc : duckData[this.columnKey]}">`
+            }
         }
         if (this.columnHref) {
             tag += `</a>`
         }
         tag += `</td>`
         return tag;
+    }
 
+    setSrcType(type) {
+        this.srcType = type;
+        return this;
+    }
+
+    appendKeyToSrc() {
+        this.appendKeySrc = true;
+        return this;
     }
 }
 
@@ -165,7 +181,6 @@ function loadTableHeader(config) {
     tableHeader.innerHTML = header;
 
     const headers = tableHeader.querySelectorAll('th');
-    // console.log(headers.length, config.length);
     for (let i in config) {
         if (config[i].isSortable) {
             headers[i].addEventListener('click', () => {
@@ -179,7 +194,7 @@ function loadTableHeader(config) {
 }
 
 
-function loadTableData(duckData, start, stop, config, sortBy="rank", ascending=true) {
+function loadTableData(duckData, start, stop, config, sortBy = "rank", ascending = true) {
     if (ascending) {
         duckData.sort((a, b) => a[sortBy] - b[sortBy]);
     } else {
@@ -192,6 +207,7 @@ function loadTableData(duckData, start, stop, config, sortBy="rank", ascending=t
     }
     let duckTable = "";
     for (let duck of ducks) {
+        console.log(duck.traits);
         let duckRow = '<tr>';
         for (let column of config) {
             duckRow += column.getColumnTag(duck);
