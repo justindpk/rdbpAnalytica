@@ -76,7 +76,7 @@ function loadTableData(duckData, start, stop, config) {
                 }
 
             } else if (duck.hasOwnProperty(column.key) && imageSuffixes.some(suffix => String(duck[column.key]).endsWith(suffix))) {
-                duckRow += `<td><img class="duckIcon" src="${duck[column.key]}"></td>`;
+                duckRow += `<td><img class="duckImage" src="${duck[column.key]}"></td>`;
             } else {
                 duckRow += `<td><strong class="rowTitle">${duck[column.key]}</strong></td>`;
             }
