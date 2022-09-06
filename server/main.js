@@ -78,13 +78,14 @@ async function parseAllDucks() {
     return parsedDucks;
 }
 
+const traitsTable = JSON.parse(fs.readFileSync("./databases/traits.json").toString());
 
 app.use(cors(
     {'Access-Control-Allow-Origin': '*'}
 ));
 
 app.get('/api', (req, res) => {
-    parseAllDucks().then((data) => res.send(data)).catch((err) => {
+    parseAllDucks().then((data) => res.send([data, traitsTable])).catch((err) => {
         console.log(err);
     })
 })

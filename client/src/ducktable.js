@@ -5,17 +5,17 @@ let counter = 0;
 window.onload = () => {
     loadTableHeader(duckConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-        loadTableData(data, 0, initialLoad, duckConfig);
+        loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
     });
 };
 window.onscroll = function () {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.95) {
         console.log("loading more ducks");
         fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-            loadTableData(data,
+            loadTableData(data[0], data[1],
                 initialLoad + counter * amountToLoad,
                 initialLoad + (counter + 1) * amountToLoad,
-                duckConfig);
+                configToUse);
             counter++;
         });
 
@@ -37,8 +37,7 @@ class ColumnConfig {
         this.columnClass = null;
         this.isSortable = false;
         this.sortClicked = false;
-        this.srcType = 'img';
-        this.appendKeySrc = false;
+        this.isTrait = false;
     }
 
     setHeaderType(headerType) {
@@ -115,8 +114,10 @@ class ColumnConfig {
         return this;
     }
 
-    getColumnTag(duckData) {
+    getColumnTag(duckData, traitTable) {
+        let filename;
         let tag = `<td>`
+
         if (this.columnHref) {
             tag += `<a href="${this.columnHref}">`
         }
@@ -127,8 +128,22 @@ class ColumnConfig {
         if (this.staticColumn || this.columnKey && this.columnType !== 'img') {
             tag += `>${this.staticColumn ? this.staticColumn : duckData[this.columnKey]}</${this.columnType}>`
         } else if (this.columnSrc || this.columnType === 'img') {
-            if (this.appendKeySrc) {
-                tag += `src="${this.columnSrc}${duckData[this.columnKey]}"`
+            if (this.isTrait) {
+                if (duckData[this.columnKey]) {
+                    filename = '';
+                    const columnKey = String(this.columnKey)[0].toUpperCase() + String(this.columnKey).slice(1);
+                    for (const traits of Object.values(traitTable[columnKey])) {
+                        // console.log(key);
+                        if (duckData[this.columnKey] === traits.name) {
+                            filename = traits.id < 10 ? `0${traits.id}` : traits.id;
+                            filename += '.png';
+                            break;
+                        }
+                    }
+                } else {
+                    filename = '0.png';
+                }
+                tag += `src="${this.columnSrc}${filename}">`
             } else {
                 tag += `src="${this.columnSrc ? this.columnSrc : duckData[this.columnKey]}">`
             }
@@ -139,14 +154,8 @@ class ColumnConfig {
         tag += `</td>`
         return tag;
     }
-
-    setSrcType(type) {
-        this.srcType = type;
-        return this;
-    }
-
-    appendKeyToSrc() {
-        this.appendKeySrc = true;
+    trait() {
+        this.isTrait = true;
         return this;
     }
 }
@@ -172,14 +181,14 @@ const duckConfig = [
 ]
 
 const traitConfig = [
-    columnConfig().setHeaderStatic("Heads").setColumnType("heads").setColumnSrc("/client/public/img/heads/").setColumnKey("heads").appendKeyToSrc(),
-    columnConfig().setHeaderStatic("Eyes").setColumnType("eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").appendKeyToSrc(),
-    columnConfig().setHeaderStatic("Necks").setColumnType("beaks").setColumnSrc("/client/public/img/beaks/").setColumnKey("beaks").appendKeyToSrc(),
-    columnConfig().setHeaderStatic("Heads").setColumnType("necks").setColumnSrc("/client/public/img/necks/").setColumnKey("necks").appendKeyToSrc(),
-    columnConfig().setHeaderStatic("Shirts").setColumnType("shirts").setColumnSrc("/client/public/img/shirts/").setColumnKey("necks").appendKeyToSrc(),
-    columnConfig().setHeaderStatic("Tattoos").setColumnType("tattoos").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoos").appendKeyToSrc(),
-    columnConfig().setHeaderStatic("Covers").setColumnType("covers").setColumnSrc("/client/public/img/covers/").setColumnKey("covers").appendKeyToSrc(),
-    columnConfig().setHeaderStatic("Backgrounds").setColumnType("backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("backgrounds").appendKeyToSrc()
+    columnConfig().setHeaderStatic("Heads").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Necks").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Heads").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Shirts").setColumnSrc("/client/public/img/shirts/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Tattoos").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Covers").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("backgrounds").setColumnType('img').trait().setColumnClass("duckImage"),
 ]
 
 function loadTableHeader(config) {
@@ -197,7 +206,7 @@ function loadTableHeader(config) {
             headers[i].addEventListener('click', () => {
                 config[i].sortClicked = !config[i].sortClicked;
                 fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-                    loadTableData(data, 0, initialLoad, homeConfig, config[i].columnKey, config[i].sortClicked);
+                    loadTableData(data[0], data[1], 0, initialLoad, homeConfig, config[i].columnKey, config[i].sortClicked);
                 });
             })
         }
@@ -205,7 +214,7 @@ function loadTableHeader(config) {
 }
 
 
-function loadTableData(duckData, start, stop, config, sortBy = "rank", ascending = true) {
+function loadTableData(duckData, traitData, start, stop, config, sortBy = "rank", ascending = true) {
     if (ascending) {
         duckData.sort((a, b) => a[sortBy] - b[sortBy]);
     } else {
@@ -221,7 +230,7 @@ function loadTableData(duckData, start, stop, config, sortBy = "rank", ascending
         console.log(duck.traits);
         let duckRow = '<tr>';
         for (let column of config) {
-            duckRow += column.getColumnTag(duck);
+            duckRow += column.getColumnTag(duck, traitData);
         }
         duckRow += '</tr>';
         duckTable += duckRow;
@@ -233,16 +242,18 @@ function loadTableData(duckData, start, stop, config, sortBy = "rank", ascending
     }
 }
 
+let configToUse = duckConfig;
 function generateTraitTable(){
+    configToUse = traitConfig;
     loadTableHeader(traitConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-        loadTableData(data, 0, initialLoad, traitConfig);
+        loadTableData(data[0], data[1], 0, initialLoad, traitConfig);
     });
 }
 
 function generateDuckTable(){
     loadTableHeader(duckConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-        loadTableData(data, 0, initialLoad, duckConfig);
+        loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
     });
 }
