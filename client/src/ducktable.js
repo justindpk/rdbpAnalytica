@@ -175,9 +175,11 @@ const duckConfig = [
     columnConfig().setHeaderStatic("Parties").setColumnKey("parties").sortable(),
     columnConfig().setHeaderStatic("Rank Change").setColumnKey("rarityChange").sortable(),
     columnConfig().setHeaderStatic("Owner").setColumnStatic("bludmoneyy"),
-    columnConfig().setHeaderStatic("Days Owned").setColumnStatic("184"),
-    columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party"),
-    columnConfig().setHeaderStatic("Looksrare").setColumnType('img').setColumnSrc("/client/public/img/looksrare.svg").setColumnHref("https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6")
+    //columnConfig().setHeaderStatic("Days Owned").setColumnStatic("184"),
+    columnConfig().setHeaderStatic("Sales").setColumnStatic("3"),
+    columnConfig().setHeaderStatic("Last Sale").setColumnStatic(".33 ETH"),
+    columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
+    columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party")
 ]
 
 const traitConfig = [
@@ -192,6 +194,8 @@ const traitConfig = [
     columnConfig().setHeaderStatic("Tattoos").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Covers").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
+    columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party")
 ]
 
 function loadTableHeader(config) {
