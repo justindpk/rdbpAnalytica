@@ -269,6 +269,7 @@ function generateDuckTable(){
     counter = 0;
     sortBy_ = "rank";
     sortAscending = true;
+    configToUse = duckConfig;
     loadTableHeader(duckConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
