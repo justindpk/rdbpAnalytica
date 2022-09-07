@@ -2,7 +2,7 @@ const initialLoad = 100;
 const amountToLoad = 50;
 let counter = 0;
 let sortBy_ = "rank";
-let sortAscending = false;
+let sortAscending = true;
 
 window.onload = () => {
     loadTableHeader(duckConfig);
@@ -38,7 +38,6 @@ class ColumnConfig {
         this.columnHref = null;
         this.columnClass = null;
         this.isSortable = false;
-        this.sortClicked = false;
         this.isTrait = false;
     }
 
@@ -207,11 +206,15 @@ function loadTableHeader(config) {
     for (let i in config) {
         if (config[i].isSortable) {
             headers[i].addEventListener('click', () => {
+                if (sortBy_ !== config[i].columnKey) {
+                    sortAscending = true;
+                } else {
+                    sortAscending = !sortAscending;
+                }
+                counter = 0;
                 sortBy_ = config[i].columnKey;
-                config[i].sortClicked = !config[i].sortClicked;
-                sortAscending = !sortAscending;
                 fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-                    loadTableData(data[0], data[1], 0, initialLoad, configToUse, config[i].columnKey, config[i].sortClicked);
+                    loadTableData(data[0], data[1], 0, initialLoad, configToUse, config[i].columnKey, sortAscending);
                 });
             })
         }
@@ -248,6 +251,9 @@ function loadTableData(duckData, traitData, start, stop, config, sortBy = "rank"
 
 let configToUse = duckConfig;
 function generateTraitTable(){
+    counter = 0;
+    sortBy_ = "rank";
+    sortAscending = true;
     configToUse = traitConfig;
     loadTableHeader(traitConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
@@ -256,6 +262,9 @@ function generateTraitTable(){
 }
 
 function generateDuckTable(){
+    counter = 0;
+    sortBy_ = "rank";
+    sortAscending = true;
     loadTableHeader(duckConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, duckConfig);

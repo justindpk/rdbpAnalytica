@@ -73,9 +73,6 @@ async function parseAllDucks() {
                 duckData[value.trait_type.toLowerCase()] = value.value;
             }
         }
-        if (Number(duckData.id) === 406) {
-            console.log(duckData)
-        }
         parsedDucks.push(duckData);
     }
     return parsedDucks;
