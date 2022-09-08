@@ -197,6 +197,21 @@ const traitConfig = [
     columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party")
 ]
 
+const backpackConfig = [
+    columnConfig().setHeaderStatic("Rank").setColumnKey("rank").sortable(),
+    columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
+    columnConfig().setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyPaint.png").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyWater.png").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/sandBag.png").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/seed.png").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/egg.png").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/chest.png").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
+    columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party")
+]
+
+
 function loadTableHeader(config) {
     const tableHeader = document.getElementById('tableHeader');
     let header = '<tr>';
@@ -273,5 +288,16 @@ function generateDuckTable(){
     loadTableHeader(duckConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
+    });
+}
+
+function generateBackpackTable(){
+    counter = 0;
+    sortBy_ = "rank";
+    sortAscending = true;
+    configToUse = backpackConfig;
+    loadTableHeader(backpackConfig);
+    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+        loadTableData(data[0], data[1], 0, initialLoad, backpackConfig);
     });
 }

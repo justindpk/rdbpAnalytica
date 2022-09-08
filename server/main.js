@@ -48,8 +48,14 @@ async function parseAllDucks() {
 
     let parsedDucks = [];
     let allDucks = JSON.parse(fs.readFileSync("./databases/allDucks.json").toString());
+    let allBackpacks = JSON.parse(fs.readFileSync("./databases/allBackpacks.json").toString());
 
-    for (const duck of allDucks) {
+    allDucks.sort((a, b) => a["duck"] - b["duck"])
+    allBackpacks.sort((a, b) => a["duck"] - b["duck"])
+
+    for (const i in allDucks) {
+        let duck = allDucks[i];
+        let backpack = allBackpacks[i];
         let duckData = {
             "id": duck.duck,
             "rank": duck.history[0].rank,
@@ -66,13 +72,19 @@ async function parseAllDucks() {
             "beak": null,
             "eyes": null,
             "cover": null,
-
+            "water": null,
+            "bagOfSand": null,
+            "paintBucket": null,
+            "egg": null,
+            "seed": null,
+            "chest": null
         };
         for (let [key, value] of Object.entries(duck.attributes)) {
             if (key > 0) {
                 duckData[value.trait_type.toLowerCase()] = value.value;
             }
         }
+        
         parsedDucks.push(duckData);
     }
     return parsedDucks;
