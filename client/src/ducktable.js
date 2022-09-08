@@ -39,6 +39,7 @@ class ColumnConfig {
         this.columnClass = null;
         this.isSortable = false;
         this.isTrait = false;
+        this.isAppendIdToColumnHref = false;
     }
 
     setHeaderType(headerType) {
@@ -120,7 +121,7 @@ class ColumnConfig {
         let tag = `<td>`
 
         if (this.columnHref) {
-            tag += `<a href="${this.columnHref}">`
+            tag += `<a href="${this.columnHref}${this.isAppendIdToColumnHref ? duckData.id : ""}">`
         }
         tag += `<${this.columnType} `
         if (this.columnClass) {
@@ -144,6 +145,8 @@ class ColumnConfig {
                     filename = '0.png';
                 }
                 tag += `src="${this.columnSrc}${filename}">`
+            } else if (this.columnSrc && this.columnKey) {
+                tag += `src="${this.columnSrc}${duckData[this.columnKey]}${this.columnType === "img" ? ".png" : ""}">`
             } else {
                 tag += `src="${this.columnSrc ? this.columnSrc : duckData[this.columnKey]}">`
             }
@@ -156,6 +159,10 @@ class ColumnConfig {
     }
     trait() {
         this.isTrait = true;
+        return this;
+    }
+    appendIdToColumnHref() {
+        this.isAppendIdToColumnHref = true;
         return this;
     }
 }
@@ -178,7 +185,10 @@ const duckConfig = [
     columnConfig().setHeaderStatic("Sales").setColumnStatic("3"),
     columnConfig().setHeaderStatic("Last Sale").setColumnStatic(".33 ETH"),
     columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
-    columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party")
+    columnConfig()
+        .setHeaderStatic("Opensea")
+        .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
+        .appendIdToColumnHref()
 ]
 
 const traitConfig = [
@@ -194,8 +204,48 @@ const traitConfig = [
     columnConfig().setHeaderStatic("Covers").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
-    columnConfig().setHeaderStatic("Opensea").setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/collection/rubber-duck-bath-party")
+    columnConfig()
+        .setHeaderStatic("Opensea")
+        .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
+        .appendIdToColumnHref()
 ]
+
+const backpackConfig = [
+    columnConfig()
+        .setHeaderStatic("Rank")
+        .setColumnKey("rank").sortable(),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
+        .setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig()
+        .setHeaderStatic("Number").setColumnKey("id").sortable(),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyPaint.png")
+        .setColumnSrc("/client/public/img/paintBuckets/").setColumnKey("Paint Bucket").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyWater.png")
+        .setColumnSrc("/client/public/img/water/").setColumnKey("Water").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/sandBag.png")
+        .setColumnType('img').setColumnSrc("/client/public/img/bagOfSand/Unrevealed.png").setColumnClass("duckImage"),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/seed.png")
+        .setColumnKey("Seed").sortable(),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/egg.png")
+        .setColumnKey("Egg").sortable(),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/chest.png")
+        .setColumnKey("Chest").sortable(),
+    columnConfig()
+        .setHeaderStatic("Listed")
+        .setColumnStatic("No"),
+    columnConfig()
+        .setHeaderStatic("Opensea")
+        .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
+        .appendIdToColumnHref()
+]
+
 
 function loadTableHeader(config) {
     const tableHeader = document.getElementById('tableHeader');
@@ -273,5 +323,16 @@ function generateDuckTable(){
     loadTableHeader(duckConfig);
     fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
+    });
+}
+
+function generateBackpackTable(){
+    counter = 0;
+    sortBy_ = "rank";
+    sortAscending = true;
+    configToUse = backpackConfig;
+    loadTableHeader(backpackConfig);
+    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+        loadTableData(data[0], data[1], 0, initialLoad, backpackConfig);
     });
 }
