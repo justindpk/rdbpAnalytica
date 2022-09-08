@@ -40,9 +40,17 @@ const URLS = {
 
 async function parseAllDucks() {
     for (let [databaseName, url] of Object.entries(URLS)) {
-        updateLocalDatabases(databaseName, url).catch((err) => {
+        await updateLocalDatabases(databaseName, url).catch((err) => {
             console.log(err)
         })
+    }
+    const traitsTable = JSON.parse(fs.readFileSync("./databases/traits.json").toString());
+    const backpackRarity = JSON.parse(fs.readFileSync("./databases/backpackRarity.json").toString());
+    let backpackTypesCount = {};
+    for (let [backpackId, backpack] of Object.entries(backpackRarity)) {
+        if (backpackId !== "traitCount") {
+            backpackTypesCount[backpackId] = Object.keys(backpack).length;
+        }
     }
 
 
@@ -72,32 +80,51 @@ async function parseAllDucks() {
             "beak": null,
             "eyes": null,
             "cover": null,
-            "water": null,
-            "bagOfSand": null,
-            "paintBucket": null,
-            "egg": null,
-            "seed": null,
-            "chest": null
+            "Water": null,
+            "Bag of Sand": null,
+            "Paint Bucket": null,
+            "Egg": null,
+            "Seed": null,
+            "Chest": null
         };
+
         for (let [key, value] of Object.entries(duck.attributes)) {
             if (key > 0) {
                 duckData[value.trait_type.toLowerCase()] = value.value;
             }
         }
-        
+
+        // Backpacks
+        for (let [backpackId, backpackTypeCount] of Object.entries(backpackTypesCount)) {
+            if (backpackTypeCount > 1) {
+                duckData[backpackId] = 0;
+            }
+        }
+        for (const [key, value] of Object.entries(backpackTypesCount)) {
+            if (value === 1) {
+                duckData[key] = 0;
+            }
+        }
+        for (let attribute of backpack.attributes) {
+             if (backpackTypesCount[attribute.trait_type] === 1) {
+                duckData[attribute.trait_type] += 1;
+            } else {
+                duckData[attribute.trait_type] = attribute.value;
+            }
+        }
         parsedDucks.push(duckData);
+        console.log(duckData["Paint Bucket"]);
     }
-    return parsedDucks;
+    return [parsedDucks, traitsTable];
 }
 
-const traitsTable = JSON.parse(fs.readFileSync("./databases/traits.json").toString());
 
 app.use(cors(
     {'Access-Control-Allow-Origin': '*'}
 ));
 
 app.get('/api', (req, res) => {
-    parseAllDucks().then((data) => res.send([data, traitsTable])).catch((err) => {
+    parseAllDucks().then((data) => res.send(data)).catch((err) => {
         console.log(err);
     })
 })
