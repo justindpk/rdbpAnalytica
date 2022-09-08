@@ -40,6 +40,7 @@ class ColumnConfig {
         this.isSortable = false;
         this.isTrait = false;
         this.isAppendIdToColumnHref = false;
+        this.isOpenColumnHrefNT = false;
     }
 
     setHeaderType(headerType) {
@@ -121,7 +122,8 @@ class ColumnConfig {
         let tag = `<td>`
 
         if (this.columnHref) {
-            tag += `<a href="${this.columnHref}${this.isAppendIdToColumnHref ? duckData.id : ""}">`
+            tag += `<a href="${this.columnHref}${this.isAppendIdToColumnHref ? duckData.id : ""}"${this.isOpenColumnHrefNT ? " target=\"_blank\" " : ""}>`
+            console.log(tag)
         }
         tag += `<${this.columnType} `
         if (this.columnClass) {
@@ -165,6 +167,10 @@ class ColumnConfig {
         this.isAppendIdToColumnHref = true;
         return this;
     }
+    openColumnHrefNT() {
+        this.isOpenColumnHrefNT = true;
+        return this;
+    }
 }
 
 // <th scope="col"><img class="duckIcon" src="/client/public/img/duckIcon.svg"></th>
@@ -175,7 +181,9 @@ function columnConfig() {
 
 const duckConfig = [
     columnConfig().setHeaderStatic("Rank").setColumnKey("rank").sortable(),
-    columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
+        .setColumnKey("img").setColumnType('img').setColumnClass("duckImage").setColumnHref("https://duck.art/").appendIdToColumnHref().openColumnHrefNT(),
     columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
     columnConfig().setHeaderStatic("Version").setColumnKey("version").sortable(),
     columnConfig().setHeaderStatic("Parties").setColumnKey("parties").sortable(),
@@ -188,12 +196,14 @@ const duckConfig = [
     columnConfig()
         .setHeaderStatic("Opensea")
         .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
-        .appendIdToColumnHref()
+        .appendIdToColumnHref().openColumnHrefNT(),
 ]
 
 const traitConfig = [
     columnConfig().setHeaderStatic("Rank").setColumnKey("rank").sortable(),
-    columnConfig().setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg").setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+    columnConfig()
+        .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
+        .setColumnKey("img").setColumnType('img').setColumnClass("duckImage").setColumnHref("https://duck.art/").appendIdToColumnHref().openColumnHrefNT(),
     columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
     columnConfig().setHeaderStatic("Heads").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
@@ -207,7 +217,7 @@ const traitConfig = [
     columnConfig()
         .setHeaderStatic("Opensea")
         .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
-        .appendIdToColumnHref()
+        .appendIdToColumnHref().openColumnHrefNT(),
 ]
 
 const backpackConfig = [
@@ -216,7 +226,7 @@ const backpackConfig = [
         .setColumnKey("rank").sortable(),
     columnConfig()
         .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
-        .setColumnKey("img").setColumnType('img').setColumnClass("duckImage"),
+        .setColumnKey("img").setColumnType('img').setColumnClass("duckImage").setColumnHref("https://duck.art/").appendIdToColumnHref().openColumnHrefNT(),
     columnConfig()
         .setHeaderStatic("Number").setColumnKey("id").sortable(),
     columnConfig()
@@ -243,7 +253,7 @@ const backpackConfig = [
     columnConfig()
         .setHeaderStatic("Opensea")
         .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
-        .appendIdToColumnHref()
+        .appendIdToColumnHref().openColumnHrefNT(),
 ]
 
 
