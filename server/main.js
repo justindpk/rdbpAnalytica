@@ -113,7 +113,6 @@ async function parseAllDucks() {
             }
         }
         parsedDucks.push(duckData);
-        console.log(duckData["Paint Bucket"]);
     }
     return [parsedDucks, traitsTable];
 }
