@@ -1,26 +1,26 @@
-const initialLoad = 100;
-const amountToLoad = 50;
+const initialLoad = 200;
+const amountToLoad = 100;
 let counter = 0;
 let sortBy_ = "rank";
 let sortAscending = true;
+let duckDatabasePromise;
 
 window.onload = () => {
     loadTableHeader(duckConfig);
-    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-        loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
-    });
+    duckDatabasePromise = fetch('http://localhost:3005/api').then(res => res.json());
+    duckDatabasePromise.then(data => { loadTableData(data[0], data[1], 0, initialLoad, duckConfig) });
 };
+
 window.onscroll = function () {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight * 0.95) {
         console.log("loading more ducks");
-        fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+        duckDatabasePromise.then(data => {
             loadTableData(data[0], data[1],
                 initialLoad + counter * amountToLoad,
                 initialLoad + (counter + 1) * amountToLoad,
-                configToUse, sortBy_, sortAscending);
+                configToUse);
             counter++;
         });
-
     }
 };
 
@@ -256,6 +256,15 @@ const backpackConfig = [
         .appendIdToColumnHref().openColumnHrefNT(),
 ]
 
+function sortData(database, sortBy, ascending) {
+    let duckData = database[0]
+    if (ascending) {
+        duckData.sort((a, b) => a[sortBy] - b[sortBy]);
+    } else {
+        duckData.sort((a, b) => b[sortBy] - a[sortBy]);
+    }
+    return [duckData, database[1]];
+}
 
 function loadTableHeader(config) {
     const tableHeader = document.getElementById('tableHeader');
@@ -277,8 +286,9 @@ function loadTableHeader(config) {
                 }
                 counter = 0;
                 sortBy_ = config[i].columnKey;
-                fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
-                    loadTableData(data[0], data[1], 0, initialLoad, configToUse, config[i].columnKey, sortAscending);
+                duckDatabasePromise = duckDatabasePromise.then((database) => sortData(database, sortBy_, sortAscending));
+                duckDatabasePromise.then(data => {
+                    loadTableData(data[0], data[1], 0, initialLoad, configToUse);
                 });
             })
         }
@@ -286,17 +296,11 @@ function loadTableHeader(config) {
 }
 
 
-function loadTableData(duckData, traitData, start, stop, config, sortBy = "rank", ascending = true) {
-    if (ascending) {
-        duckData.sort((a, b) => a[sortBy] - b[sortBy]);
-    } else {
-        duckData.sort((a, b) => b[sortBy] - a[sortBy]);
-    }
+function loadTableData(duckData, traitData, start, stop, config) {
+
+
     const tableBody = document.getElementById('tableData');
-    let ducks = [];
-    for (let i = start; i < stop; i++) {
-        ducks.push(duckData[i]);
-    }
+    let ducks = duckData.slice(start, stop);
     let duckTable = "";
     for (let duck of ducks) {
         let duckRow = '<tr>';
@@ -320,7 +324,7 @@ function generateTraitTable(){
     sortAscending = true;
     configToUse = traitConfig;
     loadTableHeader(traitConfig);
-    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+    duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, traitConfig);
     });
 }
@@ -331,7 +335,7 @@ function generateDuckTable(){
     sortAscending = true;
     configToUse = duckConfig;
     loadTableHeader(duckConfig);
-    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+    duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
     });
 }
@@ -342,7 +346,7 @@ function generateBackpackTable(){
     sortAscending = true;
     configToUse = backpackConfig;
     loadTableHeader(backpackConfig);
-    fetch('http://localhost:3005/api').then(res => res.json()).then(data => {
+    duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, backpackConfig);
     });
 }
