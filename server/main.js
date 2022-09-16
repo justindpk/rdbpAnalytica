@@ -83,9 +83,9 @@ async function parseAllDucks() {
             "water": null,
             "bag of sand": null,
             "paint bucket": null,
-            "egg": null,
-            "seed": null,
-            "chest": null
+            "egg": 0,
+            "seed": 0,
+            "chest": 0
         };
 
         for (let [key, value] of Object.entries(duck.attributes)) {

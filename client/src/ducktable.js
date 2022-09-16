@@ -50,11 +50,6 @@ function traitSort(value) {
     });
 }
 
-function backpackSort(value) {
-    value = value.split(/,(.*)/s).slice(0, -1);
-    console.log(value)
-}
-
 function sortByObjectValue(a, b) {
     if (a.name < b.name) {
         return -1;
