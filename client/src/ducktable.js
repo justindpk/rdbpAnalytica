@@ -7,6 +7,7 @@ let duckDatabasePromise;
 
 window.onload = () => {
     duckDatabasePromise = fetch('http://localhost:3005/api').then(res => res.json());
+    duckDatabasePromise = duckDatabasePromise.then((database) => sortData(database, sortBy_, sortAscending));
     duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, duckConfig)
     });
@@ -36,8 +37,7 @@ async function pullTraitFront(trait, key, duckDatabase) {
             withoutTrait.push(duck);
         }
     }
-    const allDucks = [withTrait.concat(withoutTrait)];
-    return allDucks.concat(duckDatabase.slice(1));
+    return [withTrait.concat(withoutTrait)].concat(duckDatabase.slice(1));
 }
 
 function traitSort(value) {
@@ -338,7 +338,7 @@ function sortData(database, sortBy, ascending) {
     } else {
         duckData.sort((a, b) => b[sortBy] - a[sortBy]);
     }
-    return duckData.concat(database.slice(1))
+    return [duckData].concat(database.slice(1))
 }
 
 async function loadTableHeader(config) {
