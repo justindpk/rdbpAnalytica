@@ -39,7 +39,7 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	text-decoration: none;
 	padding: 24px 30px;
 	font-family: 'Syncopate';
-	margin: 10px 24px;
+	margin: 10px 12px;
 	font-weight: 700;
 	font-size: 20px;
 	border-radius: 10px;
@@ -180,16 +180,53 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 }
 
 .analyticaTitle {
-	margin: 15px 0px 0px 0px;
-	display: flex;
+	margin: 10px 0px 0px 0px;
+	display: block;
 }
 .analyticaTitle a {
 	text-decoration: none;
 	font-family: 'Readex Pro';
 	font-size: 36px;
-	padding: 8px;
+	padding: 0px 4px 8px 4px;
 	transition: all .1s;
 }
+.description {
+	display: block;
+	text-decoration: none;
+	font-family: 'Readex Pro';
+	font-size: 18px;
+	transition: all .1s;
+	margin: 0px 0px 0px 5px;
+}
+.description a {
+	margin: 0px;
+	padding: 0px;
+	display: inline-block;
+	text-decoration: none;
+	font-family: 'Readex Pro';
+	font-size: 18px;
+	transition: all .1s;
+	font-weight: 800;
+	text-decoration: #400000;
+	text-decoration: underline;
+}
+a:link{
+	color: #400000;
+	text-align: none;
+}
+a:visited{
+	color: #400000;
+	text-align: none;
+}
+a:hover{
+	color: #400000;
+	text-align: none;
+}
+a:active{
+	color: #400000;
+	text-align: none;
+}
+
 .darkDuckIcon {
 	width: 25px;
 	height: 25px;
@@ -225,7 +262,7 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
     display: flex;
     background: #ffffff;
     border-bottom: 4px solid #400000;
-    padding-left: 4px;
+    padding-left: 16px;
 	padding-bottom: 10px;
 }
 
