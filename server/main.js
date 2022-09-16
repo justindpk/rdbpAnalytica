@@ -114,7 +114,7 @@ async function parseAllDucks() {
         }
         parsedDucks.push(duckData);
     }
-    return [parsedDucks, traitsTable];
+    return [parsedDucks, traitsTable, backpackRarity];
 }
 
 
