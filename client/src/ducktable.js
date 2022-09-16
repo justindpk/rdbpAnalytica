@@ -180,7 +180,7 @@ function columnConfig() {
 }
 
 const duckConfig = [
-    columnConfig().setHeaderStatic("Rank").setColumnKey("rank").sortable(),
+    columnConfig().setHeaderStatic("rank").setColumnKey("rank").sortable(),
     columnConfig()
         .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
         .setColumnKey("img").setColumnType('img').setColumnClass("duckImage").setColumnHref("https://duck.art/").appendIdToColumnHref().openColumnHrefNT(),
