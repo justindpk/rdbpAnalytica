@@ -41,13 +41,18 @@ async function pullTraitFront(trait, key, duckDatabase) {
 }
 
 function traitSort(value) {
-    value = value.split(/ (.*)/s).slice(0, -1);
+    value = value.split(/,(.*)/s).slice(0, -1);
     const traitName = value[0];
     const traitValue = value[1];
     duckDatabasePromise = duckDatabasePromise.then(data => pullTraitFront(traitName, traitValue, data));
     duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, configToUse);
     });
+}
+
+function backpackSort(value) {
+    value = value.split(/,(.*)/s).slice(0, -1);
+    console.log(value)
 }
 
 function sortByObjectValue(a, b) {
@@ -78,6 +83,7 @@ class ColumnConfig {
         this.isOpenColumnHrefNT = false;
         this.headerDropdown = false;
         this.headerDropdownFunction = null;
+        this.dropdownType = null;
     }
 
     setHeaderType(headerType) {
@@ -130,7 +136,7 @@ class ColumnConfig {
         return this;
     }
 
-    getHeaderTag(traitTable) {
+    getHeaderTag(traitTable, backpackRarity) {
         let tag = `<th scope="col">`
         if (this.headerName) {
             tag += `${this.headerName}`
@@ -146,9 +152,19 @@ class ColumnConfig {
         }
         if (this.headerDropdown) {
             tag += `<select class="hideable" onchange="${this.headerDropdownFunction}(value)">`
-            let sortedTraits = traitTable[this.headerDropdownKey].sort((a, b) => sortByObjectValue(a, b));
-            for (const value of sortedTraits) {
-                tag += `<option value="${this.headerName} ${value["name"]}">${value["name"]}</option>`
+            if (this.dropdownType === "trait") {
+                let sortedTraits = traitTable[this.headerDropdownKey].sort((a, b) => sortByObjectValue(a, b));
+                for (const value of sortedTraits) {
+                    tag += `<option value="${this.headerDropdownKey},${value["name"]}">${value["name"]}</option>`
+                }
+            } else if (this.dropdownType === "backpack") {
+                const uppercaseDropdownKey = this.headerDropdownKey.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                tag += `<option value=","></option>`
+                for (const key of Object.keys(backpackRarity[uppercaseDropdownKey]).sort()) {
+                    console.log(key);
+                    tag += `<option value="${this.headerDropdownKey},${key}">${key}</option>`
+                }
+                console.log(backpackRarity[uppercaseDropdownKey]);
             }
             tag += `</select>`
         }
@@ -220,14 +236,14 @@ class ColumnConfig {
         return this;
     }
 
-    setHeaderDropdown(headerName, type) {
+    addHeaderDropdown(headerName, type) {
         this.headerDropdown = true;
-        this.headerName = headerName;
         this.headerDropdownKey = headerName;
+        this.dropdownType = type;
         if (type === "trait") {
             this.headerDropdownFunction = "traitSort";
         } else if (type === "backpack") {
-            this.headerDropdownFunction = "backpackSort";
+            this.headerDropdownFunction = "traitSort";
         } else {
             console.log("Error: Invalid type for setHeaderDropdown")
         }
@@ -267,14 +283,14 @@ const traitConfig = [
         .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
         .setColumnKey("img").setColumnType('img').setColumnClass("duckImage").setColumnHref("https://duck.art/").appendIdToColumnHref().openColumnHrefNT(),
     columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
-    columnConfig().setHeaderDropdown("Head", "trait").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Eyes", "trait").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Neck", "trait").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Beak", "trait").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Shirt", "trait").setColumnSrc("/client/public/img/shirts/").setColumnKey("shirt").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Tattoo", "trait").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Cover", "trait").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Background", "trait").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Heads").addHeaderDropdown("Head", "trait").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Eyes").addHeaderDropdown("Eyes", "trait").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Necks").addHeaderDropdown("Neck", "trait").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Beaks").addHeaderDropdown("Beak", "trait").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Shirt").addHeaderDropdown("Shirt", "trait").setColumnSrc("/client/public/img/shirts/").setColumnKey("shirt").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Tattoo").addHeaderDropdown("Tattoo", "trait").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Cover").addHeaderDropdown("Cover", "trait").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderStatic("Background").addHeaderDropdown("Background", "trait").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
     columnConfig()
         .setHeaderStatic("Opensea")
@@ -293,9 +309,11 @@ const backpackConfig = [
         .setHeaderStatic("Number").setColumnKey("id").sortable(),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyPaint.png")
+        .addHeaderDropdown("paint bucket", "backpack")
         .setColumnSrc("/client/public/img/paintBuckets/").setColumnKey("paint bucket").setColumnType('img').setColumnClass("duckImage"),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyWater.png")
+        .addHeaderDropdown("water", "backpack")
         .setColumnSrc("/client/public/img/water/").setColumnKey("water").setColumnType('img').setColumnClass("duckImage"),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/sandBag.png")
@@ -332,7 +350,7 @@ async function loadTableHeader(config) {
     const tableHeader = document.getElementById('tableHeader');
     let header = '<tr>';
     for (let column of config) {
-        header += await duckDatabasePromise.then(data => column.getHeaderTag(data[1]));
+        header += await duckDatabasePromise.then(data => column.getHeaderTag(data[1], data[2]));
     }
     header += '</tr>';
     tableHeader.innerHTML = header;
