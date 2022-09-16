@@ -6,9 +6,11 @@ let sortAscending = true;
 let duckDatabasePromise;
 
 window.onload = () => {
-    loadTableHeader(duckConfig);
     duckDatabasePromise = fetch('http://localhost:3005/api').then(res => res.json());
-    duckDatabasePromise.then(data => { loadTableData(data[0], data[1], 0, initialLoad, duckConfig) });
+    duckDatabasePromise.then(data => {
+        loadTableData(data[0], data[1], 0, initialLoad, duckConfig)
+    });
+    loadTableHeader(duckConfig).then();
 };
 
 window.onscroll = function () {
@@ -24,6 +26,39 @@ window.onscroll = function () {
     }
 };
 
+async function pullTraitsFront(trait, key, duckDatabase) {
+    let withTrait = [];
+    let withoutTrait = [];
+    for (let duck of duckDatabase[0]) {
+        if (duck[trait.toLowerCase()] === key) {
+            withTrait.push(duck);
+        } else {
+            withoutTrait.push(duck);
+        }
+    }
+    duckDatabase = [withTrait.concat(withoutTrait), duckDatabase[1]];
+    return duckDatabase;
+}
+
+function traitSort(value) {
+    value = value.split(/ (.*)/s).slice(0, -1);
+    const traitName = value[0];
+    const traitValue = value[1];
+    duckDatabasePromise = duckDatabasePromise.then(data => pullTraitsFront(traitName, traitValue, data));
+    duckDatabasePromise.then(data => {
+        loadTableData(data[0], data[1], 0, initialLoad, configToUse);
+    });
+}
+
+function sortByObjectValue(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    }
+    if (a.name > b.name) {
+        return 1;
+    }
+    return 0;
+}
 
 class ColumnConfig {
     constructor() {
@@ -41,6 +76,8 @@ class ColumnConfig {
         this.isTrait = false;
         this.isAppendIdToColumnHref = false;
         this.isOpenColumnHrefNT = false;
+        this.headerDropdown = false;
+        this.headerDropdownFunction = null;
     }
 
     setHeaderType(headerType) {
@@ -93,7 +130,7 @@ class ColumnConfig {
         return this;
     }
 
-    getHeaderTag() {
+    getHeaderTag(traitTable) {
         let tag = `<th scope="col">`
         if (this.headerName) {
             tag += `${this.headerName}`
@@ -106,6 +143,14 @@ class ColumnConfig {
                 tag += `src="${this.headerSrc}" `
             }
             tag += `>`
+        }
+        if (this.headerDropdown) {
+            tag += `<select class="hideable" onchange="${this.headerDropdownFunction}(value)">`
+            let sortedTraits = traitTable[this.headerDropdownKey].sort((a, b) => sortByObjectValue(a, b));
+            for (const value of sortedTraits) {
+                tag += `<option value="${this.headerName} ${value["name"]}">${value["name"]}</option>`
+            }
+            tag += `</select>`
         }
         tag += `</th>`
         return tag;
@@ -123,7 +168,7 @@ class ColumnConfig {
 
         if (this.columnHref) {
             tag += `<a href="${this.columnHref}${this.isAppendIdToColumnHref ? duckData.id : ""}"${this.isOpenColumnHrefNT ? " target=\"_blank\" " : ""}>`
-            console.log(tag)
+            // console.log(tag)
         }
         tag += `<${this.columnType} `
         if (this.columnClass) {
@@ -159,16 +204,27 @@ class ColumnConfig {
         tag += `</td>`
         return tag;
     }
+
     trait() {
         this.isTrait = true;
         return this;
     }
+
     appendIdToColumnHref() {
         this.isAppendIdToColumnHref = true;
         return this;
     }
+
     openColumnHrefNT() {
         this.isOpenColumnHrefNT = true;
+        return this;
+    }
+
+    setHeaderDropdown(headerName, traitKey) {
+        this.headerDropdown = true;
+        this.headerName = headerName;
+        this.headerDropdownKey = traitKey;
+        this.headerDropdownFunction = "traitSort";
         return this;
     }
 }
@@ -205,14 +261,14 @@ const traitConfig = [
         .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
         .setColumnKey("img").setColumnType('img').setColumnClass("duckImage").setColumnHref("https://duck.art/").appendIdToColumnHref().openColumnHrefNT(),
     columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
-    columnConfig().setHeaderStatic("Heads").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Necks").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Beaks").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Shirts").setColumnSrc("/client/public/img/shirts/").setColumnKey("shirt").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Tattoos").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Covers").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Backgrounds").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Head", "Head").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Eyes", "Eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Neck", "Neck").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Beak", "Beak").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Shirt", "Shirt").setColumnSrc("/client/public/img/shirts/").setColumnKey("shirt").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Tattoo", "Tattoo").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Cover", "Cover").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Background", "Background").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
     columnConfig()
         .setHeaderStatic("Opensea")
@@ -266,11 +322,11 @@ function sortData(database, sortBy, ascending) {
     return [duckData, database[1]];
 }
 
-function loadTableHeader(config) {
+async function loadTableHeader(config) {
     const tableHeader = document.getElementById('tableHeader');
     let header = '<tr>';
     for (let column of config) {
-        header += column.getHeaderTag();
+        header += await duckDatabasePromise.then(data => column.getHeaderTag(data[1]));
     }
     header += '</tr>';
     tableHeader.innerHTML = header;
@@ -318,34 +374,35 @@ function loadTableData(duckData, traitData, start, stop, config) {
 }
 
 let configToUse = duckConfig;
-function generateTraitTable(){
+
+function generateTraitTable() {
     counter = 0;
     sortBy_ = "rank";
     sortAscending = true;
     configToUse = traitConfig;
-    loadTableHeader(traitConfig);
+    loadTableHeader(traitConfig).then();
     duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, traitConfig);
     });
 }
 
-function generateDuckTable(){
+function generateDuckTable() {
     counter = 0;
     sortBy_ = "rank";
     sortAscending = true;
     configToUse = duckConfig;
-    loadTableHeader(duckConfig);
+    loadTableHeader(duckConfig).then();
     duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, duckConfig);
     });
 }
 
-function generateBackpackTable(){
+function generateBackpackTable() {
     counter = 0;
     sortBy_ = "rank";
     sortAscending = true;
     configToUse = backpackConfig;
-    loadTableHeader(backpackConfig);
+    loadTableHeader(backpackConfig).then();
     duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, backpackConfig);
     });
