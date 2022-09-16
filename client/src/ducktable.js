@@ -1,5 +1,5 @@
-const initialLoad = 200;
-const amountToLoad = 100;
+const initialLoad = 50;
+const amountToLoad = 20;
 let counter = 0;
 let sortBy_ = "rank";
 let sortAscending = true;
