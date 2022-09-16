@@ -289,8 +289,8 @@ table {
 .duckImage {
 	width: 117px;
 	height: 117px;
-	border-radius: 2px;
-	border: 1px solid #400000;
+	border-radius: 8px;
+	border: 2px solid #400000;
 	box-sizing: border-box;
 	flex-shrink: 0;
 	transition: all .1s;
@@ -317,3 +317,22 @@ table {
 .sortable:hover .showFilter{
 	display: inline;
 }
+
+select {
+	display: block;
+	height: 30px;
+	width: 100px;
+	margin: auto;
+	outline: none;
+	color: #74646E;
+	border: 1px solid #C8BFC4;
+	border-radius: 10px;
+	box-shadow: inset 1px 1px 2px #DDD8DC;
+	background: #FFF;
+  }
+  /* Select arrow styling */
+  
+  .hideable {
+
+  }
+  
