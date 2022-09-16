@@ -1,4 +1,8 @@
 /* || GLOBAL */
+*	{
+	cursor:url(/client/public/img/strawberyyCursor.svg), auto;
+}
+
 .body{
   margin: 0;
   font-family: 'Readex Pro';
@@ -143,9 +147,11 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	background: #ffe233;
 	text-align: left;
 	border-bottom: 3px solid #400000;
-    -webkit-box-shadow: 0 6px 8px -8px #400000;
-    -moz-box-shadow: 0 6px 8px -8px #400000;
-    box-shadow: 0 6px 8px -8px #400000;
+	/*
+    -webkit-box-shadow: 0 2px 4px -4px #400000;
+    -moz-box-shadow: 0 2px 4px -4px #400000;
+    box-shadow: 0 2px 2px -4px #400000;
+	*/
 	height: 100px;
 	display: flex;
 	justify-content: space-between;
@@ -198,7 +204,7 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
     text-align: left;
     display: flex;
     padding: 0px 0 10px 25px;
-    margin-top: 90px;
+    margin-top: 50px;
     border-bottom: 4px solid #400000;
 }
 
@@ -320,19 +326,26 @@ table {
 
 select {
 	display: block;
-	height: 30px;
+	height: 25px;
 	width: 100px;
 	margin: auto;
 	outline: none;
-	color: #74646E;
-	border: 1px solid #C8BFC4;
-	border-radius: 10px;
-	box-shadow: inset 1px 1px 2px #DDD8DC;
+	color: #400000 ;
+	border: 2px solid #400000;
+	border-radius: 8px;
+	/* box-shadow: inset 1px 1px 2px #400000; */
 	background: #FFF;
+	text-align: center;
+	text-indent: 4px;
   }
-  /* Select arrow styling */
+  /* Select arrow styling *
   
   .hideable {
-
+	display: none;
   }
   
+
+  .hideable:hover {
+	display: block;
+  }
+  */
