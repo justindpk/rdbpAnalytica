@@ -26,7 +26,7 @@ window.onscroll = function () {
     }
 };
 
-async function pullTraitsFront(trait, key, duckDatabase) {
+async function pullTraitFront(trait, key, duckDatabase) {
     let withTrait = [];
     let withoutTrait = [];
     for (let duck of duckDatabase[0]) {
@@ -36,15 +36,15 @@ async function pullTraitsFront(trait, key, duckDatabase) {
             withoutTrait.push(duck);
         }
     }
-    duckDatabase = [withTrait.concat(withoutTrait), duckDatabase[1]];
-    return duckDatabase;
+    const allDucks = [withTrait.concat(withoutTrait)];
+    return allDucks.concat(duckDatabase.slice(1));
 }
 
 function traitSort(value) {
     value = value.split(/ (.*)/s).slice(0, -1);
     const traitName = value[0];
     const traitValue = value[1];
-    duckDatabasePromise = duckDatabasePromise.then(data => pullTraitsFront(traitName, traitValue, data));
+    duckDatabasePromise = duckDatabasePromise.then(data => pullTraitFront(traitName, traitValue, data));
     duckDatabasePromise.then(data => {
         loadTableData(data[0], data[1], 0, initialLoad, configToUse);
     });
@@ -220,11 +220,17 @@ class ColumnConfig {
         return this;
     }
 
-    setHeaderDropdown(headerName, traitKey) {
+    setHeaderDropdown(headerName, type) {
         this.headerDropdown = true;
         this.headerName = headerName;
-        this.headerDropdownKey = traitKey;
-        this.headerDropdownFunction = "traitSort";
+        this.headerDropdownKey = headerName;
+        if (type === "trait") {
+            this.headerDropdownFunction = "traitSort";
+        } else if (type === "backpack") {
+            this.headerDropdownFunction = "backpackSort";
+        } else {
+            console.log("Error: Invalid type for setHeaderDropdown")
+        }
         return this;
     }
 }
@@ -261,14 +267,14 @@ const traitConfig = [
         .setHeaderType('img').setHeaderClass("duckIcon").setHeaderSrc("/client/public/img/duckIcon.svg")
         .setColumnKey("img").setColumnType('img').setColumnClass("duckImage").setColumnHref("https://duck.art/").appendIdToColumnHref().openColumnHrefNT(),
     columnConfig().setHeaderStatic("Number").setColumnKey("id").sortable(),
-    columnConfig().setHeaderDropdown("Head", "Head").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Eyes", "Eyes").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Neck", "Neck").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Beak", "Beak").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Shirt", "Shirt").setColumnSrc("/client/public/img/shirts/").setColumnKey("shirt").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Tattoo", "Tattoo").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Cover", "Cover").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderDropdown("Background", "Background").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Head", "trait").setColumnSrc("/client/public/img/heads/").setColumnKey("head").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Eyes", "trait").setColumnSrc("/client/public/img/eyes/").setColumnKey("eyes").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Neck", "trait").setColumnSrc("/client/public/img/necks/").setColumnKey("neck").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Beak", "trait").setColumnSrc("/client/public/img/beaks/").setColumnKey("beak").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Shirt", "trait").setColumnSrc("/client/public/img/shirts/").setColumnKey("shirt").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Tattoo", "trait").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Cover", "trait").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
+    columnConfig().setHeaderDropdown("Background", "trait").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
     columnConfig()
         .setHeaderStatic("Opensea")
@@ -319,7 +325,7 @@ function sortData(database, sortBy, ascending) {
     } else {
         duckData.sort((a, b) => b[sortBy] - a[sortBy]);
     }
-    return [duckData, database[1]];
+    return duckData.concat(database.slice(1))
 }
 
 async function loadTableHeader(config) {
