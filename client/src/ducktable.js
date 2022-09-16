@@ -293,22 +293,22 @@ const backpackConfig = [
         .setHeaderStatic("Number").setColumnKey("id").sortable(),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyPaint.png")
-        .setColumnSrc("/client/public/img/paintBuckets/").setColumnKey("Paint Bucket").setColumnType('img').setColumnClass("duckImage"),
+        .setColumnSrc("/client/public/img/paintBuckets/").setColumnKey("paint bucket").setColumnType('img').setColumnClass("duckImage"),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/emptyWater.png")
-        .setColumnSrc("/client/public/img/water/").setColumnKey("Water").setColumnType('img').setColumnClass("duckImage"),
+        .setColumnSrc("/client/public/img/water/").setColumnKey("water").setColumnType('img').setColumnClass("duckImage"),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/sandBag.png")
         .setColumnType('img').setColumnSrc("/client/public/img/bagOfSand/Unrevealed.png").setColumnClass("duckImage"),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/seed.png")
-        .setColumnKey("Seed").sortable(),
+        .setColumnKey("seed").sortable(),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/egg.png")
-        .setColumnKey("Egg").sortable(),
+        .setColumnKey("egg").sortable(),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/chest.png")
-        .setColumnKey("Chest").sortable(),
+        .setColumnKey("chest").sortable(),
     columnConfig()
         .setHeaderStatic("Listed")
         .setColumnStatic("No"),

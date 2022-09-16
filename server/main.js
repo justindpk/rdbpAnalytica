@@ -80,12 +80,12 @@ async function parseAllDucks() {
             "beak": null,
             "eyes": null,
             "cover": null,
-            "Water": null,
-            "Bag of Sand": null,
-            "Paint Bucket": null,
-            "Egg": null,
-            "Seed": null,
-            "Chest": null
+            "water": null,
+            "bag of sand": null,
+            "paint bucket": null,
+            "egg": null,
+            "seed": null,
+            "chest": null
         };
 
         for (let [key, value] of Object.entries(duck.attributes)) {
@@ -107,9 +107,9 @@ async function parseAllDucks() {
         }
         for (let attribute of backpack.attributes) {
              if (backpackTypesCount[attribute.trait_type] === 1) {
-                duckData[attribute.trait_type] += 1;
+                duckData[attribute.trait_type.toLowerCase()] += 1;
             } else {
-                duckData[attribute.trait_type] = attribute.value;
+                duckData[attribute.trait_type.toLowerCase()] = attribute.value;
             }
         }
         parsedDucks.push(duckData);
