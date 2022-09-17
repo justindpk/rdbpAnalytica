@@ -3,15 +3,21 @@
 	cursor:url(/client/public/img/strawberyyCursor.svg), auto;
 }
 
-.body{
-  margin: 0;
-  font-family: 'Readex Pro';
-  color: #400000;
-  background: #FFFBC1;
-  text-align: center;
-  font-size: 24px;
-  padding-top: 59px;
-  width: 100%;
+a:link{
+	color: #400000;
+	text-align: none;
+}
+a:visited{
+	color: #400000;
+	text-align: none;
+}
+a:hover{
+	color: #400000;
+	text-align: none;
+}
+a:active{
+	color: #400000;
+	text-align: none;
 }
 
 input {
@@ -33,6 +39,19 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0;}
 input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 ::placeholder { color: #400000; opacity:  .5; }
 
+.body{
+	margin: auto;
+	font-family: 'Readex Pro';
+	color: #400000;
+	background: #FFFBC1;
+	text-align: center;
+	font-size: 24px;
+	padding-top: 59px;
+	width: 100%;
+	overflow-x: hidden;
+  
+  }
+
 .button {
 	background: white;
 	text-transform: uppercase;
@@ -44,7 +63,7 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	font-size: 20px;
 	border-radius: 10px;
 	border: 2px solid #400000;
-	box-shadow: inset 0 -8px rgb(64 0 0 / 10%);
+	box-shadow: inset 0 -6px rgb(64 0 0 / 10%);
 	transition: all .05s;
 	display: block;
 	align-items: center;
@@ -126,13 +145,10 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	h1 { font-size:50px }
 	h2 { font-size:24px }
 	p { font-size:18px }
-	.number { top: 0; width:24px; height:24px }
-	.block { padding:40px 20px; width:100%; ; border: 0; border-bottom: 2px solid #400000; border-top: 2px solid #400000; margin: 0; margin-top: -2px}
 }
 
-@media screen and (max-width: 1000px) {
-	body { margin-top:0 }
-	.doubleHeader { width: 240%; }
+@media screen and (max-width: 840px) {
+	.header .logoAndTitle .analyticaTitle .description { display: none; }
 }
 /* || GLOBAL */
 
@@ -190,6 +206,7 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	padding: 0px 4px 8px 4px;
 	transition: all .1s;
 }
+
 .description {
 	display: block;
 	text-decoration: none;
@@ -210,22 +227,6 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	text-decoration: #400000;
 	text-decoration: underline;
 }
-a:link{
-	color: #400000;
-	text-align: none;
-}
-a:visited{
-	color: #400000;
-	text-align: none;
-}
-a:hover{
-	color: #400000;
-	text-align: none;
-}
-a:active{
-	color: #400000;
-	text-align: none;
-}
 
 .darkDuckIcon {
 	width: 25px;
@@ -242,7 +243,7 @@ a:active{
     display: flex;
     padding: 0px 0 10px 25px;
     margin-top: 50px;
-    border-bottom: 4px solid #400000;
+    border-bottom: 3px solid #400000;
 }
 
 .screenerTitle {
@@ -258,14 +259,17 @@ a:active{
 
 /* || FILTER BAR */
 .filterBar{
+	align-content: center;
+	box-sizing: border-box;
+	width: 100%;
     text-align: left;
     display: flex;
+	max-width: auto;
     background: #ffffff;
-    border-bottom: 4px solid #400000;
+    border-bottom: 3px solid #400000;
     padding-left: 16px;
 	padding-bottom: 10px;
 }
-
 
 .search{
     display: flex;
@@ -278,26 +282,22 @@ a:active{
 	height: 30px;
     margin-top: 5px;
 }
+
 .backpackIcon {
 	width: 35px;
 	height: 35px;
+	margin-bottom: 5px;
 }
-
 /* || FILTER BAR */
 
 
 /* || DUCK TABLE */
-.duckTable{
-    display: flex;
-    width: 100%;
-    border-bottom: 2px solid #400000;
-}
-
 table {
     border-collapse: separate;
     border-spacing: 0;
     color: #400000;
     width: 100%;
+	overflow-x: scroll;
 }
   th,
   td {
@@ -324,42 +324,6 @@ table {
     padding-top: 8px;
     padding-bottom: 4px;
 }
-  .rowTitle {
-    color: #400000;
-    display: block;
-}
-
-.duckImage {
-	width: 117px;
-	height: 117px;
-	border-radius: 8px;
-	border: 2px solid #400000;
-	box-sizing: border-box;
-	flex-shrink: 0;
-	transition: all .1s;
-}
-.duckButtonIcon{
-    width: 30px;
-	height: 30px;
-}
-.buttonIcon {
-	width: 60px;
-	height: 60px;
-}
-
-.traitIcon{
-	width: 60px;
-	height: 60px;
-    margin-top: 5px;
-}
-
-.sortable .showFilter{
-	display: none;
-}
-
-.sortable:hover .showFilter{
-	display: inline;
-}
 
 select {
 	display: block;
@@ -374,15 +338,45 @@ select {
 	background: #FFF;
 	text-align: center;
 	text-indent: 4px;
+	margin-top: 4px;
   }
-  /* Select arrow styling *
-  
-  .hideable {
-	display: none;
-  }
-  
 
-  .hideable:hover {
-	display: block;
-  }
-  */
+.duckTable{
+    display: flex;
+    width: 100%;
+    border-bottom: 2px solid #400000;
+	/* why did this fix table scroll ??? */
+	overflow-x: scroll;
+	white-space: nowrap;
+}
+
+.rowTitle {
+    color: #400000;
+    display: block;
+}
+
+.duckImage {
+	width: 117px;
+	height: 117px;
+	border-radius: 8px;
+	border: 2px solid #400000;
+	box-sizing: border-box;
+	flex-shrink: 0;
+	transition: all .1s;
+}
+
+.duckButtonIcon{
+    width: 30px;
+	height: 30px;
+}
+
+.buttonIcon {
+	width: 60px;
+	height: 60px;
+}
+
+.traitIcon{
+	width: 60px;
+	height: 60px;
+}
+/* || DUCK TABLE */
