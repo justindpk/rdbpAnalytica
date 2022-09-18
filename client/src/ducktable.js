@@ -170,7 +170,7 @@ class ColumnConfig {
                         }
                     }
                 } else {
-                    filename = '0.png';
+                    filename = '00.png';
                 }
                 tag += `src="${this.columnSrc}${filename}">`
             } else if (this.columnSrc && this.columnKey) {
