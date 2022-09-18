@@ -118,6 +118,7 @@ class ColumnConfig {
         }
         if (this.headerDropdown) {
             tag += `<select class="hideable" onchange="${this.headerDropdownFunction}(value)">`
+            tag += `<option value="none" selected disabled hidden></option>`
             if (this.dropdownType === "trait") {
                 let sortedTraits = traitTable[this.headerDropdownKey].sort((a, b) => sortByObjectValue(a, b)).slice(1);
                 for (const value of sortedTraits) {
@@ -228,10 +229,10 @@ const duckConfig = [
     columnConfig().setHeaderStatic("Version").setColumnKey("version").sortable(),
     columnConfig().setHeaderStatic("Parties").setColumnKey("parties").sortable(),
     columnConfig().setHeaderStatic("Rank Change").setColumnKey("rarityChange").sortable(),
-    columnConfig().setHeaderStatic("Owner").setColumnStatic("bludmoneyy"),
-    columnConfig().setHeaderStatic("Sales").setColumnStatic("3"),
-    columnConfig().setHeaderStatic("Last Sale").setColumnStatic(".33 ETH"),
-    columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
+   // columnConfig().setHeaderStatic("Owner").setColumnStatic("bludmoneyy"),
+   //columnConfig().setHeaderStatic("Sales").setColumnStatic("3"),
+   // columnConfig().setHeaderStatic("Last Sale").setColumnStatic(".33 ETH"),
+   // columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
     columnConfig()
         .setHeaderStatic("Opensea")
         .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
@@ -252,7 +253,7 @@ const traitConfig = [
     columnConfig().setHeaderStatic("Tattoo").addHeaderDropdown("Tattoo", "trait").setColumnSrc("/client/public/img/tattoos/").setColumnKey("tattoo").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Cover").addHeaderDropdown("Cover", "trait").setColumnSrc("/client/public/img/covers/").setColumnKey("cover").setColumnType('img').trait().setColumnClass("duckImage"),
     columnConfig().setHeaderStatic("Background").addHeaderDropdown("Background", "trait").setColumnSrc("/client/public/img/backgrounds/").setColumnKey("background").setColumnType('img').trait().setColumnClass("duckImage"),
-    columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
+    // columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
     columnConfig()
         .setHeaderStatic("Opensea")
         .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
@@ -288,9 +289,9 @@ const backpackConfig = [
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/chest.png")
         .setColumnKey("chest").sortable(),
-    columnConfig()
-        .setHeaderStatic("Listed")
-        .setColumnStatic("No"),
+   /* columnConfig()
+       . .setHeaderStatic("Listed")
+        .setColumnStatic("No"), */
     columnConfig()
         .setHeaderStatic("Opensea")
         .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
