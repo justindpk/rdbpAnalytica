@@ -1,10 +1,14 @@
+// GLOBALS //
 const initialLoad = 50;
 const amountToLoad = 20;
 let counter = 0;
 let sortBy_ = "rank";
 let sortAscending = true;
 let duckDatabasePromise;
+// GLOBALS //
 
+
+// DEFINTIONS //
 window.onload = () => {
     duckDatabasePromise = fetch('http://localhost:3005/api').then(res => res.json());
     duckDatabasePromise = duckDatabasePromise.then((database) => sortData(database, sortBy_, sortAscending));
@@ -26,39 +30,6 @@ window.onscroll = function () {
         });
     }
 };
-
-async function pullTraitFront(trait, key, duckDatabase) {
-    let withTrait = [];
-    let withoutTrait = [];
-    for (let duck of duckDatabase[0]) {
-        if (duck[trait.toLowerCase()] === key) {
-            withTrait.push(duck);
-        } else {
-            withoutTrait.push(duck);
-        }
-    }
-    return [withTrait.concat(withoutTrait)].concat(duckDatabase.slice(1));
-}
-
-function traitSort(value) {
-    value = value.split(/,(.*)/s).slice(0, -1);
-    const traitName = value[0];
-    const traitValue = value[1];
-    duckDatabasePromise = duckDatabasePromise.then(data => pullTraitFront(traitName, traitValue, data));
-    duckDatabasePromise.then(data => {
-        loadTableData(data[0], data[1], 0, initialLoad, configToUse);
-    });
-}
-
-function sortByObjectValue(a, b) {
-    if (a.name < b.name) {
-        return -1;
-    }
-    if (a.name > b.name) {
-        return 1;
-    }
-    return 0;
-}
 
 class ColumnConfig {
     constructor() {
@@ -150,7 +121,7 @@ class ColumnConfig {
             if (this.dropdownType === "trait") {
                 let sortedTraits = traitTable[this.headerDropdownKey].sort((a, b) => sortByObjectValue(a, b));
                 for (const value of sortedTraits) {
-                    tag += `<option value="${this.headerDropdownKey},${value["name"]}">${value["name"]}</option>`
+                    tag += `<option class="select-items" value="${this.headerDropdownKey},${value["name"]}">${value["name"]}</option>`
                 }
             } else if (this.dropdownType === "backpack") {
                 const uppercaseDropdownKey = this.headerDropdownKey.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
@@ -179,7 +150,6 @@ class ColumnConfig {
 
         if (this.columnHref) {
             tag += `<a href="${this.columnHref}${this.isAppendIdToColumnHref ? duckData.id : ""}"${this.isOpenColumnHrefNT ? " target=\"_blank\" " : ""}>`
-            // console.log(tag)
         }
         tag += `<${this.columnType} `
         if (this.columnClass) {
@@ -245,13 +215,10 @@ class ColumnConfig {
         return this;
     }
 }
+// DEFINTIONS //
 
-// <th scope="col"><img class="duckIcon" src="/client/public/img/duckIcon.svg"></th>
 
-function columnConfig() {
-    return new ColumnConfig()
-}
-
+// CONFIGS //
 const duckConfig = [
     columnConfig().setHeaderStatic("rank").setColumnKey("rank").sortable(),
     columnConfig()
@@ -262,7 +229,6 @@ const duckConfig = [
     columnConfig().setHeaderStatic("Parties").setColumnKey("parties").sortable(),
     columnConfig().setHeaderStatic("Rank Change").setColumnKey("rarityChange").sortable(),
     columnConfig().setHeaderStatic("Owner").setColumnStatic("bludmoneyy"),
-    //columnConfig().setHeaderStatic("Days Owned").setColumnStatic("184"),
     columnConfig().setHeaderStatic("Sales").setColumnStatic("3"),
     columnConfig().setHeaderStatic("Last Sale").setColumnStatic(".33 ETH"),
     columnConfig().setHeaderStatic("Listed").setColumnStatic("No"),
@@ -330,6 +296,46 @@ const backpackConfig = [
         .setColumnType('img').setColumnSrc("/client/public/img/opensea.svg").setColumnHref("https://opensea.io/assets/ethereum/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/")
         .appendIdToColumnHref().openColumnHrefNT(),
 ]
+// CONFIGS //
+
+
+// FUNCTIONS //
+async function pullTraitFront(trait, key, duckDatabase) {
+    let withTrait = [];
+    let withoutTrait = [];
+    for (let duck of duckDatabase[0]) {
+        if (duck[trait.toLowerCase()] === key) {
+            withTrait.push(duck);
+        } else {
+            withoutTrait.push(duck);
+        }
+    }
+    return [withTrait.concat(withoutTrait)].concat(duckDatabase.slice(1));
+}
+
+function traitSort(value) {
+    value = value.split(/,(.*)/s).slice(0, -1);
+    const traitName = value[0];
+    const traitValue = value[1];
+    duckDatabasePromise = duckDatabasePromise.then(data => pullTraitFront(traitName, traitValue, data));
+    duckDatabasePromise.then(data => {
+        loadTableData(data[0], data[1], 0, initialLoad, configToUse);
+    });
+}
+
+function sortByObjectValue(a, b) {
+    if (a.name < b.name) {
+        return -1;
+    }
+    if (a.name > b.name) {
+        return 1;
+    }
+    return 0;
+}
+
+function columnConfig() {
+    return new ColumnConfig()
+}
 
 function sortData(database, sortBy, ascending) {
     let duckData = database[0]
@@ -372,8 +378,6 @@ async function loadTableHeader(config) {
 
 
 function loadTableData(duckData, traitData, start, stop, config) {
-
-
     const tableBody = document.getElementById('tableData');
     let ducks = duckData.slice(start, stop);
     let duckTable = "";
@@ -426,3 +430,4 @@ function generateBackpackTable() {
         loadTableData(data[0], data[1], 0, initialLoad, backpackConfig);
     });
 }
+// FUNCTIONS //

@@ -147,8 +147,14 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 	p { font-size:18px }
 }
 
-@media screen and (max-width: 840px) {
-	.header .logoAndTitle .analyticaTitle .description { display: none; }
+
+@media screen and (max-width: 520px) {
+	.header .logoAndTitle .analyticaTitle .description {display: none }
+}
+
+
+@media screen and (max-width: 950px) {
+	.header .logoAndTitle .analyticaTitle .description {font-size: 14px; }
 }
 /* || GLOBAL */
 
@@ -336,10 +342,26 @@ select {
 	border-radius: 8px;
 	/* box-shadow: inset 1px 1px 2px #400000; */
 	background: #FFF;
-	text-align: center;
-	text-indent: 4px;
+	text-align: justify;
 	margin-top: 4px;
   }
+  select::-ms-expand{
+	
+	color: #400000;
+  }
+.select-items{
+	background-color: white  /* #FF426E */;
+	font-weight: 800;
+}
+
+.hideable *{
+	border-radius: 12px;
+}
+/*can get rid of initial empty selection with this ?*/
+.hideable select{
+	display: none;
+}
+/* maybe place in select items or as in selct ms expand ??? */
 
 .duckTable{
     display: flex;
