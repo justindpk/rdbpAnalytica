@@ -119,13 +119,13 @@ class ColumnConfig {
         if (this.headerDropdown) {
             tag += `<select class="hideable" onchange="${this.headerDropdownFunction}(value)">`
             if (this.dropdownType === "trait") {
-                let sortedTraits = traitTable[this.headerDropdownKey].sort((a, b) => sortByObjectValue(a, b));
+                let sortedTraits = traitTable[this.headerDropdownKey].sort((a, b) => sortByObjectValue(a, b)).slice(1);
                 for (const value of sortedTraits) {
                     tag += `<option class="select-items" value="${this.headerDropdownKey},${value["name"]}">${value["name"]}</option>`
                 }
             } else if (this.dropdownType === "backpack") {
                 const uppercaseDropdownKey = this.headerDropdownKey.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
-                tag += `<option value=","></option>`
+                // tag += `<option value=","></option>`
                 for (const key of Object.keys(backpackRarity[uppercaseDropdownKey]).sort()) {
                     console.log(key);
                     tag += `<option value="${this.headerDropdownKey},${key}">${key}</option>`
