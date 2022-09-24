@@ -15,12 +15,12 @@ async function updateLocalDatabases(database_name, database_url) {
         response = response.data.replace(database_name + ' = ', '');
         fs.writeFileSync(databaseFilepath, response);
     }
-
+    let x = 1;
     if (!fs.existsSync(databaseFilepath)) {
         await getWriteDB();
     } else {
         let stat = fs.statSync(databaseFilepath);
-        if (Date.now() - stat.mtimeMs > 604800000) {
+        if (x === 1) {
             await getWriteDB();
         } else {
             console.log(`Database ${database_name} is up to date`);
@@ -30,10 +30,10 @@ async function updateLocalDatabases(database_name, database_url) {
 
 
 const URLS = {
-    'allDucks': 'https://duck.art/rarity-data/v7/allDucks.js',
-    'globalRarity': 'https://duck.art/rarity-data/v7/globalRarity.js',
-    'allBackpacks': 'https://duck.art/rarity-data/v7/allBackpacks.js',
-    'backpackRarity': 'https://duck.art/rarity-data/v7/backpackRarity.js',
+    'allDucks': 'https://duck.art/rarity-data/v8/allDucks.js',
+    'globalRarity': 'https://duck.art/rarity-data/v8/globalRarity.js',
+    'allBackpacks': 'https://duck.art/rarity-data/v8/allBackpacks.js',
+    'backpackRarity': 'https://duck.art/rarity-data/v8/backpackRarity.js',
     'traits': 'https://duck.art/rarity-data/traits.js',
 }
 
