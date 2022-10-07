@@ -125,10 +125,13 @@ class ColumnConfig {
                     tag += `<option class="select-items" value="${this.headerDropdownKey},${value["name"]}">${value["name"]}</option>`
                 }
             } else if (this.dropdownType === "backpack") {
-                const uppercaseDropdownKey = this.headerDropdownKey.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                let uppercaseDropdownKey = this.headerDropdownKey.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+                if(uppercaseDropdownKey === "Bag Of Sand")
+                    uppercaseDropdownKey = "Bag of Sand";
+                console.log(uppercaseDropdownKey);
                 // tag += `<option value=","></option>`
                 for (const key of Object.keys(backpackRarity[uppercaseDropdownKey]).sort()) {
-                    console.log(key);
+                    //console.log(key);
                     tag += `<option value="${this.headerDropdownKey},${key}">${key}</option>`
                 }
                 console.log(backpackRarity[uppercaseDropdownKey]);
@@ -279,7 +282,8 @@ const backpackConfig = [
         .setColumnSrc("/client/public/img/water/").setColumnKey("water").setColumnType('img').setColumnClass("duckImage"),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/sandBag.png")
-        .setColumnType('img').setColumnSrc("/client/public/img/bagOfSand/Unrevealed.png").setColumnClass("duckImage"),
+        .addHeaderDropdown("bag of sand", "backpack")
+        .setColumnSrc("/client/public/img/bagOfSand/").setColumnKey("bag of sand").setColumnType('img').setColumnClass("duckImage"),
     columnConfig()
         .setHeaderType('img').setHeaderClass("traitIcon").setHeaderSrc("/client/public/img/backpackItems/seed.png")
         .setColumnKey("seed").sortable(),
