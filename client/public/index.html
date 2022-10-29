@@ -1,75 +1,43 @@
-<!-- 
-	Home page for rdbpAnalytica
--->
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-        <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300&amp;family=Syncopate:wght@400;700&amp;display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&amp;" rel="stylesheet">
-        <link href="/client/public/css/main.css" rel="stylesheet" media="all">
-        <title> RDBP Analytica </title>
-        <meta name="description" content="A project based on the NFT collection Rubber Duck Bath Party, focused on providing duck metrics.">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="/client/public/img/strawduck.svg">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-        <script src="../src/ducktable.js"> </script>
-    </head>
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
 
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
 
-    <body class="body">
-        <div class="header">
-            <div class="logoAndTitle">
-
-                <a class="analyticaLogo" href="#top">
-                    <img src="/client/public/img/analyticaStrawberryDuck.png" />
-                </a>
-                <div class="analyticaTitle">
-                    <a> RDBP Analytica </a>
-                    <p class="description"> A community project analyzing the <a class="description" href="https://duck.art/" target="_blank">Rubber Duck Bath Party</a> NFT collection.</p>
-                </div>
-            </div>
-            <div class="links">
-                <a class="socialMediaSvg" href="https://duck.art/" target="_blank"><img class="darkDuckIcon" src="/client/public/img/darkDuck.png"></a>
-                <a class="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank"><img src="/client/public/img/opensea.svg"></a>
-                <a class="socialMediaSvg" href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank"><img src="/client/public/img/looksrare.svg"></a>
-                <a class="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank"><img src="/client/public/img/twitter.svg"></a>
-                <a class="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank"><img src="/client/public/img/discord.svg"></a>
-            </div>
-        </div>
-
-        <div class="doubleHeader">
-            <div class="screenerTitle">
-                <!-- change to onClick duck/trait/backpack screener -->
-                <a id="screenerTitle"> Duck Screener </a>
-            </div>
-        </div>
-
-        <div class="filterBar">
-            <!--
-            <div class="search">
-                <input type="text" placeholder="Search" class="search-field" />
-            </div>
-            -->
-            <button class="button row yellow" onclick="generateDuckTable()" > <img class="duckButtonIcon" src="/client/public/img/duckIcon.svg"> </button>
-            <button class="button row red" onclick="generateTraitTable()"> Traits </button>
-            <button class="button row lightPurple" onclick="generateBackpackTable()"> <img class="backpackIcon" src="/client/public/img/backpack.png"> </button>
-            <!--
-            <button class="button purple"> <img class="buttonIcon" src="/client/public/img/itemChest.png"> </button>
-            <button class="button teal"> <img class="buttonIcon" src="/client/public/img/emptyPaint.png"> </button>
-            <button class="button pink"> <img class="buttonIcon" src="/client/public/img/emptyWater.png"> </button>
-            <button class="button skyBlue"> <img class="buttonIcon" src="/client/public/img/itemEgg.png"> </button>
-            <button class="button green"> <img class="buttonIcon" src="/client/public/img/itemSeed.png"> </button>
-            <button class="button cotton"> <img class="buttonIcon" src="/client/public/img/sandBag.png"> </button>
-            -->
-        </div>
-
-        <div class="duckTable">
-            <table class="sortable">
-                <thead class = "filterable" id="tableHeader"></thead>
-                <tbody id="tableData"></tbody>
-            </table>
-        </div>
-    </body>
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
