@@ -30,10 +30,10 @@ async function updateLocalDatabases(database_name, database_url) {
 
 
 const URLS = {
-    'allDucks': 'https://duck.art/rarity-data/v8/allDucks.js',
-    'globalRarity': 'https://duck.art/rarity-data/v8/globalRarity.js',
-    'allBackpacks': 'https://duck.art/rarity-data/v8/allBackpacks.js',
-    'backpackRarity': 'https://duck.art/rarity-data/v8/backpackRarity.js',
+    'allDucks': 'https://duck.art/rarity-data/v9/allDucks.js',
+    'globalRarity': 'https://duck.art/rarity-data/v9/globalRarity.js',
+    'allBackpacks': 'https://duck.art/rarity-data/v9/allBackpacks.js',
+    'backpackRarity': 'https://duck.art/rarity-data/v9/backpackRarity.js',
     'traits': 'https://duck.art/rarity-data/traits.js',
 }
 
