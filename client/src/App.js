@@ -2,11 +2,11 @@ import './App.css';
 import {useEffect, useState} from 'react';
 
 const URLS = {
-  'allDucks': 'http://duck.art/rarity-data/v9/allDucks.js',
-  'globalRarity': 'http://duck.art/rarity-data/v9/globalRarity.js',
-  'allBackpacks': 'http://duck.art/rarity-data/v9/allBackpacks.js',
-  'backpackRarity': 'http://duck.art/rarity-data/v9/backpackRarity.js',
-  'traits': 'http://duck.art/rarity-data/traits.js',
+  'allDucks': 'https://duck.art/rarity-data/v9/allDucks.js',
+  'globalRarity': 'https://duck.art/rarity-data/v9/globalRarity.js',
+  'allBackpacks': 'https://duck.art/rarity-data/v9/allBackpacks.js',
+  'backpackRarity': 'https://duck.art/rarity-data/v9/backpackRarity.js',
+  'traits': 'https://duck.art/rarity-data/traits.js',
 }
 
 
@@ -96,6 +96,7 @@ function App() {
   const [allBackpacks, setAllBackpacks] = useState();
   const [backpackRarity, setBackpackRarity] = useState();
   const [traits, setTraits] = useState();
+  const [loaded, setLoaded] = useState(false);
 
 
   useEffect(() => {
@@ -122,7 +123,6 @@ function App() {
           default:
             break;
         }
-        // setDatabase({[databaseName]: window[databaseName], ...database});
         document.body.removeChild(script);
       });
       document.body.appendChild(script);
@@ -131,11 +131,7 @@ function App() {
 
   useEffect(() => {
     if (allDucks && globalRarity && allBackpacks && backpackRarity && traits) {
-      console.log('allDucks', allDucks);
-      console.log('globalRarity', globalRarity);
-      console.log('allBackpacks', allBackpacks);
-      console.log('backpackRarity', backpackRarity);
-      console.log('traits', traits);
+      setLoaded(true);
     }
   }, [allDucks, globalRarity, allBackpacks, backpackRarity, traits]);
 
@@ -143,6 +139,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        {loaded ? (
+          <p>Loaded</p>
+        ) : (
+          <p>Loading...</p>
+        )}
       </header>
     </div>
   );
