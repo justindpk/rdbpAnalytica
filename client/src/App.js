@@ -131,6 +131,13 @@ function App() {
 
   useEffect(() => {
     if (allDucks && globalRarity && allBackpacks && backpackRarity && traits) {
+      console.log({
+        'allDucks': allDucks,
+        'globalRarity': globalRarity,
+        'allBackpacks': allBackpacks,
+        'backpackRarity': backpackRarity,
+        'traits': traits
+      });
       setLoaded(true);
     }
   }, [allDucks, globalRarity, allBackpacks, backpackRarity, traits]);
