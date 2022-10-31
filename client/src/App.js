@@ -96,11 +96,11 @@ function App() {
       newDatabases = {...newDatabases, [databaseName]: window[databaseName]}
     });
     setDatabases(newDatabases);
-    setLoaded(true);
   }, []);
 
   useEffect(() => {
     console.log(databases);
+    setLoaded(true);
   }, [databases]);
 
   return (
@@ -110,7 +110,7 @@ function App() {
         <div className="doubleHeader"> 
           <div className="screenerTitle">
           {loaded ? (
-              <p className="screenerTitle">Loaded</p>
+              <p className="screenerTitle">Loaded: {Object.keys(databases).map((databaseName) => " " + databaseName)}</p>
             ) : (
               <p className="screenerTitle">Loading...</p>
             )}
