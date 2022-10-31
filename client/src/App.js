@@ -105,13 +105,17 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        {loaded ? (
-          <p>Loaded</p>
-        ) : (
-          <p>Loading...</p>
-        )}
+      <header className="header">
       </header>
+        <div className="doubleHeader"> 
+          <div className="screenerTitle">
+          {loaded ? (
+              <p className="screenerTitle">Loaded</p>
+            ) : (
+              <p className="screenerTitle">Loading...</p>
+            )}
+            </div>
+        </div>
     </div>
   );
 }
