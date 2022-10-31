@@ -1,5 +1,6 @@
 .idea
 .vscode
+out
 /client-old/node_modules/*
 /server/node_modules/*
 /server/databases/*

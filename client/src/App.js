@@ -1,13 +1,8 @@
 import './App.css';
 import {useEffect, useState} from 'react';
 
-const URLS = {
-  'allDucks': 'https://duck.art/rarity-data/v9/allDucks.js',
-  'globalRarity': 'https://duck.art/rarity-data/v9/globalRarity.js',
-  'allBackpacks': 'https://duck.art/rarity-data/v9/allBackpacks.js',
-  'backpackRarity': 'https://duck.art/rarity-data/v9/backpackRarity.js',
-  'traits': 'https://duck.art/rarity-data/traits.js',
-}
+
+const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
 
 
 // async function parseAllDucks() {
@@ -91,57 +86,22 @@ const URLS = {
 
 
 function App() {
-  const [allDucks, setAllDucks] = useState();
-  const [globalRarity, setGlobalRarity] = useState();
-  const [allBackpacks, setAllBackpacks] = useState();
-  const [backpackRarity, setBackpackRarity] = useState();
-  const [traits, setTraits] = useState();
+  const [databases, setDatabases] = useState();
   const [loaded, setLoaded] = useState(false);
 
 
   useEffect(() => {
-    Object.entries(URLS).forEach(([databaseName, url]) => {
-      const script = document.createElement('script');
-      script.src = url;
-      script.addEventListener('load', () => {
-        switch (databaseName) {
-          case 'allDucks':
-            setAllDucks(window.allDucks);
-            break;
-          case 'globalRarity':
-            setGlobalRarity(window.globalRarity);
-            break;
-          case 'allBackpacks':
-            setAllBackpacks(window.allBackpacks);
-            break;
-          case 'backpackRarity':
-            setBackpackRarity(window.backpackRarity);
-            break;
-          case 'traits':
-            setTraits(window.traits);
-            break;
-          default:
-            break;
-        }
-        document.body.removeChild(script);
-      });
-      document.body.appendChild(script);
+    let newDatabases = {};
+    databaseNames.forEach((databaseName) => {
+      newDatabases = {...newDatabases, [databaseName]: window[databaseName]}
     });
+    setDatabases(newDatabases);
+    setLoaded(true);
   }, []);
 
   useEffect(() => {
-    if (allDucks && globalRarity && allBackpacks && backpackRarity && traits) {
-      console.log({
-        'allDucks': allDucks,
-        'globalRarity': globalRarity,
-        'allBackpacks': allBackpacks,
-        'backpackRarity': backpackRarity,
-        'traits': traits
-      });
-      setLoaded(true);
-    }
-  }, [allDucks, globalRarity, allBackpacks, backpackRarity, traits]);
-
+    console.log(databases);
+  }, [databases]);
 
   return (
     <div className="App">
