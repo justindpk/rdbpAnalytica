@@ -1,5 +1,6 @@
 import './App.css';
 import {useEffect, useState} from 'react';
+import Table from './components/Table.js';
 
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
@@ -107,15 +108,19 @@ function App() {
     <div className="App">
       <header className="header">
       </header>
-        <div className="doubleHeader"> 
-          <div className="screenerTitle">
+      <div className="doubleHeader">
+        <div className="screenerTitle">
           {loaded ? (
-              <p className="screenerTitle">Loaded: {Object.keys(databases).map((databaseName) => " " + databaseName)}</p>
-            ) : (
-              <p className="screenerTitle">Loading...</p>
-            )}
+            <div>
+              <p className="screenerTitle">Loaded:
+                {Object.keys(databases).map((databaseName) => " " + databaseName)}</p>
+              <Table databases={databases}/>
             </div>
+          ) : (
+            <p className="screenerTitle">Loading...</p>
+          )}
         </div>
+      </div>
     </div>
   );
 }
