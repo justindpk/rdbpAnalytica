@@ -1,4 +1,3 @@
-// import './App.css';
 import {useEffect, useState} from 'react';
 import './main.css';
 import MainTable from "./components/MainTable";
