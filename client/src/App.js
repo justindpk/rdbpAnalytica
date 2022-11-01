@@ -145,7 +145,6 @@ function TableTypeBar({setTableType}) {
 
 function App() {
   const [databases, setDatabases] = useState();
-  const [parsedDatabase, setParsedDatabase] = useState();
   const [loaded, setLoaded] = useState(false);
   const [tableType, setTableType] = useState("main");
 
@@ -156,19 +155,9 @@ function App() {
       newDatabases = {...newDatabases, [databaseName]: window[databaseName]}
     });
     setDatabases(newDatabases);
+    setLoaded(true);
   }, []);
 
-  useEffect(() => {
-    if (databases) {
-      setParsedDatabase(parseAllDucks({
-        backpackRarity: databases['backpackRarity'],
-        allDucks: databases['allDucks'],
-        allBackpacks: databases['allBackpacks'],
-      }));
-      setLoaded(true);
-      console.log(databases);
-    }
-  }, [databases]);
 
   let table;
   if (loaded) {
