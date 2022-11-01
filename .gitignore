@@ -1,7 +1,6 @@
 .idea
 .vscode
 out
-scratch
 /client-old/node_modules/*
 /server/node_modules/*
 /server/databases/*
