@@ -179,11 +179,11 @@ function App() {
               {Object.keys(databases).map((databaseName) => " " + databaseName)}</p>
             {
               tableType === "main" ? (
-                <MainTable ducks={databases.ducks} backpacks={databases.backpacks}/>
+                <MainTable databases={databases}/>
               ) : tableType === "traits" ? (
-                <TraitsTable traitsTable={databases.traitsTable}/>
+                <TraitsTable databases={databases}/>
               ) : tableType === "backpacks" ? (
-                <BackpacksTable backpacks={databases.backpacks} backpackRarity={databases.backpackRarity}/>
+                <BackpacksTable databases={databases}/>
               ) : null
             }
           </div>
