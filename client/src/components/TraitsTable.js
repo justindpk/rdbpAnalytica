@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 
-function Table({databases}) {
+function TraitsTable({databases}) {
   //TODO: Create table load
   useEffect(() => {
     console.log("Table loaded");
@@ -8,9 +8,9 @@ function Table({databases}) {
 
   return (
     <>
-      <p>TODO: Table</p>
+      <p>TODO:TraitsTable</p>
     </>
   );
 }
 
-export default Table;
+export default TraitsTable;

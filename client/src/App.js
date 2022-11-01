@@ -1,7 +1,9 @@
-import './App.css';
+// import './App.css';
 import {useEffect, useState} from 'react';
-import Table from './components/Table.js';
 import './main.css';
+import MainTable from "./components/MainTable";
+import BackpacksTable from "./components/BackpacksTable";
+import TraitsTable from "./components/TraitsTable";
 
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
@@ -86,10 +88,71 @@ const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRari
 //   return [parsedDucks, traitsTable, backpackRarity];
 // }
 
+function TopBar() {
+  return (
+    <>
+      <header className="header">
+        <div className="logoAndTitle">
+
+          <a className="analyticaLogo" href="#top">
+            <img src="/img/analyticaStrawberryDuck.png"/>
+          </a>
+          <div className="analyticaTitle">
+            <a> RDBP Analytica </a>
+            <p className="description">
+              A community project analyzing the <a className="description" href="https://duck.art/" target="_blank">
+              Rubber Duck Bath Party</a> NFT collection.
+            </p>
+          </div>
+        </div>
+        <div className="links">
+          <a className="socialMediaSvg" href="https://duck.art/" target="_blank">
+            <img className="darkDuckIcon" src="/img/darkDuck.png"/>
+          </a>
+          <a className="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank">
+            <img src="/img/opensea.svg"/>
+          </a>
+          <a className="socialMediaSvg"
+             href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank">
+            <img src="/img/looksrare.svg"/>
+          </a>
+          <a className="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank">
+            <img src="/img/twitter.svg"/>
+          </a>
+          <a className="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank">
+            <img src="/img/discord.svg"/>
+          </a>
+        </div>
+      </header>
+
+      <div className="doubleHeader">
+        <div className="screenerTitle">
+          <a id="screenerTitle"> Duck Screener </a>
+        </div>
+      </div>
+    </>
+  )
+
+}
+
+function TableTypeBar({setTableType}) {
+  return (
+    <div className="filterBar">
+      <button className="button row yellow" onClick={() => setTableType("main")}>
+        <img className="duckButtonIcon" src="/img/duckIcon.svg"/>
+      </button>
+      <button className="button row red" onClick={() => setTableType("traits")}>Traits</button>
+      <button className="button row lightPurple" onClick={() => setTableType("backpacks")}>
+        <img className="backpackIcon" src="/img/backpack.png"/>
+      </button>
+    </div>
+  )
+}
 
 function App() {
   const [databases, setDatabases] = useState();
   const [loaded, setLoaded] = useState(false);
+  const [tableType, setTableType] = useState("main");
 
 
   useEffect(() => {
@@ -107,54 +170,22 @@ function App() {
 
   return (
     <div className="App">
-      <header className="header">
-        <div className="logoAndTitle">
-
-          <a className="analyticaLogo" href="#top">
-            <img src="/img/analyticaStrawberryDuck.png"/>
-          </a>
-          <div className="analyticaTitle">
-            <a> RDBP Analytica </a>
-            <p className="description"> A community project analyzing the <a className="description"
-                                                                             href="https://duck.art/" target="_blank">Rubber
-              Duck Bath Party</a> NFT collection.</p>
-          </div>
-        </div>
-        <div className="links">
-          <a className="socialMediaSvg" href="https://duck.art/" target="_blank"><img className="darkDuckIcon"
-                                                                                      src="/img/darkDuck.png"/></a>
-          <a className="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank"><img
-            src="/img/opensea.svg"/></a>
-          <a className="socialMediaSvg"
-             href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank"><img
-            src="/img/looksrare.svg"/></a>
-          <a className="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank"><img
-            src="/img/twitter.svg"/></a>
-          <a className="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank"><img src="/img/discord.svg"/></a>
-        </div>
-      </header>
-
-      <div className="doubleHeader">
-        <div className="screenerTitle">
-          <a id="screenerTitle"> Duck Screener </a>
-        </div>
-      </div>
-
-      <div className="filterBar">
-        <button className="button row yellow" onClick="generateDuckTable()"><img className="duckButtonIcon"
-                                                                                 src="/img/duckIcon.svg"/></button>
-        <button className="button row red" onClick="generateTraitTable()">Traits</button>
-        <button className="button row lightPurple" onClick="generateBackpackTable()"><img className="backpackIcon"
-                                                                                          src="/img/backpack.png"/>
-        </button>
-      </div>
-
+      <TopBar/>
+      <TableTypeBar setTableType={setTableType}/>
       <div className="screenerTitle">
         {loaded ? (
           <div>
             <p className="screenerTitle">Loaded:
               {Object.keys(databases).map((databaseName) => " " + databaseName)}</p>
-            <Table databases={databases}/>
+            {
+              tableType === "main" ? (
+                <MainTable ducks={databases.ducks} backpacks={databases.backpacks}/>
+              ) : tableType === "traits" ? (
+                <TraitsTable traitsTable={databases.traitsTable}/>
+              ) : tableType === "backpacks" ? (
+                <BackpacksTable backpacks={databases.backpacks} backpackRarity={databases.backpackRarity}/>
+              ) : null
+            }
           </div>
         ) : (
           <p className="screenerTitle">Loading...</p>
