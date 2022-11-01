@@ -91,27 +91,30 @@ function TopBar() {
           <div className="analyticaTitle">
             <a href="top"> RDBP Analytica </a>
             <p className="description">
-              A community project analyzing the <a className="description" href="https://duck.art/" target="_blank" rel="noreferrer">
+              A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
+                                                   rel="noreferrer">
               Rubber Duck Bath Party</a> NFT collection.
             </p>
           </div>
         </div>
         <div className="links">
           <a className="socialMediaSvg" href="https://duck.art/" target="_blank" rel="noreferrer">
-            <img className="darkDuckIcon" src="/img/darkDuck.png" alt="duck.art" />
+            <img className="darkDuckIcon" src="/img/darkDuck.png" alt="duck.art"/>
           </a>
-          <a className="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank" rel="noreferrer">
+          <a className="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank"
+             rel="noreferrer">
             <img src="/img/opensea.svg" alt="opensea"/>
           </a>
           <a className="socialMediaSvg"
-             href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank" rel="noreferrer">
+             href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank"
+             rel="noreferrer">
             <img src="/img/looksrare.svg" alt="looksrare"/>
           </a>
           <a className="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank" rel="noreferrer">
-            <img src="/img/twitter.svg" alt="twitter" />
+            <img src="/img/twitter.svg" alt="twitter"/>
           </a>
           <a className="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank" rel="noreferrer">
-            <img src="/img/discord.svg" alt="discord" />
+            <img src="/img/discord.svg" alt="discord"/>
           </a>
         </div>
       </header>
@@ -167,28 +170,31 @@ function App() {
     }
   }, [databases]);
 
+  let table;
+  if (loaded) {
+    switch (tableType) {
+      case "main":
+        table = <MainTable databases={databases}/>;
+        break;
+      case "traits":
+        table = <TraitsTable databases={databases}/>;
+        break;
+      case "backpacks":
+        table = <BackpacksTable databases={databases}/>;
+        break;
+      default:
+        table = <MainTable databases={databases}/>;
+    }
+  } else {
+    table = <p className="loading">Loading...</p>;
+  }
+
   return (
     <div className="App">
       <TopBar/>
       <TableTypeBar setTableType={setTableType}/>
       <div className="screenerTitle">
-        {loaded ? (
-          <div>
-            <p className="screenerTitle">Loaded:
-              {Object.keys(databases).map((databaseName) => " " + databaseName)}</p>
-            {
-              tableType === "main" ? (
-                <MainTable databases={databases}/>
-              ) : tableType === "traits" ? (
-                <TraitsTable databases={databases}/>
-              ) : tableType === "backpacks" ? (
-                <BackpacksTable databases={databases}/>
-              ) : null
-            }
-          </div>
-        ) : (
-          <p className="screenerTitle">Loading...</p>
-        )}
+        {table}
       </div>
     </div>
   );
