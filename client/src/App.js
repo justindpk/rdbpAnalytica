@@ -12,11 +12,11 @@ function TopBar() {
       <header className="header">
         <div className="logoAndTitle">
 
-          <a className="analyticaLogo" onClick={() => {window.scroll(0, 0)}}>
+          <a href="#top" className="analyticaLogo" onClick={() => {window.scroll(0, 0)}}>
             <img src="/img/analyticaStrawberryDuck.png" alt="strawberry duck"/>
           </a>
           <div className="analyticaTitle">
-            <a onClick={() => {window.scroll(0, 0)}}> RDBP Analytica </a>
+            <a href="#top" onClick={() => {window.scroll(0, 0)}}> RDBP Analytica </a>
             <p className="description">
               A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
                                                    rel="noreferrer">
@@ -47,10 +47,8 @@ function TopBar() {
       </header>
 
       <div className="doubleHeader">
-        <div className="screenerTitle">
-          <a href="/" id="screenerTitle"> Duck Screener </a>
+          <p className="screenerTitle"> Duck Screener </p>
         </div>
-      </div>
     </>
   )
 

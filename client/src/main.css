@@ -243,18 +243,20 @@ input[type=number] { -moz-appearance:textfield; /* Firefox */ }
 .doubleHeader{
     text-align: left;
     display: flex;
-    padding: 0px 0 10px 25px;
-    margin-top: 109px;
+    padding: 0px 0 0px 0px;
+    margin-top: 100px;
     border-bottom: 3px solid #400000;
+	background: #FFFBC1;
 }
 
 .screenerTitle {
   text-align: left;
-  padding-left: 5px;
+  padding-left: 30px;
   font-size: 34px;
   font-family: 'Readex Pro';
   color: #400000;
   font-weight: 800;
+  margin: 8px 0px 10px 0px;
 }
 /* || DOUBLE HEADER */
 
