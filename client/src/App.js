@@ -1,6 +1,7 @@
 import './App.css';
 import {useEffect, useState} from 'react';
 import Table from './components/Table.js';
+import './main.css';
 
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
@@ -107,6 +108,23 @@ function App() {
   return (
     <div className="App">
       <header className="header">
+        <div className="logoAndTitle">
+
+          <a className="analyticaLogo" href="#top">
+            <img src="/img/analyticaStrawberryDuck.png" />
+          </a>
+          <div className="analyticaTitle">
+            <a> RDBP Analytica </a>
+            <p className="description"> A community project analyzing the <a className="description" href="https://duck.art/" target="_blank">Rubber Duck Bath Party</a> NFT collection.</p>
+          </div>
+        </div>
+        {/*<div className="links">*/}
+        {/*  <a className="socialMediaSvg" href="https://duck.art/" target="_blank"><img className="darkDuckIcon" src="/client1/public/img/darkDuck.png"></a>*/}
+        {/*  <a className="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank"><img src="/client1/public/img/opensea.svg"></a>*/}
+        {/*  <a className="socialMediaSvg" href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank"><img src="/client1/public/img/looksrare.svg"></a>*/}
+        {/*  <a className="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank"><img src="/client1/public/img/twitter.svg"></a>*/}
+        {/*  <a className="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank"><img src="/client1/public/img/discord.svg"></a>*/}
+        {/*</div>*/}
       </header>
       <div className="doubleHeader">
         <div className="screenerTitle">
