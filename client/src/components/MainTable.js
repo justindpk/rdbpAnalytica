@@ -1,13 +1,13 @@
 import {useState} from "react";
 
 function MainTable({databases, setDatabases, amountToLoad}) {
-  const [clicked, setClicked] = useState({'rank': 0, 'id': 0, 'version': 0, 'parties': 0, 'rankChange': 0});
+  const [clicked, setClicked] = useState({'rank': 1, 'id': 0, 'version': 0, 'parties': 0, 'rankChange': 0});
 
   function handleSort(name, func) {
     setClicked({...clicked, [name]: clicked[name] + 1});
     let newDatabases = {...databases};
     newDatabases.allDucks.sort((a, b) => {
-      return func(a, b) * (clicked[name] % 2 === 0 ? -1 : 1);
+      return func(a, b) * (clicked[name] % 2 === 0 ? 1 : -1);
     });
     setDatabases(newDatabases);
   }
