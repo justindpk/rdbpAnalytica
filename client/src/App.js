@@ -55,14 +55,18 @@ function TopBar() {
 
 }
 
+function scrollToTop() {
+  document.getElementsByClassName("tableContainer")[0].scrollTo(0, 0);
+}
+
 function TableTypeBar({setTableType}) {
   return (
     <div className="filterBar">
-      <button className="button row yellow" onClick={() => setTableType("main")}>
+      <button className="button row yellow" onClick={() => {setTableType("main"); scrollToTop();}}>
         <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
       </button>
-      <button className="button row red" onClick={() => setTableType("traits")}>Traits</button>
-      <button className="button row lightPurple" onClick={() => setTableType("backpacks")}>
+      <button className="button row red" onClick={() => {setTableType("traits"); scrollToTop();}}>Traits</button>
+      <button className="button row lightPurple" onClick={() => {setTableType("backpacks"); scrollToTop();}}>
         <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
       </button>
     </div>
