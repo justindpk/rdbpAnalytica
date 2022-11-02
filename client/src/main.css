@@ -60,10 +60,8 @@ input[type=number] {
     background: #FFFBC1;
     text-align: center;
     font-size: 24px;
-    padding-top: 59px;
     width: 100%;
     overflow-x: hidden;
-
 }
 
 .button {
@@ -387,6 +385,7 @@ td {
     text-align: center;
     background: #FFFCDB;
     font-size: 16px;
+    font-weight: 700;
     padding-top: 8px;
     padding-bottom: 4px;
 }
