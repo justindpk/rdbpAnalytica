@@ -295,7 +295,6 @@ input[type=number] {
     text-align: left;
     display: flex;
     padding: 0px 0 0px 0px;
-    margin-top: 100px;
     border-bottom: 3px solid #400000;
     background: #FFFBC1;
 }
@@ -349,8 +348,9 @@ input[type=number] {
 
 /* || DUCK TABLE */
 .tableContainer {
+    margin-top: 100px;
     overflow: scroll;
-    height: calc(100vh - 271px);
+    height: calc(100vh - 100px);
     width: 100vw;
 }
 

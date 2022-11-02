@@ -50,9 +50,6 @@ function TopBar() {
         </div>
       </header>
 
-      <div className="doubleHeader">
-        <p className="screenerTitle"> Duck Screener </p>
-      </div>
     </div>
   )
 
@@ -77,6 +74,7 @@ function App() {
   const [databases, setDatabases] = useState();
   const [loaded, setLoaded] = useState(false);
   const [tableType, setTableType] = useState("main");
+  const [amountToLoad, setAmountToLoad] = useState(20);
 
 
   useEffect(() => {
@@ -89,21 +87,27 @@ function App() {
     setLoaded(true);
   }, []);
 
+  function handleScroll(e) {
+    if (0.9 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
+      setAmountToLoad(amountToLoad + 10);
+    }
+  }
+
 
   let table;
   if (loaded) {
     switch (tableType) {
       case "main":
-        table = <MainTable databases={databases}/>;
+        table = <MainTable databases={databases} amountToLoad={amountToLoad}/>;
         break;
       case "traits":
-        table = <TraitsTable databases={databases}/>;
+        table = <TraitsTable databases={databases} amountToLoad={amountToLoad}/>;
         break;
       case "backpacks":
-        table = <BackpacksTable databases={databases}/>;
+        table = <BackpacksTable databases={databases} amountToLoad={amountToLoad}/>;
         break;
       default:
-        table = <MainTable databases={databases}/>;
+        table = <MainTable databases={databases} amountToLoad={amountToLoad}/>;
     }
   } else {
     table = <p className="loading">Loading...</p>;
@@ -112,8 +116,15 @@ function App() {
   return (
     <div className="App">
       <TopBar/>
-      <TableTypeBar setTableType={setTableType}/>
-      {table}
+
+      <div className="tableContainer" onScroll={handleScroll}>
+        <div className="doubleHeader">
+          <p className="screenerTitle"> Duck Screener </p>
+        </div>
+
+        <TableTypeBar setTableType={setTableType}/>
+        {table}
+      </div>
     </div>
   );
 }

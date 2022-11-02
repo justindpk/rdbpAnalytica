@@ -1,23 +1,14 @@
 import {useEffect, useState} from "react";
 
-function MainTable({databases}) {
-  const [ammount, setAmmount] = useState(10);
+function MainTable({databases, amountToLoad}) {
   //TODO: Create table load
   // console.log(databases['allDucks']);
-  function handleScroll(e) {
-    if (0.9 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
-      setAmmount(ammount + 10);
-    }
-    // console.log(e.target.scrollHeight - e.target.scrollTop);
-    // console.log(window);
-  }
 
   useEffect(() => {
     console.log("Table loaded");
   }, []);
 
   return (
-    <div className="tableContainer" onScroll={handleScroll}>
       <table>
         <thead>
         <tr>
@@ -31,7 +22,7 @@ function MainTable({databases}) {
         </tr>
         </thead>
         <tbody>
-        {databases['allDucks'].slice(0, ammount).map((duck, index) => {
+        {databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
           return (
             <tr key={index}>
               <td>{duck.history[0].rank}</td>
@@ -49,7 +40,6 @@ function MainTable({databases}) {
 
         </tbody>
       </table>
-    </div>
 
   );
 }
