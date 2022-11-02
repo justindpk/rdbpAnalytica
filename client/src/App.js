@@ -3,6 +3,7 @@ import './main.css';
 import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
+import {scrollToTop} from "./components/helpers";
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
 
@@ -53,10 +54,6 @@ function TopBar() {
     </div>
   )
 
-}
-
-function scrollToTop() {
-  document.getElementsByClassName("tableContainer")[0].scrollTo(0, 0);
 }
 
 function TableTypeBar({setTableType}) {

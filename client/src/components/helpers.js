@@ -67,3 +67,7 @@ function parseAllDucks({backpackRarity, allDucks, allBackpacks}) {
   }
   return parsedDucks;
 }
+
+export function scrollToTop() {
+  document.getElementsByClassName("tableContainer")[0].scrollTo(0, 0);
+}
