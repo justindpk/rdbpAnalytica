@@ -349,7 +349,8 @@ input[type=number] {
 /* || DUCK TABLE */
 .tableContainer {
     margin-top: 100px;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     height: calc(100vh - 100px);
     width: 100vw;
 }
