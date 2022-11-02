@@ -8,15 +8,19 @@ const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRari
 
 function TopBar() {
   return (
-    <>
+    <div className="topBar">
       <header className="header">
         <div className="logoAndTitle">
 
-          <a className="analyticaLogo" onClick={() => {window.scroll(0, 0)}}>
+          <a className="analyticaLogo" onClick={() => {
+            window.scroll(0, 0)
+          }}>
             <img src="/img/analyticaStrawberryDuck.png" alt="strawberry duck"/>
           </a>
           <div className="analyticaTitle">
-            <a onClick={() => {window.scroll(0, 0)}}> RDBP Analytica </a>
+            <a onClick={() => {
+              window.scroll(0, 0)
+            }}> RDBP Analytica </a>
             <p className="description">
               A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
                                                    rel="noreferrer">
@@ -47,9 +51,9 @@ function TopBar() {
       </header>
 
       <div className="doubleHeader">
-          <p className="screenerTitle"> Duck Screener </p>
-        </div>
-    </>
+        <p className="screenerTitle"> Duck Screener </p>
+      </div>
+    </div>
   )
 
 }
@@ -109,9 +113,7 @@ function App() {
     <div className="App">
       <TopBar/>
       <TableTypeBar setTableType={setTableType}/>
-      <div className="screenerTitle">
-        {table}
-      </div>
+      {table}
     </div>
   );
 }
