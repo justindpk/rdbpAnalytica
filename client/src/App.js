@@ -123,7 +123,9 @@ function App() {
         </div>
 
         <TableTypeBar setTableType={setTableType}/>
-        {table}
+        <div className="duckTable">
+          {table}
+        </div>
       </div>
     </div>
   );
