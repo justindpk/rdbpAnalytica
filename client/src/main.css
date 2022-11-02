@@ -366,6 +366,7 @@ td {
     border-right: 1px solid #400000;
     border-bottom: 1px solid #400000;
     background: #FFFBC1;
+    user-select: none;
 }
 
 thead {
