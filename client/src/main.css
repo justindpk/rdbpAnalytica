@@ -112,7 +112,7 @@ input[type=number] {
 }
 
 .button.row {
-    margin-top: 22px;
+    margin-top: 12px;
     margin-right: 2px;
     display: flex;
 }
@@ -322,7 +322,9 @@ input[type=number] {
     background: #ffffff;
     border-bottom: 3px solid #400000;
     padding-left: 16px;
-    padding-bottom: 10px;
+    padding-bottom: 2px;
+    position: sticky;
+    top: 0;
 }
 
 .search {
@@ -341,12 +343,6 @@ input[type=number] {
     width: 35px;
     height: 35px;
     margin-bottom: 5px;
-}
-
-/* || FILTER BAR */
-.filterBar {
-    position: sticky;
-    top: 0;
 }
 
 /* || DUCK TABLE */
@@ -371,6 +367,7 @@ td {
     vertical-align: middle;
     border-right: 1px solid #400000;
     border-bottom: 1px solid #400000;
+    background: #FFFBC1;
 }
 
 thead {
