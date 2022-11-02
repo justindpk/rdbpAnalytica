@@ -12,11 +12,15 @@ function TopBar() {
       <header className="header">
         <div className="logoAndTitle">
 
-          <a className="analyticaLogo" onClick={() => {window.scroll(0, 0)}}>
+          <a className="analyticaLogo" onClick={() => {
+            window.scroll(0, 0)
+          }}>
             <img src="/img/analyticaStrawberryDuck.png" alt="strawberry duck"/>
           </a>
           <div className="analyticaTitle">
-            <a onClick={() => {window.scroll(0, 0)}}> RDBP Analytica </a>
+            <a onClick={() => {
+              window.scroll(0, 0)
+            }}> RDBP Analytica </a>
             <p className="description">
               A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
                                                    rel="noreferrer">
@@ -71,6 +75,7 @@ function TableTypeBar({setTableType}) {
 }
 
 function App() {
+  const [originalDatabases, setOriginalDatabases] = useState();
   const [databases, setDatabases] = useState();
   const [loaded, setLoaded] = useState(false);
   const [tableType, setTableType] = useState("main");
@@ -81,6 +86,7 @@ function App() {
     databaseNames.forEach((databaseName) => {
       newDatabases = {...newDatabases, [databaseName]: window[databaseName]}
     });
+    setOriginalDatabases(newDatabases);
     setDatabases(newDatabases);
     setLoaded(true);
   }, []);
