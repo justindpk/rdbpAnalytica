@@ -344,11 +344,13 @@ input[type=number] {
 }
 
 /* || FILTER BAR */
-
+.filterBar {
+    position: sticky;
+    top: 0;
+}
 
 /* || DUCK TABLE */
 .tableContainer {
-    margin-top: 0px;
     overflow-x: hidden;
     overflow-y: scroll;
     height: 100vh;
