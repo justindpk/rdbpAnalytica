@@ -17,7 +17,9 @@ function MainTable({databases, amountToLoad}) {
         return (
           <tr key={index}>
             <td>{duck.history[0].rank}</td>
-            <td><img src={duck.history[0].image} alt="duck" className='duckImage'/></td>
+            <td><a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
+              <img src={duck.history[0].image} alt="duck" className='duckImage'/></a>
+            </td>
             <td>{duck.duck}</td>
             <td>{duck.history[0].version}</td>
             <td>{duck.attributes[0].value} / {duck.attributes[0].max_value}</td>

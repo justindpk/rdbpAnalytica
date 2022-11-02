@@ -115,9 +115,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className="tableContainer" onScroll={handleScroll}>
       <TopBar/>
 
-      <div className="tableContainer" onScroll={handleScroll}>
         <div className="doubleHeader">
           <p className="screenerTitle"> Duck Screener </p>
         </div>
