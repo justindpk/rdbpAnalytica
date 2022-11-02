@@ -1,9 +1,14 @@
-function MainTable({databases, amountToLoad}) {
+function MainTable({databases, setDatabases, amountToLoad}) {
+  function sortRank() {
+
+
+  }
+
   return (
     <table>
       <thead>
       <tr>
-        <th>Rank</th>
+        <th onClick={() => console.log('click rank')}>Rank</th>
         <th><img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/></th>
         <th>ID</th>
         <th>Version</th>

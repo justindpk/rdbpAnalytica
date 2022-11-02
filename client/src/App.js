@@ -102,16 +102,16 @@ function App() {
   if (loaded) {
     switch (tableType) {
       case "main":
-        table = <MainTable databases={databases} amountToLoad={amountToLoad}/>;
+        table = <MainTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>
         break;
       case "traits":
-        table = <TraitsTable databases={databases} amountToLoad={amountToLoad}/>;
+        table = <TraitsTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>
         break;
       case "backpacks":
-        table = <BackpacksTable databases={databases} amountToLoad={amountToLoad}/>;
+        table = <BackpacksTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>
         break;
       default:
-        table = <MainTable databases={databases} amountToLoad={amountToLoad}/>;
+        table = <MainTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>;
     }
   } else {
     table = <p className="loading">Loading...</p>;
