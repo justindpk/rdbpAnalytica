@@ -1,15 +1,23 @@
 import {useState} from "react";
 
 function MainTable({databases, setDatabases, amountToLoad}) {
-  const [clicked, setClicked] = useState({'rank': 1, 'id': 0, 'version': 0, 'parties': 0, 'rankChange': 0});
+  const [sortBy, setSortBy] = useState("rank");
+  const [sortAscending, setSortAscending] = useState(true);
 
   function handleSort(name, func) {
-    setClicked({...clicked, [name]: clicked[name] + 1});
+    let newSortAscending;
+    if (name === sortBy) {
+      newSortAscending = !sortAscending;
+    } else {
+      newSortAscending = true;
+    }
     let newDatabases = {...databases};
     newDatabases.allDucks.sort((a, b) => {
-      return func(a, b) * (clicked[name] % 2 === 0 ? 1 : -1);
+      return func(a, b) * (newSortAscending ? 1 : -1);
     });
+    setSortAscending(newSortAscending);
     setDatabases(newDatabases);
+    setSortBy(name);
   }
 
   return (
@@ -21,7 +29,10 @@ function MainTable({databases, setDatabases, amountToLoad}) {
         <th onClick={() => handleSort('id', (a, b) => a.duck - b.duck)}>ID</th>
         <th onClick={() => handleSort('version', (a, b) => a.history[0].version - b.history[0].version)}>Version</th>
         <th onClick={() => handleSort('parties', (a, b) => a.attributes[0].value - b.attributes[0].value)}>Parties</th>
-        <th onClick={() => handleSort('rankChange', (a, b) => (a.history.length > 1 ? a.history[1].rank - a.history[0].rank : 0) - (b.history.length > 1 ? b.history[1].rank - b.history[0].rank : 0))}>Rank Change</th>
+        <th onClick={() => handleSort('rankChange', (a, b) =>
+          (a.history.length > 1 ? a.history[1].rank - a.history[0].rank : 0) -
+          (b.history.length > 1 ? b.history[1].rank - b.history[0].rank : 0))}>Rank Change
+        </th>
         <th>Opensea</th>
       </tr>
       </thead>
