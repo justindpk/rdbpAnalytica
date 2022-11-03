@@ -165,6 +165,11 @@ input[type=number] {
     color: #400000;
 }
 
+.button.grey {
+    background: #C4C4C4;
+    color: #400000;
+}
+
 .button.svg{
     border: none;
     background: none;

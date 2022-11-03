@@ -52,15 +52,31 @@ function TopBar() {
 
 }
 
-function TableTypeBar({setTableType}) {
+function TableTypeBar({setTableType, setReset, reset}) {
   return (
     <div className="filterBar">
-      <button className="button row yellow" onClick={() => {setTableType("main"); scrollToTop();}}>
+      <button className="button row yellow" onClick={() => {
+        setTableType("main");
+        scrollToTop();
+      }}>
         <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
       </button>
-      <button className="button row red" onClick={() => {setTableType("traits"); scrollToTop();}}>Traits</button>
-      <button className="button row lightPurple" onClick={() => {setTableType("backpacks"); scrollToTop();}}>
+      <button className="button row red" onClick={() => {
+        setTableType("traits");
+        scrollToTop();
+      }}>Traits
+      </button>
+      <button className="button row lightPurple" onClick={() => {
+        setTableType("backpacks");
+        scrollToTop();
+      }}>
         <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
+      </button>
+      <button className="button row grey" onClick={() => {
+        scrollToTop();
+        setReset(reset + 1);
+      }}>
+        <img className="backpackIcon" src="/img/reset.svg" alt="reset"/>
       </button>
     </div>
   )
@@ -72,6 +88,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [tableType, setTableType] = useState("main");
   const [amountToLoad, setAmountToLoad] = useState(20);
+  const [reset, setReset] = useState(0);
 
 
   useEffect(() => {
@@ -79,10 +96,9 @@ function App() {
     databaseNames.forEach((databaseName) => {
       newDatabases = {...newDatabases, [databaseName]: window[databaseName]}
     });
-    setOriginalDatabases(newDatabases);
     setDatabases(newDatabases);
     setLoaded(true);
-  }, []);
+  }, [reset]);
 
   function handleScroll(e) {
     if (0.9 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
@@ -113,14 +129,14 @@ function App() {
   return (
     <div className="body">
       <div className="tableContainer" onScroll={handleScroll}>
-      <TopBar/>
+        <TopBar/>
 
         <div className="doubleHeader">
           <p className="screenerTitle"> Duck Screener </p>
         </div>
 
-        <TableTypeBar setTableType={setTableType}/>
-        <div className="duckTable">
+        <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
+        <div className="duckTable" key={reset}>
           {table}
         </div>
       </div>
