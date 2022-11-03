@@ -83,7 +83,6 @@ function TableTypeBar({setTableType, setReset, reset}) {
 }
 
 function App() {
-  const [originalDatabases, setOriginalDatabases] = useState();
   const [databases, setDatabases] = useState();
   const [loaded, setLoaded] = useState(false);
   const [tableType, setTableType] = useState("main");
@@ -98,7 +97,6 @@ function App() {
     });
     setDatabases(newDatabases);
     setLoaded(true);
-    console.log('loading');
   }, [reset]);
 
   function handleScroll(e) {
