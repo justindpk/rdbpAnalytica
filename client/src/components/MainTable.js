@@ -12,7 +12,7 @@ function MainTable({databases, setDatabases, amountToLoad}) {
       newSortAscending = true;
     }
     let newDatabases = {...databases};
-    newDatabases.allDucks.sort((a, b) => {
+    newDatabases['allDucks'].sort((a, b) => {
       return func(a, b) * (newSortAscending ? 1 : -1);
     });
     setSortAscending(newSortAscending);
@@ -25,11 +25,14 @@ function MainTable({databases, setDatabases, amountToLoad}) {
     <table>
       <thead>
       <tr>
-        <th onClick={() => handleSort('rank', (a, b) => a.history[0].rank - b.history[0].rank)}>Rank {sortIcon}</th>
+        <th onClick={() => handleSort('rank', (a, b) => a.history[0].rank - b.history[0].rank)}>
+          Rank {sortIcon}</th>
         <th><img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/></th>
         <th onClick={() => handleSort('id', (a, b) => a.duck - b.duck)}>ID {sortIcon}</th>
-        <th onClick={() => handleSort('version', (a, b) => a.history[0].version - b.history[0].version)}>Version {sortIcon}</th>
-        <th onClick={() => handleSort('parties', (a, b) => a.attributes[0].value - b.attributes[0].value)}>Parties {sortIcon}</th>
+        <th onClick={() => handleSort('version', (a, b) => a.history[0].version - b.history[0].version)}>
+          Version {sortIcon}</th>
+        <th onClick={() => handleSort('parties', (a, b) => a.attributes[0].value - b.attributes[0].value)}>
+          Parties {sortIcon}</th>
         <th onClick={() => handleSort('rankChange', (a, b) =>
           (a.history.length > 1 ? a.history[1].rank - a.history[0].rank : 0) -
           (b.history.length > 1 ? b.history[1].rank - b.history[0].rank : 0))}>Rank Change {sortIcon}
