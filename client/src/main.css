@@ -270,12 +270,13 @@ input[type=number] {
     display: block;
 }
 
-.analyticaTitle a {
+.analyticaTitle h1 {
     text-decoration: none;
     font-family: 'Readex Pro';
     font-size: 36px;
     padding: 0px 4px 8px 4px;
     transition: all .1s;
+    margin: 0;
 }
 
 .description {
@@ -381,7 +382,7 @@ table {
     overflow-x: scroll;
 }
 .selected {
-    background: #FFE233;
+    background: #FFFBC1;
 }
 
 th,
