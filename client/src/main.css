@@ -375,6 +375,9 @@ table {
     width: 100%;
     overflow-x: scroll;
 }
+.selected {
+    background: #FFE233;
+}
 
 th,
 td {
