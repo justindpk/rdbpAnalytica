@@ -25,7 +25,7 @@ function MainTable({databases, setDatabases, amountToLoad}) {
       <thead>
       <tr>
         <th onClick={() => handleSort('rank', (a, b) => a.history[0].rank - b.history[0].rank)}>Rank</th>
-        <th><img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/></th>
+        <th><img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/> <button className="button svg"><img src="/img/upDown.svg" alt="sort" className='duckIcon'/> </button> </th>
         <th onClick={() => handleSort('id', (a, b) => a.duck - b.duck)}>ID</th>
         <th onClick={() => handleSort('version', (a, b) => a.history[0].version - b.history[0].version)}>Version</th>
         <th onClick={() => handleSort('parties', (a, b) => a.attributes[0].value - b.attributes[0].value)}>Parties</th>
