@@ -62,7 +62,7 @@ function MainTable({databases, setDatabases, amountToLoad}) {
             <td className={handleSortClassName('parties')}>{duck.attributes[0].value} / {duck.attributes[0].max_value}</td>
             <td className={handleSortClassName('rankChange')}>{duck.history.length > 1 ? duck.history[1].rank - duck.history[0].rank : 0}</td>
             <td><a href={`https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/${duck.duck}`}
-                   target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"/></a></td>
+                   target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea" style={{width: '45px'}}/></a></td>
           </tr>
         )
       })}
