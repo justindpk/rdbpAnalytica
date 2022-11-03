@@ -13,11 +13,11 @@ function TopBar() {
       <header className="header">
         <div className="logoAndTitle">
 
-          <a className="analyticaLogo">
+          <div className="analyticaLogo">
             <img src="/img/analyticaStrawberryDuck.png" alt="strawberry duck"/>
-          </a>
+          </div>
           <div className="analyticaTitle">
-            <a> RDBP Analytica </a>
+            <h1> RDBP Analytica </h1>
             <p className="description">
               A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
                                                    rel="noreferrer">
