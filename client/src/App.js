@@ -94,10 +94,11 @@ function App() {
   useEffect(() => {
     let newDatabases = {};
     databaseNames.forEach((databaseName) => {
-      newDatabases = {...newDatabases, [databaseName]: window[databaseName]}
+      newDatabases = {...newDatabases, [databaseName]: JSON.parse(JSON.stringify(window[databaseName]))}
     });
     setDatabases(newDatabases);
     setLoaded(true);
+    console.log('loading');
   }, [reset]);
 
   function handleScroll(e) {
