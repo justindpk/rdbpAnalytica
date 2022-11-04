@@ -376,6 +376,14 @@ input[type=number] {
     width: 100vw;
 }
 
+.columnTitle{
+    text-decoration: underline;
+    font-family: 'Readex Pro';
+    font-size: 16px;
+    text-align: center;
+    display: inline;
+}
+
 table {
     border-collapse: separate;
     border-spacing: 0;

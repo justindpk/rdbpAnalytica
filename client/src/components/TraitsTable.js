@@ -56,7 +56,7 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
 
   return (
     <th ref={ref}>
-      <p onClick={() => setOpen(!open)} style={{textDecoration: 'underline'}}>
+      <p className="columnTitle" onClick={() => setOpen(!open)}>
         {columns[name]['name']}
       </p>
       <FormControl>
