@@ -167,9 +167,10 @@ function App() {
   function runAllFilters(allDucks) {
     let filteredDucks = [...allDucks];
     if (databases) {
-      let passedDucks = [];
+      console.log(filters);
       for (const [name, values] of Object.entries(filters)) {
         const upperFirst = upperFirstLetter(name)
+        let passedDucks = [];
         if (values.length > 0) {
           filteredDucks.forEach((duck) => {
             if (values.includes(duck['traits'][upperFirst])) {
