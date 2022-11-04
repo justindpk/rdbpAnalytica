@@ -221,7 +221,13 @@ function App() {
         />
         break;
       case "backpacks":
-        table = <BackpacksTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>
+        table = <BackpacksTable databases={databases} 
+                                amountToLoad={amountToLoad} 
+                                handleSort={handleSort}
+                                sorts={sorts}
+                                filters={filters}
+                                setFilters={setFilters}
+        />
         break;
       default:
         table = <MainTable databases={databases}

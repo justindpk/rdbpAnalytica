@@ -1,7 +1,7 @@
 import columns from "./columnClasses";
 import {TableHeaderSortable} from "./TableHelpers";
 
-function MainTable({databases, amountToLoad, handleSort, sorts, filters}) {
+function MainTable({databases, amountToLoad, handleSort, sorts}) {
   return (
     <table>
       <thead>

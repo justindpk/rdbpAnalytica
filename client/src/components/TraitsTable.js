@@ -56,9 +56,9 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
 
   return (
     <th ref={ref}>
-      <a onClick={() => setOpen(!open)} style={{textDecoration: 'underline'}}>
+      <p onClick={() => setOpen(!open)} style={{textDecoration: 'underline'}}>
         {columns[name]['name']}
-      </a>
+      </p>
       <FormControl>
         <Select
           multiple
@@ -186,8 +186,6 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
           </tr>
         )
       })}
-
-
       </tbody>
     </table>
 
