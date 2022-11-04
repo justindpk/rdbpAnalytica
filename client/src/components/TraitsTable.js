@@ -73,15 +73,26 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
           MenuProps={{
             anchorEl: ref.current,
             transitionDuration: 150,
+            // hide scrollbar in material-ui
+
 
             PaperProps: {
               style: {
+                border: '3px solid #400000',
+                borderRadius: '10px',
                 maxHeight: "50vh",
                 marginTop: -10,
                 backgroundColor: '#FFFBC1',
+                //hide scrollbar for MaterialUI MenuProps
+                '&::-webkit-scrollbar': {
+                  display: 'none',
+                },
+                // }
               },
             },
           }}
+
+
         >
           {options.map((option) => (
             <MenuItem disableRipple key={option} value={option[0]} style={{height: 30}}>
