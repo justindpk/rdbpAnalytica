@@ -27,7 +27,7 @@ function MainTable({databases, amountToLoad, handleSort, sorts, filters}) {
             <td>{columns['version'].value(duck)}</td>
             <td>{columns['parties'].value(duck)}</td>
             <td>{columns['rankChange'].value(duck)}</td>
-            <td><a href={`https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/${duck.duck}`}
+            <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                    target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
                                                          style={{width: '45px'}}/></a></td>
           </tr>

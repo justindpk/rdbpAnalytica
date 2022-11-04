@@ -150,6 +150,7 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
         <MultiSelectDropdown name="beak" databases={databases} filters={filters} setFilters={setFilters}/>
         <MultiSelectDropdown name="eyes" databases={databases} filters={filters} setFilters={setFilters}/>
         <MultiSelectDropdown name="cover" databases={databases} filters={filters} setFilters={setFilters}/>
+        <th>Opensea</th>
       </tr>
       </thead>
       <tbody>
@@ -179,6 +180,9 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
                      alt={traitToID['Eyes'][getTrait(duck)]} className='duckImage'/></td>
             <td><img src={getImageURL('cover', traitToID['Cover'][getTrait(duck, 'Cover')])}
                      alt={traitToID['Cover'][getTrait(duck)]} className='duckImage'/></td>
+             <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
+                   target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
+                                                         style={{width: '45px'}}/></a></td>
           </tr>
         )
       })}
