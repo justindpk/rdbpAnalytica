@@ -468,4 +468,10 @@ select {
     width: 30px;
     height: 30px;
 }
+
+.arrowIcon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 5px;
+}
 /* || DUCK TABLE */

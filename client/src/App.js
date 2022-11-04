@@ -58,26 +58,27 @@ function TableTypeBar({setTableType, setReset, reset}) {
     <div className="filterBar">
       <button className="button row yellow" onClick={() => {
         setTableType("main");
-        scrollToTop();
       }}>
         <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
       </button>
       <button className="button row red" onClick={() => {
         setTableType("traits");
-        scrollToTop();
       }}>Traits
       </button>
       <button className="button row lightPurple" onClick={() => {
         setTableType("backpacks");
-        scrollToTop();
       }}>
         <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
       </button>
       <button className="button row grey" onClick={() => {
-        scrollToTop();
         setReset(reset + 1);
       }}>
-        <img className="backpackIcon" src="/img/reset.svg" alt="reset"/>
+        <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
+      </button>
+      <button className="button row grey" onClick={() => {
+        scrollToTop();
+      }}>
+        <img className="arrowIcon" src="/img/upArrow.png" alt="scrollToTop"/>
       </button>
     </div>
   )
