@@ -334,6 +334,7 @@ input[type=number] {
 
 /* || FILTER BAR */
 .filterBar {
+    z-index: 1;
     align-content: center;
     box-sizing: border-box;
     width: 100%;
