@@ -120,18 +120,13 @@ function getImageURL(traitType, traitName) {
 }
 
 function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFilters}) {
-  const [traitToID, setTraitToID] = useState();
-
-  useEffect(() => {
-    let newTraitToID = {};
-    for (const [traitType, traits] of Object.entries(databases['traits'])) {
-      newTraitToID[traitType] = {};
-      for (const trait of traits) {
-        newTraitToID[traitType][trait['name']] = (trait['id'].length < 2 ? '0' + trait['id'] : trait['id']);
-      }
+  let traitToID = {};
+  for (const [traitType, traits] of Object.entries(databases['traits'])) {
+    traitToID[traitType] = {};
+    for (const trait of traits) {
+      traitToID[traitType][trait['name']] = (trait['id'].length < 2 ? '0' + trait['id'] : trait['id']);
     }
-    setTraitToID(newTraitToID);
-  }, [databases]);
+  }
 
 
   return (
@@ -154,7 +149,7 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
       </tr>
       </thead>
       <tbody>
-      {traitToID && databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
+      {databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
         return (
           <tr key={index}>
             <td>{columns['rank'].value(duck)}</td>
