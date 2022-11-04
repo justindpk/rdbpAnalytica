@@ -72,6 +72,7 @@ function TableTypeBar({setTableType, setReset, reset}) {
       </button>
       <button className="button row grey" onClick={() => {
         setReset(reset + 1);
+        scrollToTop();
       }}>
         <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
       </button>
