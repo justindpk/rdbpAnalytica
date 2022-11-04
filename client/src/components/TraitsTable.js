@@ -1,4 +1,102 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import {Checkbox, FormControl, ListItemText, MenuItem, Select} from "@mui/material";
+import columns from './columnClasses.js';
+import {TableHeaderSortable} from "./TableHelpers";
+import {upperFirstLetter} from "./helpers";
+
+function MultiSelectDropdown({name, databases, filters, setFilters}) {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(['Clear']);
+  const [options, setOptions] = useState([]);
+  const ref = useRef();
+  const upperName = upperFirstLetter(name);
+
+
+  useEffect(() => {
+    let total = 0;
+    let newOptions = [];
+    for (const key of Object.keys(databases['traitToID'][upperName])) {
+      if (key === '') {
+        continue;
+      }
+      const rarity = databases['globalRarity'][upperName][key];
+      total += rarity;
+      newOptions.push([key, rarity]);
+    }
+    newOptions.sort((a, b) => b[1] - a[1]);
+    newOptions.splice(0, 0, ['Empty', window['allDucks'].length - total]);
+    newOptions.splice(0, 0, ['Select All', window['allDucks'].length]);
+    newOptions.splice(0, 0, ['Clear', window['allDucks'].length]);
+    setOptions(newOptions);
+  }, [databases]);
+
+  useEffect(() => {
+    if (selected[0] === 'Clear') {
+      let newFilters = {...filters};
+      delete newFilters[name];
+      setFilters(newFilters);
+    } else {
+      setFilters({...filters, [name]: selected});
+    }
+  }, [selected]);
+
+  function handleSelect(event) {
+    const lastSelected = event.target.value[event.target.value.length - 1];
+    if (lastSelected === 'Clear' || lastSelected === undefined) {
+      if (selected.includes('Clear')) {
+        return;
+      }
+      setSelected(['Clear']);
+    } else if (lastSelected === 'Select All') {
+      setSelected(options.map(option => option[0]).slice(2));
+    } else {
+      setSelected(event.target.value.filter(value => value !== 'Clear'));
+    }
+  }
+
+  return (
+    <th ref={ref}>
+      <a onClick={() => setOpen(!open)} style={{textDecoration: 'underline'}}>
+        {columns[name]['name']}
+      </a>
+      <FormControl>
+        <Select
+          multiple
+          value={selected}
+          open={open}
+          onClose={() => setOpen(false)}
+          onOpen={() => setOpen(true)}
+          onChange={(event) => {
+            handleSelect(event);
+          }}
+          style={{display: 'none'}}
+          MenuProps={{
+            anchorEl: ref.current,
+            transitionDuration: 150,
+
+            PaperProps: {
+              style: {
+                maxHeight: "50vh",
+                marginTop: -10,
+                backgroundColor: '#FFFBC1',
+              },
+            },
+          }}
+        >
+          {options.map((option) => (
+            <MenuItem disableRipple key={option} value={option[0]} style={{height: 30}}>
+              <Checkbox checked={selected.includes(option[0])}/>
+              <ListItemText primary={`${option[0]} (${option[1]})`}/>
+            </MenuItem>
+          ))}
+
+        </Select>
+      </FormControl>
+
+    </th>
+  )
+
+}
 
 function getTrait(duck, traitType) {
   for (const attribute of duck['attributes']) {
@@ -21,11 +119,7 @@ function getImageURL(traitType, traitName) {
   return `https://duck.art/img/traits/${traitType}/${traitName}.${extension}`;
 }
 
-function TraitsTable({databases, setDatabases, amountToLoad}) {
-  const [sort, setSort] = useState({'rank': true, 'version': null, 'rarityChange': null, 'parties': null})
-  const [originalDatabases, setOriginalDatabases] = useState();
-  const [sortBy, setSortBy] = useState("rank");
-  const [sortAscending, setSortAscending] = useState(true);
+function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFilters}) {
   const [traitToID, setTraitToID] = useState();
 
   useEffect(() => {
@@ -39,77 +133,34 @@ function TraitsTable({databases, setDatabases, amountToLoad}) {
     setTraitToID(newTraitToID);
   }, [databases]);
 
-  useEffect(() => {
-    setOriginalDatabases(databases);
-  }, [databases]);
-
-  function handleSort(name, func) {
-    let newSortAscending;
-    if (name === sortBy) {
-      newSortAscending = !sortAscending;
-    } else {
-      newSortAscending = true;
-    }
-    let newDatabases = {...databases};
-    newDatabases['allDucks'].sort((a, b) => {
-      return func(a, b) * (newSortAscending ? 1 : -1);
-    });
-    setSortAscending(newSortAscending);
-    setDatabases(newDatabases);
-    setSortBy(name);
-    setSort({...sort, [name]: newSortAscending});
-  }
-
-  function handleSortClassName(name) {
-    if (name === sortBy) {
-      return "selected"
-    } else {
-      return "";
-    }
-  }
-
-  function getArrow(name) {
-    switch (sort[name]) {
-      case true:
-        return "▼";
-      case false:
-        return "▲";
-      default:
-        return "▪";
-    }
-  }
-
 
   return (
     <table>
       <thead>
       <tr>
-        <th onClick={() => handleSort('rank', (a, b) => a.history[0].rank - b.history[0].rank)}
-            className={handleSortClassName('rank')}>
-          Rank {getArrow('rank')}</th>
+        <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <th><img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/></th>
-        <th className={handleSortClassName('id')}
-            onClick={() => handleSort('id', (a, b) => a.duck - b.duck)}>ID {getArrow('id')}</th>
-        <th>Background</th>
-        <th>Body</th>
-        <th>Tattoo</th>
-        <th>Head</th>
-        <th>Shirt</th>
-        <th>Neck</th>
-        <th>Beak</th>
-        <th>Eyes</th>
-        <th>Cover</th>
+        <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
+        <MultiSelectDropdown name="background" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="body" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="tattoo" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="head" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="shirt" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="neck" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="beak" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="eyes" databases={databases} filters={filters} setFilters={setFilters}/>
+        <MultiSelectDropdown name="cover" databases={databases} filters={filters} setFilters={setFilters}/>
       </tr>
       </thead>
       <tbody>
       {traitToID && databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
         return (
           <tr key={index}>
-            <td className={handleSortClassName('rank')}>{duck.history[0].rank}</td>
+            <td>{columns['rank'].value(duck)}</td>
             <td><a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
               <img src={duck.history[0].image} alt="duck" className='duckImage'/></a>
             </td>
-            <td className={handleSortClassName('id')}>{duck.duck}</td>
+            <td>{columns['id'].value(duck)}</td>
             <td><img src={getImageURL('background', traitToID['Background'][getTrait(duck, 'Background')])}
                      alt={traitToID['Background'][getTrait(duck)]} className='duckImage'/></td>
             <td><img src={getImageURL('body', traitToID['Body'][getTrait(duck, 'Body')])}

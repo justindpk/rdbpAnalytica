@@ -3,7 +3,8 @@ import './main.css';
 import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
-import {scrollToTop} from "./components/helpers";
+import {scrollToTop, upperFirstLetter} from "./components/helpers";
+import columns from "./components/columnClasses";
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
 
@@ -82,12 +83,15 @@ function TableTypeBar({setTableType, setReset, reset}) {
   )
 }
 
+
 function App() {
   const [databases, setDatabases] = useState();
-  const [loaded, setLoaded] = useState(false);
+  const [originalDatabases, setOriginalDatabases] = useState();
   const [tableType, setTableType] = useState("main");
   const [amountToLoad, setAmountToLoad] = useState(20);
   const [reset, setReset] = useState(0);
+  const [sorts, setSorts] = useState({});
+  const [filters, setFilters] = useState({});
 
 
   useEffect(() => {
@@ -95,8 +99,30 @@ function App() {
     databaseNames.forEach((databaseName) => {
       newDatabases = {...newDatabases, [databaseName]: JSON.parse(JSON.stringify(window[databaseName]))}
     });
+
+    let traitToID = {};
+    for (const [traitType, traits] of Object.entries(newDatabases['traits'])) {
+      traitToID[traitType] = {};
+      for (const trait of traits) {
+        traitToID[traitType][trait['name']] = (trait['id'].length < 2 ? '0' + trait['id'] : trait['id']);
+      }
+    }
+    newDatabases['traitToID'] = traitToID;
+
+    let newDucks = []
+    for (let duck of newDatabases['allDucks']) {
+      duck['traits'] = {};
+      duck['attributes'].forEach((attribute) => {
+        duck['traits'][attribute['trait_type']] = attribute['value']
+      });
+      newDucks.push(duck);
+    }
+    newDatabases['allDucks'] = newDucks;
+
     setDatabases(newDatabases);
-    setLoaded(true);
+    setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
+    setSorts({});
+    setFilters({});
   }, [reset]);
 
   function handleScroll(e) {
@@ -105,21 +131,100 @@ function App() {
     }
   }
 
+  function handleSort(name) {
+    if (sorts[name]) {
+      if (sorts[name]['ascending']) {
+        const priority = sorts[name]['priority'];
+        setSorts({...sorts, [name]: {ascending: false, priority: priority}});
+      } else {
+        const newSorts = {...sorts};
+        const priority = sorts[name]['priority'];
+        for (let sort in newSorts) {
+          if (newSorts[sort]['priority'] > priority) {
+            newSorts[sort]['priority'] -= 1;
+          }
+        }
+        delete newSorts[name];
+        setSorts(newSorts);
+      }
+    } else {
+      setSorts({...sorts, [name]: {ascending: true, priority: Object.keys(sorts).length + 1}});
+    }
+  }
+
+  function runAllSorts(allDucks) {
+    let sortedDucks = [...allDucks];
+    if (databases) {
+      const sortedSorts = Object.entries(sorts).sort((a, b) => a[1]['priority'] - b[1]['priority']);
+      for (const [name, attrs] of sortedSorts) {
+        const compareFn = columns[name].sort
+        sortedDucks.sort((a, b) => compareFn(a, b) * (attrs['ascending'] ? 1 : -1));
+      }
+    }
+    return sortedDucks;
+  }
+
+  function runAllFilters(allDucks) {
+    let filteredDucks = [...allDucks];
+    if (databases) {
+      let passedDucks = [];
+      for (const [name, values] of Object.entries(filters)) {
+        const upperFirst = upperFirstLetter(name)
+        if (values.length > 0) {
+          filteredDucks.forEach((duck) => {
+            if (values.includes(duck['traits'][upperFirst])) {
+              passedDucks.push(duck);
+            } else if (values.includes('Empty') && !duck['traits'][upperFirst]) {
+              passedDucks.push(duck);
+            }
+          });
+          filteredDucks = passedDucks;
+        }
+      }
+    }
+    return filteredDucks;
+  }
+
+
+  useEffect(() => {
+    if (databases) {
+      setDatabases({...databases, allDucks: runAllSorts(databases['allDucks'])});
+    }
+  }, [sorts]);
+
+  useEffect(() => {
+    if (databases) {
+      const filteredDucks = runAllFilters(originalDatabases['allDucks']);
+      setDatabases({...databases, allDucks: runAllSorts(filteredDucks)});
+    }
+  }, [filters]);
 
   let table;
-  if (loaded) {
+  if (databases) {
     switch (tableType) {
       case "main":
-        table = <MainTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>
+        table = <MainTable databases={databases}
+                           amountToLoad={amountToLoad}
+                           handleSort={handleSort}
+                           sorts={sorts}
+                           filters={filters}
+        />
         break;
       case "traits":
-        table = <TraitsTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>
+        table = <TraitsTable databases={databases}
+                             amountToLoad={amountToLoad}
+                             handleSort={handleSort}
+                             sorts={sorts}
+                             filters={filters}
+                             setFilters={setFilters}
+        />
         break;
       case "backpacks":
         table = <BackpacksTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>
         break;
       default:
-        table = <MainTable databases={databases} setDatabases={setDatabases} amountToLoad={amountToLoad}/>;
+        table = <MainTable databases={databases}
+                           amountToLoad={amountToLoad}/>;
     }
   } else {
     table = <p className="loading">Loading...</p>;
