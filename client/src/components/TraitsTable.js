@@ -75,7 +75,6 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
             transitionDuration: 150,
             // hide scrollbar in material-ui
 
-
             PaperProps: {
               style: {
                 border: '3px solid #400000',
@@ -85,8 +84,9 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
                 backgroundColor: '#FFFBC1',
                 //hide scrollbar for MaterialUI MenuProps
                 '&::-webkit-scrollbar': {
-                  display: 'none',
+                  width: 0,
                 },
+                scrollbarWidth: 'none',
                 // }
               },
             },
@@ -186,7 +186,7 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
                      alt={traitToID['Eyes'][getTrait(duck)]} className='duckImage'/></td>
             <td><img src={getImageURL('cover', traitToID['Cover'][getTrait(duck, 'Cover')])}
                      alt={traitToID['Cover'][getTrait(duck)]} className='duckImage'/></td>
-             <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
+            <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                    target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
                                                          style={{width: '45px'}}/></a></td>
           </tr>
