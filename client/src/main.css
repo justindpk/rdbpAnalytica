@@ -47,11 +47,35 @@ input[type=number] {
     -moz-appearance: textfield; /* Firefox */
 }
 
-::placeholder {
-    color: #400000;
-    opacity: .5;
+@media screen and (max-width: 1000px) {
+    body {
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 50px
+    }
+
+    h2 {
+        font-size: 24px
+    }
+
+    p {
+        font-size: 18px
+    }
 }
 
+@media screen and (max-width: 520px) {
+    .header .logoAndTitle .analyticaTitle .description {
+        display: none
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .header .logoAndTitle .analyticaTitle .description {
+        font-size: 14px;
+    }
+}
 
 .body {
     margin: auto;
@@ -64,6 +88,14 @@ input[type=number] {
     overflow-x: hidden;
 }
 
+::placeholder {
+    color: #400000;
+    opacity: .5;
+}
+/* || GLOBAL */
+
+
+/* || BUTTONS */
 .button {
     background: white;
     text-transform: uppercase;
@@ -186,59 +218,16 @@ input[type=number] {
 .button.svg:hover{
     transform: none;
 }
-
-
-@media screen and (max-width: 1000px) {
-    body {
-        margin: 0;
-    }
-
-    h1 {
-        font-size: 50px
-    }
-
-    h2 {
-        font-size: 24px
-    }
-
-    p {
-        font-size: 18px
-    }
-}
-
-
-@media screen and (max-width: 520px) {
-    .header .logoAndTitle .analyticaTitle .description {
-        display: none
-    }
-}
-
-
-@media screen and (max-width: 950px) {
-    .header .logoAndTitle .analyticaTitle .description {
-        font-size: 14px;
-    }
-}
-
-/* || GLOBAL */
+/* || BUTTONS */
 
 
 /* || HEADER */
 .header {
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*z-index: 2;*/
     width: 100%;
     background: #ffe233;
     text-align: left;
     border-bottom: 3px solid #400000;
-    /*
-    -webkit-box-shadow: 0 2px 4px -4px #400000;
-    -moz-box-shadow: 0 2px 4px -4px #400000;
-    box-shadow: 0 2px 2px -4px #400000;
-    */
-    height: 100px;
+    height: 90px;
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -274,9 +263,10 @@ input[type=number] {
     text-decoration: none;
     font-family: 'Readex Pro';
     font-size: 36px;
-    padding: 0px 4px 8px 4px;
+    padding: 0px 4px 0px 4px;
     transition: all .1s;
     margin: 0;
+    font-weight: 500;
 }
 
 .description {
@@ -308,6 +298,14 @@ input[type=number] {
     margin-right: 5px;
 }
 
+.darkBlurIcon {
+    width: 28px;
+    height: 28px;
+}
+
+.socialMediaSvg{
+    padding-left: 5px;
+}
 /* || HEADER */
 
 
@@ -329,7 +327,6 @@ input[type=number] {
     font-weight: 800;
     margin: 8px 0px 10px 0px;
 }
-
 /* || DOUBLE HEADER */
 
 
@@ -365,6 +362,8 @@ input[type=number] {
     height: 35px;
     margin-bottom: 5px;
 }
+/* || FILTER BAR */
+
 
 /* || DUCK TABLE */
 .tableContainer {
@@ -426,14 +425,13 @@ select {
     color: #400000;
     border: 2px solid #400000;
     border-radius: 8px;
-    /* box-shadow: inset 1px 1px 2px #400000; */
     background: #FFF;
     text-align: justify;
     margin-top: 4px;
 }
 
 .select-items {
-    background-color: white /* #FF426E */;
+    background-color: white;
     font-weight: 800;
 }
 
@@ -441,14 +439,8 @@ select {
     display: flex;
     width: 100%;
     border-bottom: 2px solid #400000;
-    /* why did this fix table scroll ??? */
     overflow-x: scroll;
     white-space: nowrap;
-}
-
-.rowTitle {
-    color: #400000;
-    display: block;
 }
 
 .duckImage {
@@ -465,15 +457,4 @@ select {
     width: 30px;
     height: 30px;
 }
-
-.buttonIcon {
-    width: 60px;
-    height: 60px;
-}
-
-.traitIcon {
-    width: 60px;
-    height: 60px;
-}
-
 /* || DUCK TABLE */

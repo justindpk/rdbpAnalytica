@@ -34,9 +34,9 @@ function TopBar() {
             <img src="/img/opensea.svg" alt="opensea"/>
           </a>
           <a className="socialMediaSvg"
-             href="https://looksrare.org/collections/0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6" target="_blank"
+             href="https://blur.io/collection/rubber-duck-bath-party" target="_blank"
              rel="noreferrer">
-            <img src="/img/looksrare.svg" alt="looksrare"/>
+            <img className="darkBlurIcon" src="/img/blurio.png" alt="blur"/>
           </a>
           <a className="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank" rel="noreferrer">
             <img src="/img/twitter.svg" alt="twitter"/>
