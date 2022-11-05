@@ -98,7 +98,13 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
                 },
 
                 // Firefox scrollbar
-                scrollbarColor: '#400000 transparent'
+                scrollbarColor: '#400000 transparent',
+
+                '& .Mui-selected': {
+                  backgroundColor: '#400000',
+                  color: '#FFFBC1',
+
+                }
               },
             },
           }}
@@ -107,7 +113,6 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
         >
           {options.map((option) => (
             <MenuItem disableRipple key={option} value={option[0]} style={{height: 30}}>
-              <Checkbox checked={selected.includes(option[0])}/>
               <ListItemText primary={`${option[0]} (${option[1]})`}/>
             </MenuItem>
           ))}
