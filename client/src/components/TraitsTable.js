@@ -101,9 +101,8 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
                 scrollbarColor: '#400000 transparent',
 
                 '& .Mui-selected': {
-                  backgroundColor: '#400000',
                   color: '#FFFBC1',
-
+                  backgroundColor: '#400000 !important',
                 }
               },
             },
