@@ -8,9 +8,9 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
         <tr>
           <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
-          <TableHeaderSortable name="totalTraits" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="version" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="parties" handleSort={handleSort} sorts={sorts}/>
+          <TableHeaderSortable name="totalTraits" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="rankChange" handleSort={handleSort} sorts={sorts}/>
           <th>Opensea</th>
         </tr>
@@ -26,9 +26,9 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
                 </a>
                 <p className="duckLabel">{columns['id'].value(duck)}</p>
               </td>
-              <td>{columns['totalTraits'].value(duck)} / 9</td>
               <td>{columns['version'].value(duck)}</td>
               <td>{columns['parties'].value(duck)}</td>
+              <td>{columns['totalTraits'].value(duck)} / 9</td>
               <td>{columns['rankChange'].value(duck)}</td>
               <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                      target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
