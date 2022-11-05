@@ -23,7 +23,8 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
                 <a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
                   <img src={duck.history[0].image} alt="duck" className='duckImage'/>
                 </a>
-                <p className="duckLabel">{columns['id'].value(duck)}</p></td>
+                <p className="duckLabel">{columns['id'].value(duck)}</p>
+              </td>
               <td>{columns['version'].value(duck)}</td>
               <td>{columns['parties'].value(duck)}</td>
               <td>{columns['rankChange'].value(duck)}</td>
