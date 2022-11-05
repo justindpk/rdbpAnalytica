@@ -86,7 +86,7 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
 
                 // Chrome scrollbar
                 '&::-webkit-scrollbar': {
-                  width: '0.4em',
+                  width: '5px',
                 },
                 '&::-webkit-scrollbar-track': {
                   background: 'transparent'

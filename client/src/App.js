@@ -246,7 +246,7 @@ function App() {
       <Box className="tableContainer" onScroll={handleScroll} sx={{
         overflowY: 'overlay',
         '&::-webkit-scrollbar': {
-          width: '0.4em'
+          width: '5px'
         },
         '&::-webkit-scrollbar-track': {
           background: 'transparent'
