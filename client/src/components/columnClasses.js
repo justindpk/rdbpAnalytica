@@ -26,6 +26,11 @@ const columns = {
       (b.history.length > 1 ? b.history[1].rank - b.history[0].rank : 0),
     value: (duck) => (duck.history.length > 1 ? duck.history[1].rank - duck.history[0].rank : 0),
   },
+  totalTraits: {
+    name: 'total traits',
+    sort: (a, b) => a.attributes.length - b.attributes.length,
+    value: (duck) => duck.attributes.length-1,
+  },
   background: {
     name: 'background',
   },
