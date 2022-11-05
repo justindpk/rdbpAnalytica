@@ -5,7 +5,7 @@ const columns = {
     value: (duck) => duck.history[0].rank,
   },
   id: {
-    name: 'id',
+    name: (<img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/>),
     sort: (a, b) => a.duck - b.duck,
     value: (duck) => duck.duck,
   },

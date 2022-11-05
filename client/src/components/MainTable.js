@@ -7,7 +7,6 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
         <thead>
         <tr>
           <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
-          <th><img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/></th>
           <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="version" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="parties" handleSort={handleSort} sorts={sorts}/>
@@ -20,10 +19,11 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
           return (
             <tr key={index}>
               <td>{columns['rank'].value(duck)}</td>
-              <td><a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
-                <img src={duck.history[0].image} alt="duck" className='duckImage'/></a>
-              </td>
-              <td>{columns['id'].value(duck)}</td>
+              <td>
+                <a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
+                  <img src={duck.history[0].image} alt="duck" className='duckImage'/>
+                </a>
+                <p>{columns['id'].value(duck)}</p></td>
               <td>{columns['version'].value(duck)}</td>
               <td>{columns['parties'].value(duck)}</td>
               <td>{columns['rankChange'].value(duck)}</td>
