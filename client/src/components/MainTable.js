@@ -8,6 +8,7 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
         <tr>
           <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
+          <TableHeaderSortable name="totalTraits" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="version" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="parties" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="rankChange" handleSort={handleSort} sorts={sorts}/>
@@ -25,6 +26,7 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
                 </a>
                 <p className="duckLabel">{columns['id'].value(duck)}</p>
               </td>
+              <td>{columns['totalTraits'].value(duck)} / 9</td>
               <td>{columns['version'].value(duck)}</td>
               <td>{columns['parties'].value(duck)}</td>
               <td>{columns['rankChange'].value(duck)}</td>
