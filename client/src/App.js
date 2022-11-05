@@ -267,9 +267,9 @@ function App() {
         </div>
 
         <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
-        <div className="duckTable" key={reset}>
+        {/*<div className="duckTable" key={reset}>*/}
           {table}
-        </div>
+        {/*</div>*/}
       </Box>
     </div>
   );

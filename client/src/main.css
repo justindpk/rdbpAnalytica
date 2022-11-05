@@ -426,7 +426,7 @@ th {
 
 thead {
     position: sticky;
-    top: 0;
+    top: 89px;
     color: rgb(0, 0, 0);
     font-size: 16px;
     text-transform: uppercase;
