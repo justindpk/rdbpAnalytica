@@ -40,13 +40,13 @@ input:focus {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-            appearance: none;
+    appearance: none;
     margin: 0;
 }
 
 input[type=number] {
     -moz-appearance: textfield; /* Firefox */
-         appearance: none;
+    appearance: none;
 }
 
 @media screen and (max-width: 1000px) {
@@ -94,6 +94,7 @@ input[type=number] {
     color: #400000;
     opacity: .5;
 }
+
 /* || GLOBAL */
 
 
@@ -204,7 +205,7 @@ input[type=number] {
     color: #400000;
 }
 
-.button.svg{
+.button.svg {
     border: none;
     background: none;
     cursor: pointer;
@@ -217,9 +218,10 @@ input[type=number] {
     transition: none;
 }
 
-.button.svg:hover{
+.button.svg:hover {
     transform: none;
 }
+
 /* || BUTTONS */
 
 
@@ -305,9 +307,10 @@ input[type=number] {
     height: 28px;
 }
 
-.socialMediaSvg{
+.socialMediaSvg {
     padding-left: 5px;
 }
+
 /* || HEADER */
 
 
@@ -329,6 +332,7 @@ input[type=number] {
     font-weight: 800;
     margin: 8px 0px 10px 0px;
 }
+
 /* || DOUBLE HEADER */
 
 
@@ -344,7 +348,7 @@ input[type=number] {
     border-bottom: 3px solid #400000;
     padding-left: 16px;
     padding-bottom: 2px;
-    position: sticky;
+    /*position: sticky;*/
     top: 0;
 }
 
@@ -365,6 +369,7 @@ input[type=number] {
     height: 35px;
     margin-bottom: 5px;
 }
+
 /* || FILTER BAR */
 
 
@@ -376,7 +381,7 @@ input[type=number] {
     width: 100vw;
 }
 
-.columnTitle{
+.columnTitle {
     text-decoration: underline;
     font-family: 'Readex Pro';
     font-size: 16px;
@@ -391,6 +396,7 @@ table {
     width: 100%;
     overflow-x: scroll;
 }
+
 .selected {
     background: #FFFBC1;
 }
@@ -405,7 +411,14 @@ td {
     user-select: none;
 }
 
+th {
+    position: sticky;
+    top: 0;
+}
+
 thead {
+    position: sticky;
+    top: 0;
     color: rgb(0, 0, 0);
     font-size: 16px;
     text-transform: uppercase;
@@ -474,4 +487,5 @@ select {
     height: 35px;
     margin-bottom: 5px;
 }
+
 /* || DUCK TABLE */

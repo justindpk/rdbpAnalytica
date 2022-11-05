@@ -5,6 +5,7 @@ import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
 import {scrollToTop, upperFirstLetter} from "./components/helpers";
 import columns from "./components/columnClasses";
+import {Box} from "@mui/material";
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
 
@@ -72,7 +73,6 @@ function TableTypeBar({setTableType, setReset, reset}) {
       </button>
       <button className="button row grey" onClick={() => {
         setReset(reset + 1);
-        scrollToTop();
       }}>
         <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
       </button>
@@ -125,10 +125,11 @@ function App() {
     setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
     setSorts({});
     setFilters({});
+    setAmountToLoad(20);
   }, [reset]);
 
   function handleScroll(e) {
-    if (0.9 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
+    if (0.95 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
       setAmountToLoad(amountToLoad + 10);
     }
   }
@@ -241,7 +242,23 @@ function App() {
 
   return (
     <div className="body">
-      <div className="tableContainer" onScroll={handleScroll}>
+      <Box className="tableContainer" onScroll={handleScroll} sx={{
+        overflowY: 'overlay',
+        '&::-webkit-scrollbar': {
+          width: '0.4em'
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent'
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: '#400000',
+          borderRadius: '10px',
+          border: 'transparent'
+        },
+
+        // Firefox scrollbar
+        scrollbarColor: '#400000 transparent'
+      }}>
         <TopBar/>
 
         <div className="doubleHeader">
@@ -252,7 +269,7 @@ function App() {
         <div className="duckTable" key={reset}>
           {table}
         </div>
-      </div>
+      </Box>
     </div>
   );
 }

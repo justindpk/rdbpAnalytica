@@ -76,18 +76,29 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
             // hide scrollbar in material-ui
 
             PaperProps: {
-              style: {
+              sx: {
                 border: '3px solid #400000',
                 borderRadius: '10px',
                 maxHeight: "50vh",
-                marginTop: -10,
+                marginTop: -2,
                 backgroundColor: '#FFFBC1',
-                //hide scrollbar for MaterialUI MenuProps
+                overflowY: 'overlay',
+
+                // Chrome scrollbar
                 '&::-webkit-scrollbar': {
-                  width: 0,
+                  width: '0.4em',
                 },
-                scrollbarWidth: 'none',
-                // }
+                '&::-webkit-scrollbar-track': {
+                  background: 'transparent'
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  backgroundColor: '#400000',
+                  borderRadius: '10px',
+                  border: 'transparent'
+                },
+
+                // Firefox scrollbar
+                scrollbarColor: '#400000 transparent'
               },
             },
           }}
