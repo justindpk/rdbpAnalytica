@@ -245,7 +245,6 @@ input[type=number] {
 }
 
 .header .links {
-    justify-content: flex-end;
     padding-top: 35px;
 }
 
@@ -339,10 +338,8 @@ input[type=number] {
 /* || FILTER BAR */
 .filterBar {
     z-index: 1;
-    align-content: center;
     box-sizing: border-box;
     width: 100%;
-    text-align: left;
     display: flex;
     background: #ffffff;
     border-bottom: 3px solid #400000;
@@ -350,6 +347,17 @@ input[type=number] {
     padding-bottom: 2px;
     position: sticky;
     top: 0;
+    justify-content: space-between;
+    align-content: center;
+}
+.filterBar .left{
+    text-align: left;
+    display: flex;
+   
+}
+.filterBar .control {
+    display: flex;
+    padding-right: 5px;
 }
 
 .search {

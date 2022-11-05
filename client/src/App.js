@@ -11,7 +11,6 @@ const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRari
 
 function TopBar() {
   return (
-    <div className="topBar">
       <header className="header">
         <div className="logoAndTitle">
 
@@ -48,39 +47,41 @@ function TopBar() {
           </a>
         </div>
       </header>
-
-    </div>
   )
-
 }
 
 function TableTypeBar({setTableType, setReset, reset}) {
   return (
     <div className="filterBar">
-      <button className="button row yellow" onClick={() => {
-        setTableType("main");
-      }}>
-        <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
-      </button>
-      <button className="button row red" onClick={() => {
-        setTableType("traits");
-      }}>Traits
-      </button>
-      <button className="button row lightPurple" onClick={() => {
-        setTableType("backpacks");
-      }}>
-        <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
-      </button>
-      <button className="button row grey" onClick={() => {
-        setReset(reset + 1);
-      }}>
-        <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
-      </button>
-      <button className="button row grey" onClick={() => {
-        scrollToTop();
-      }}>
-        <img className="arrowIcon" src="/img/upArrow.png" alt="scrollToTop"/>
-      </button>
+      <div className='left'>
+          <button className="button row yellow" onClick={() => {
+            setTableType("main");
+          }}>
+            <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
+          </button>
+          <button className="button row red" onClick={() => {
+            setTableType("traits");
+          }}>Traits
+          </button>
+          <button className="button row lightPurple" onClick={() => {
+            setTableType("backpacks");
+          }}>
+            <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
+          </button>
+        </div>
+        <div className='control'>
+          <button className="button row grey" onClick={() => {
+            setReset(reset + 1);
+            scrollToTop();
+          }}>
+            <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
+          </button>
+          <button className="button row grey" onClick={() => {
+            scrollToTop();
+          }}>
+            <img className="arrowIcon" src="/img/upArrow.png" alt="scrollToTop"/>
+          </button>
+        </div>
     </div>
   )
 }
