@@ -25,7 +25,7 @@ input {
     border: 2px solid #400000;
     margin: 0 auto;
     margin-right: 10px;
-    /*overflow: hidden;*/
+    overflow: hidden;
     display: flex;
     max-width: 300px;
     box-sizing: border-box;
@@ -87,7 +87,7 @@ input[type=number] {
     text-align: center;
     font-size: 24px;
     width: 100%;
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
 }
 
 ::placeholder {
@@ -238,8 +238,6 @@ input[type=number] {
     box-sizing: border-box;
     padding-right: 10px;
     padding-left: 2px;
-    position: sticky;
-    left: 0;
 }
 
 .header .analyticaLogo {
@@ -318,8 +316,6 @@ input[type=number] {
 
 /* || DOUBLE HEADER */
 .doubleHeader {
-    position: sticky;
-    left: 0;
     text-align: left;
     display: flex;
     padding: 0px 0 0px 0px;
@@ -351,7 +347,6 @@ input[type=number] {
     padding-bottom: 2px;
     position: sticky;
     top: 0;
-    left: 0;
     justify-content: space-between;
     align-content: center;
 }
@@ -388,8 +383,8 @@ input[type=number] {
 
 /* || DUCK TABLE */
 .tableContainer {
-    /*overflow-x: scroll;*/
-    /*overflow-y: scroll;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
     height: 100vh;
     width: 100vw;
 }
@@ -407,7 +402,7 @@ table {
     border-spacing: 0;
     color: #400000;
     width: 100%;
-    /*overflow-x: scroll;*/
+    overflow-x: scroll;
 }
 
 .selected {
@@ -476,7 +471,7 @@ select {
     display: flex;
     width: 100%;
     border-bottom: 2px solid #400000;
-    /*overflow-x: scroll;*/
+    overflow-x: scroll;
     white-space: nowrap;
 }
 

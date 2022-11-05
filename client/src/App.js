@@ -11,42 +11,42 @@ const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRari
 
 function TopBar() {
   return (
-    <header className="header">
-      <div className="logoAndTitle">
+      <header className="header">
+        <div className="logoAndTitle">
 
-        <div className="analyticaLogo">
-          <img src="/img/analyticaStrawberryDuck.png" alt="strawberry duck"/>
+          <div className="analyticaLogo">
+            <img src="/img/analyticaStrawberryDuck.png" alt="strawberry duck"/>
+          </div>
+          <div className="analyticaTitle">
+            <h1> RDBP Analytica </h1>
+            <p className="description">
+              A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
+                                                   rel="noreferrer">
+              Rubber Duck Bath Party</a> NFT collection.
+            </p>
+          </div>
         </div>
-        <div className="analyticaTitle">
-          <h1> RDBP Analytica </h1>
-          <p className="description">
-            A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
-                                                 rel="noreferrer">
-            Rubber Duck Bath Party</a> NFT collection.
-          </p>
+        <div className="links">
+          <a className="socialMediaSvg" href="https://duck.art/" target="_blank" rel="noreferrer">
+            <img className="darkDuckIcon" src="/img/darkDuck.png" alt="duck.art"/>
+          </a>
+          <a className="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank"
+             rel="noreferrer">
+            <img src="/img/opensea.svg" alt="opensea"/>
+          </a>
+          <a className="socialMediaSvg"
+             href="https://blur.io/collection/rubber-duck-bath-party" target="_blank"
+             rel="noreferrer">
+            <img className="darkBlurIcon" src="/img/blurio.png" alt="blur"/>
+          </a>
+          <a className="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank" rel="noreferrer">
+            <img src="/img/twitter.svg" alt="twitter"/>
+          </a>
+          <a className="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank" rel="noreferrer">
+            <img src="/img/discord.svg" alt="discord"/>
+          </a>
         </div>
-      </div>
-      <div className="links">
-        <a className="socialMediaSvg" href="https://duck.art/" target="_blank" rel="noreferrer">
-          <img className="darkDuckIcon" src="/img/darkDuck.png" alt="duck.art"/>
-        </a>
-        <a className="socialMediaSvg" href="https://opensea.io/collection/rubber-duck-bath-party" target="_blank"
-           rel="noreferrer">
-          <img src="/img/opensea.svg" alt="opensea"/>
-        </a>
-        <a className="socialMediaSvg"
-           href="https://blur.io/collection/rubber-duck-bath-party" target="_blank"
-           rel="noreferrer">
-          <img className="darkBlurIcon" src="/img/blurio.png" alt="blur"/>
-        </a>
-        <a className="socialMediaSvg" href="https://twitter.com/rubberduckbp" target="_blank" rel="noreferrer">
-          <img src="/img/twitter.svg" alt="twitter"/>
-        </a>
-        <a className="socialMediaSvg" href="https://discord.gg/rdbp" target="_blank" rel="noreferrer">
-          <img src="/img/discord.svg" alt="discord"/>
-        </a>
-      </div>
-    </header>
+      </header>
   )
 }
 
@@ -54,33 +54,33 @@ function TableTypeBar({setTableType, setReset, reset}) {
   return (
     <div className="filterBar">
       <div className='left'>
-        <button className="button row yellow" onClick={() => {
-          setTableType("main");
-        }}>
-          <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
-        </button>
-        <button className="button row red" onClick={() => {
-          setTableType("traits");
-        }}>Traits
-        </button>
-        <button className="button row lightPurple" onClick={() => {
-          setTableType("backpacks");
-        }}>
-          <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
-        </button>
-      </div>
-      <div className='control'>
-        <button className="button row grey" onClick={() => {
-          setReset(reset + 1);
-        }}>
-          <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
-        </button>
-        <button className="button row grey" onClick={() => {
-          scrollToTop();
-        }}>
-          <img className="arrowIcon" src="/img/upArrow.png" alt="scrollToTop"/>
-        </button>
-      </div>
+          <button className="button row yellow" onClick={() => {
+            setTableType("main");
+          }}>
+            <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
+          </button>
+          <button className="button row red" onClick={() => {
+            setTableType("traits");
+          }}>Traits
+          </button>
+          <button className="button row lightPurple" onClick={() => {
+            setTableType("backpacks");
+          }}>
+            <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
+          </button>
+        </div>
+        <div className='control'>
+          <button className="button row grey" onClick={() => {
+            setReset(reset + 1);
+          }}>
+            <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
+          </button>
+          <button className="button row grey" onClick={() => {
+            scrollToTop();
+          }}>
+            <img className="arrowIcon" src="/img/upArrow.png" alt="scrollToTop"/>
+          </button>
+        </div>
     </div>
   )
 }
@@ -224,8 +224,8 @@ function App() {
         />
         break;
       case "backpacks":
-        table = <BackpacksTable databases={databases}
-                                amountToLoad={amountToLoad}
+        table = <BackpacksTable databases={databases} 
+                                amountToLoad={amountToLoad} 
                                 handleSort={handleSort}
                                 sorts={sorts}
                                 filters={filters}
@@ -244,11 +244,8 @@ function App() {
     <div className="body">
       <Box className="tableContainer" onScroll={handleScroll} sx={{
         overflowY: 'overlay',
-        overflowX: 'overlay',
-        //vertical scrollbar
         '&::-webkit-scrollbar': {
-          width: '5px',
-          height:'5px'
+          width: '5px'
         },
         '&::-webkit-scrollbar-track': {
           background: 'transparent'
@@ -257,14 +254,6 @@ function App() {
           backgroundColor: '#400000',
           borderRadius: '10px',
           border: 'transparent'
-        },
-        //horizontal scrollbar
-        '&::-webkit-scrollbar-track-piece': {
-          background: 'transparent'
-        },
-        '&::-webkit-scrollbar-corner': {
-          background: 'transparent'
-
         },
 
         // Firefox scrollbar
@@ -277,7 +266,9 @@ function App() {
         </div>
 
         <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
-        {table}
+        {/*<div className="duckTable" key={reset}>*/}
+          {table}
+        {/*</div>*/}
       </Box>
     </div>
   );
