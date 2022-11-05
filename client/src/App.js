@@ -178,7 +178,7 @@ function App() {
           filteredDucks.forEach((duck) => {
             if (values.includes(duck['traits'][upperFirst])) {
               passedDucks.push(duck);
-            } else if (values.includes('Empty') && !duck['traits'][upperFirst]) {
+            } else if (values.includes('None') && !duck['traits'][upperFirst]) {
               passedDucks.push(duck);
             }
           });
