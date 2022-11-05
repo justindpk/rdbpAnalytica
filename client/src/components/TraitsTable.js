@@ -11,6 +11,10 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
   const ref = useRef();
   const upperName = upperFirstLetter(name);
 
+  useEffect(() => {
+    setSelected(['Clear']);
+  }, [databases['globalRarity']]);
+
 
   useEffect(() => {
     let total = 0;
