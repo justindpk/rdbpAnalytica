@@ -21,7 +21,7 @@ export function TableHeaderSortable({name, handleSort, sorts}) {
   }, [sorts]);
   return (
     <th onClick={() => handleSort(name)}>
-      {columns[name]['name']} {arrow} {priority && `(${priority})`}
+      {columns[name]['name']} <p className={`${name} sortableTableHeader`}>{arrow}</p> {priority && `(${priority})`}
     </th>
   )
 }
