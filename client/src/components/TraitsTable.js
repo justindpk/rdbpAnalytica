@@ -1,8 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {Checkbox, FormControl, ListItemText, MenuItem, Select} from "@mui/material";
-import columns from './ColumnClasses.js';
 import {TableHeaderSortable} from "./TableHelpers";
-import {upperFirstLetter} from "./helpers";
+import columns, {upperFirstLetter} from "./helpers";
 
 function MultiSelectDropdown({name, databases, filters, setFilters}) {
   const [open, setOpen] = useState(false);

@@ -1,6 +1,6 @@
 import {useEffect} from "react";
-import columns from "./ColumnClasses";
 import {TableHeaderSortable} from "./TableHelpers";
+import columns from "./helpers";
 
 function BackpacksTable({databases, amountToLoad, handleSort, sorts}) {
   //TODO: Create table load

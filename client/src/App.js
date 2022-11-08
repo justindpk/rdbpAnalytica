@@ -3,8 +3,7 @@ import './css/main.css';
 import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
-import {scrollToTop, upperFirstLetter} from "./components/helpers";
-import columns from "./components/ColumnClasses";
+import columns, {scrollToTop, upperFirstLetter} from "./components/helpers";
 import {Box} from "@mui/material";
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
