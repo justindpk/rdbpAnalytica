@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import './main.css';
+import './css/main.css';
 import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
@@ -73,7 +73,7 @@ function TableTypeBar({setTableType, setReset, reset}) {
         <button className="button row grey" onClick={() => {
           setReset(reset + 1);
         }}>
-          <img className="backpackIcon" src="/img/resetRoundBig.png" alt="reset"/>
+          <img className="backpackIcon" src="/img/reset.png" alt="reset"/>
         </button>
         <button className="button row grey" onClick={() => {
           scrollToTop();
