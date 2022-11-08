@@ -5,3 +5,5 @@ out
 /server/node_modules/*
 /server/databases/*
 client/.env
+.next
+node_modules
