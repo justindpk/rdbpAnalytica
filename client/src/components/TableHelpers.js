@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import columns from "./columnClasses";
+import columns from "./ColumnClasses";
 
 export function TableHeaderSortable({name, handleSort, sorts}) {
   const [arrow, setArrow] = useState("▪");

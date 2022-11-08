@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {Checkbox, FormControl, ListItemText, MenuItem, Select} from "@mui/material";
-import columns from './columnClasses.js';
+import columns from './ColumnClasses.js';
 import {TableHeaderSortable} from "./TableHelpers";
 import {upperFirstLetter} from "./helpers";
 

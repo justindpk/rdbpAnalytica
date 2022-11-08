@@ -1,4 +1,4 @@
-import columns from "./columnClasses";
+import columns from "./ColumnClasses";
 import {TableHeaderSortable} from "./TableHelpers";
 
 function MainTable({databases, amountToLoad, handleSort, sorts}) {
