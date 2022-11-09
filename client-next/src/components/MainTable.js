@@ -1,6 +1,5 @@
 import columns from "./columnClasses";
 import {TableHeaderSortable} from "./TableHelpers";
-import Image from "next/image";
 
 function MainTable({databases, amountToLoad, handleSort, sorts}) {
   return (
@@ -18,12 +17,15 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
         </thead>
         <tbody>
         {databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
+          const priority = index > amountToLoad - 60 ? true : false;
+          const loading = priority ? "eager" : "lazy";
+          const decode = priority ? "sync" : "async";
           return (
             <tr key={index}>
               <td>{columns['rank'].value(duck)}</td>
               <td>
                 <a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
-                  <Image width={117} height={117} quality={100} src={duck.history[0].image} alt="duck" className='duckImage'/>
+                  <img loading={loading} decoding={decode} src={duck.history[0].image} alt="duck" className='duckImage'/>
                 </a>
                 <p className="duckLabel">{columns['id'].value(duck)}</p>
               </td>

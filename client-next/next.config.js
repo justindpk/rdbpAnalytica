@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   images: {
     domains: ['duck.art', 'duck.mypinata.cloud'],
+    unoptimized: true,
   }
 }
 

@@ -89,7 +89,7 @@ function Index() {
   const [databases, setDatabases] = useState();
   const [originalDatabases, setOriginalDatabases] = useState();
   const [tableType, setTableType] = useState("main");
-  const [amountToLoad, setAmountToLoad] = useState(20);
+  const [amountToLoad, setAmountToLoad] = useState(50);
   const [reset, setReset] = useState(0);
   const [sorts, setSorts] = useState({});
   const [filters, setFilters] = useState({});
@@ -124,13 +124,13 @@ function Index() {
     setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
     setSorts({});
     setFilters({});
-    setAmountToLoad(20);
+    setAmountToLoad(50);
   }, [reset]);
 
   function handleScroll(e) {
     console.log(e.target.scrollHeight-332, e.target.scrollTop, e.target.clientHeight);
     if ((e.target.scrollHeight - e.target.scrollTop - 332 - e.target.clientHeight) <= e.target.clientHeight) {
-      setAmountToLoad(amountToLoad + 10);
+      setAmountToLoad(amountToLoad + 40);
     }
   }
 
