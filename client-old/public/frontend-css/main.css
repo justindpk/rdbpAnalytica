@@ -100,7 +100,6 @@ input[type=number] {
 
 /* || BUTTONS */
 .button {
-    background: white;
     text-transform: uppercase;
     text-decoration: none;
     padding: 24px 30px;
@@ -404,10 +403,6 @@ table {
     overflow-x: scroll;
 }
 
-.selected {
-    background: #FFFBC1;
-}
-
 th,
 td {
     padding: 10px 15px;
@@ -433,10 +428,6 @@ thead {
     text-align: center;
 }
 
-tbody tr:nth-child(even) {
-    background: #f0f0f2;
-}
-
 td {
     border-bottom: 1px solid #400000;
     border-right: 1px solid #400000;
@@ -460,6 +451,10 @@ select {
     background: #FFF;
     text-align: justify;
     margin-top: 4px;
+}
+
+.selected {
+    background: #FFFBC1;
 }
 
 .select-items {

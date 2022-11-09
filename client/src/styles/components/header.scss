@@ -1,0 +1,143 @@
+// header //
+.header{
+	width: $max-width;
+	background: $color-yellow; 
+	text-align: left;
+	border-bottom: 3px solid $color-burgundy;
+	height: 90px;
+	display: flex;
+	justify-content: space-between; 
+	align-content: center;
+	box-sizing: border-box;
+	padding-right: 10px;
+	padding-left: 2px;
+
+	.analyticaLogo{
+		padding: 5px;
+		height: 80px;
+		img{
+			max-height: $max-height;
+        }
+    }
+	.links{
+		padding-top: 35px;
+    } 
+
+}
+
+.logoAndTitle {
+	text-align: left;
+	display: flex;
+}
+
+.analyticaTitle {
+	margin: 10px 0px 0px 0px;
+	display: block;
+	h1{ 
+		text-decoration: none;
+		font-family: $font-text;
+		font-size: 36px;
+		padding: 0px 4px 0px 4px;
+		transition: all .1s;
+		margin: 0;
+		font-weight: $font-weight-small;
+    }
+}
+
+.description{
+	display: block;
+	text-decoration: none; 
+	font-family: $font-text;
+	font-size: 18px; 
+	transition: all .1s;
+	margin: 0px 0px 0px 5px;
+    a {
+        margin: 0px;
+        padding: 0px; 
+        display: inline-block;
+        text-decoration: none;
+        font-family: $font-text;
+        font-size: 18px;
+        transition: all .1s;
+        font-weight: $font-weight-large;
+        text-decoration: $color-burgundy;
+        text-decoration: underline ;
+    }
+}
+// header //
+
+
+// header icons //
+.darkDuckIcon{ 
+	width: 25px;
+	height: 25px; 
+	margin-bottom: 2px; 
+	margin-right: 5px;
+}
+
+.darkBlurIcon{
+	width: 28px;
+	height: 28px;
+}
+
+.socialMediaSvg{ 
+	padding-left: 5px;
+}
+// header icons //
+
+
+// double header //
+.doubleHeader{ 
+	text-align: left; 
+	display: flex;
+	padding: 0px 0 0px 0px;
+	border-bottom: 3px solid $color-burgundy; 
+	background: $color-lightYellow;
+}
+
+.screenerTitle{
+	text-align: left;
+	padding-left: 12px;
+	font-size: 34px; 
+	font-family: $font-text; 
+	color: $color-burgundy;
+	font-weight: $font-weight-large;
+	margin: 8px 0px 10px 0px;
+}
+// double header //
+
+
+// filter bar //
+.filterBar{ 
+	z-index: 1;
+	box-sizing: border-box;
+	width: $max-width;
+	display: flex;
+	background: $color-white; 
+	border-bottom: 3px solid $color-burgundy;
+	padding-bottom: 2px;
+	position: sticky;
+	top: 0;
+	justify-content: space-between;
+	align-content: center;
+	.left{ 
+		text-align: left;
+		display: flex;
+    } 
+	.control{
+		display: flex;
+		padding-right: 5px;
+    }
+}
+
+.duckIcon{
+	width: 30px; 
+	height: 30px;
+}
+
+.backpackIcon{
+	width: 35px;
+	height: 35px; 
+	margin-bottom: 5px;
+}
+// filter bar //
