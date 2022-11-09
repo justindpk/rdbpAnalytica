@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react';
 import './styles/main.scss';
-//import './css/main.css';
 import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
