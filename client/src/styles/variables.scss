@@ -30,8 +30,8 @@ $max-height: 100%;
 
 // breakpoints //
 $breakpoints: (
-    'small':  ( min-width:  767px ),
-    'medium': ( min-width:  992px ),
-    'large':  ( min-width: 1200px )
+    'small':  ( max-width:  520px ),
+    'medium': ( max-width:  950px ),
+    'large':  ( max-width: 1200px )
 ) !default;
 

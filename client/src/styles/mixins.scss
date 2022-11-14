@@ -1,52 +1,11 @@
-/*
-@mixin respond($breakpoint) {
-    @if $breakpoint == small {
-      @media (max-width: 600px) {
-        .header .logoAndTitle .analyticaTitle .description {
-            display: none
-        }
-      }
-    }
-    @if $breakpoint == tab-port {
-      @media (max-width: 840px) {
-        .header .logoAndTitle .analyticaTitle .description {
-            font-size: 14px;
-        }
-      }
-    }
-    @if $breakpoint == tab-land {
-      @media (max-width: 1040px) {
-        body {
-            margin: 0;
-        }
-    
-        h1 {
-            font-size: 50px
-        }
-    
-        h2 {
-            font-size: 24px
-        }
-    
-        p {
-            font-size: 18px
-        }
-      }
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
     }
   }
-  */
-  @mixin respond-to($breakpoint) {
-    // If the key exists in the map
-    @if map-has-key($breakpoints, $breakpoint) {
-      // Prints a media query based on the value
-      @media (min-width: map-get($breakpoints, $breakpoint)) {
-        @content;
-      }
-    }
-   
-    // If the key doesn't exist in the map
-    @else {
-      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-          + "Available breakpoints are: #{map-keys($breakpoints)}.";
-    }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
   }
+}

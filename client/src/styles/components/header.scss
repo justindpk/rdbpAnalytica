@@ -4,7 +4,7 @@
 	background: $color-yellow; 
 	text-align: left;
 	border-bottom: 3px solid $color-burgundy;
-	height: 90px;
+	height: 100px;
 	display: flex;
 	justify-content: space-between; 
 	align-content: center;
@@ -64,6 +64,19 @@
         text-decoration: underline ;
     }
 }
+
+.header .logoAndTitle .analyticaTitle .description{
+	@include respond-to('small') {
+		display: none;
+	  }
+}
+
+.header .logoAndTitle .analyticaTitle .description{
+	@include respond-to('medium') {
+		font-size: 14px;
+	  }
+}
+
 // header //
 
 
@@ -81,7 +94,7 @@
 }
 
 .socialMediaSvg{ 
-	padding-left: 5px;
+	padding-left: 10px;
 }
 // header icons //
 
