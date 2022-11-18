@@ -265,7 +265,9 @@ function App() {
         </div>
 
         <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
-        {table}
+        <div className='scrollable'>
+          {table}
+        </div>
       </Box>
     </div>
   );

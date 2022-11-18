@@ -4,7 +4,7 @@ table {
 	border-spacing: 0;
 	color: $color-burgundy;
 	width: $max-width;
-	overflow-x: scroll; 
+	overflow-x: scroll;
 }
 
 th,
@@ -25,7 +25,7 @@ th{
 
 thead{
 	position: sticky;
-	top: 89px;
+	top: 0px;
 	color: rgb(0, 0, 0);
 	font-size: 16px;
 	text-transform: uppercase;
@@ -42,6 +42,16 @@ td {
 	padding-top: 8px;
 	padding-bottom: 4px; 
 }
+
+
+.scrollable{
+	white-space: nowrap;
+
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
 // table //
 
 
