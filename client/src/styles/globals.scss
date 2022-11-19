@@ -39,7 +39,7 @@ input {
 }
 
 
-.root {
+.mainContainer {
     margin: auto;
     font-family: $font-text;
     color: #400000;
@@ -49,6 +49,7 @@ input {
     width: 100%;
 
     &::-webkit-scrollbar {
+        z-index: 2;
         width: 5px;
         height: 5px;
     }
@@ -71,10 +72,16 @@ input {
         background: transparent;
     }
 
-    scrollbar-color: #400000 transparent;
-    //overflow: overlay;
+    //scrollbar-color: #400000 transparent;
+    overflow: scroll;
+    overflow-y: overlay;
     height: 100vh;
-    overflow: overlay;
+
+    //-ms-overflow-y: scroll;
+}
+
+body {
+    overflow: hidden;
 }
 
 

@@ -130,6 +130,7 @@ function App() {
     if (0.95 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
       setAmountToLoad(amountToLoad + 10);
     }
+    console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight);
   }
 
   function handleSort(name) {
@@ -239,7 +240,7 @@ function App() {
   }
 
   return (
-    <div className="root" onScroll={handleScroll}>
+    <div className="mainContainer" onScroll={handleScroll}>
       <TopBar/>
         <div className="doubleHeader">
           <p className="screenerTitle"> Duck Screener </p>
