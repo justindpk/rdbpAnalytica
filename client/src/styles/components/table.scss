@@ -1,54 +1,50 @@
 // table //
 table {
-	border-collapse: separate; 
-	border-spacing: 0;
-	color: $color-burgundy;
-	width: $max-width;
-	overflow-x: scroll;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: $color-burgundy;
+    width: $max-width;
 }
 
 th,
-td{
-	padding: 10px 15px;
-	vertical-align: middle;
-	border-right: 1px solid $color-burgundy;
-	border-bottom: 1px solid $color-burgundy;
-	background: $color-lightYellow;
-	user-select: none;
-} 
-
-th{
-	position: sticky;
-	top: 88px;
-	border-bottom: 3px solid $color-burgundy;
+td {
+    padding: 10px 15px;
+    vertical-align: middle;
+    border-right: 1px solid $color-burgundy;
+    border-bottom: 1px solid $color-burgundy;
+    background: $color-lightYellow;
+    user-select: none;
 }
 
-thead{
-	position: sticky;
-	top: 0px;
-	color: rgb(0, 0, 0);
-	font-size: 16px;
-	text-transform: uppercase;
-	text-align: center;
+th {
+    position: sticky;
+    top: 88px;
+    border-bottom: 3px solid $color-burgundy;
+}
+
+thead {
+    position: sticky;
+    top: 0px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 td {
-	border-bottom: 1px solid $color-burgundy;
-	border-right: 1px solid $color-burgundy;
-	text-align: center;
-	background: $color-lightYellow; 
-	font-size: 16px;
-	font-weight: $font-weight-medium;
-	padding-top: 8px;
-	padding-bottom: 4px; 
+    border-bottom: 1px solid $color-burgundy;
+    border-right: 1px solid $color-burgundy;
+    text-align: center;
+    background: $color-lightYellow;
+    font-size: 16px;
+    font-weight: $font-weight-medium;
+    padding-top: 8px;
+    padding-bottom: 4px;
 }
 
 
-.scrollable{
-	white-space: nowrap;
-    overflow-x: scroll;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+.scrollable {
+    white-space: nowrap;
 }
 
 // table //
@@ -56,108 +52,109 @@ td {
 
 // drop down select (not being used rn) //
 select {
-	display: block; 
-	height: 25px;
-	width: 100px;
-	margin: auto;
-	outline: none; 
-	color: $color-burgundy; 
-	border: 2px solid $color-burgundy; 
-	border-radius: 8px;
-	background: $color-white;
-	text-align: justify;
-	margin-top: 4px;
+    display: block;
+    height: 25px;
+    width: 100px;
+    margin: auto;
+    outline: none;
+    color: $color-burgundy;
+    border: 2px solid $color-burgundy;
+    border-radius: 8px;
+    background: $color-white;
+    text-align: justify;
+    margin-top: 4px;
 }
 
 .selected {
-	background: $color-lightYellow;
+    background: $color-lightYellow;
 }
 
-.select-items{
-	background-color: $color-white;
-	font-weight: $font-weight-large;
+.select-items {
+    background-color: $color-white;
+    font-weight: $font-weight-large;
 }
+
 // drop down select (not being used rn) //
 
 // duck table styling //
-.tableContainer{
-    //overflow-x: overlay;
-    //overflow-y: overlay;
-	overflow: overlay;
+.tableContainer {
     height: 100vh;
     width: 100vw;
 
-	//overflow-y: ;
-	&::-webkit-scrollbar{
-		width: 5px;
-		height: 5px;
-	}
-	//
-	&::-webkit-scrollbar-track{
-		background: transparent;
-	}
-	&::-webkit-scrollbar-thumb{
-		background-color: #400000;
-		border-radius: 10px;
-		border: transparent;
-	}
-	&::-webkit-scrollbar-corner{
-		background: transparent;
-	}
-	scrollbar-color: #400000 transparent;
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+
+    //
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #400000;
+        border-radius: 10px;
+        border: transparent;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+
+    scrollbar-color: #400000 transparent;
 }
 
-.columnTitle{
+.columnTitle {
     text-decoration: underline;
     font-family: $font-text;
     font-size: 16px;
-    text-align: center; 
+    text-align: center;
     display: inline;
 }
 
-.duckTable{
-	display: flex; 
-	width: $max-width;
-	border-bottom: 2px solid $color-burgundy;
-	overflow-x: scroll;
-	white-space: nowrap;
+.duckTable {
+    display: flex;
+    width: $max-width;
+    border-bottom: 2px solid $color-burgundy;
+    white-space: nowrap;
 }
 
-.duckImage{ 
-	width: 117px;
-	height: 117px; 
-	border-radius: 8px; 
-	border: 2px solid $color-burgundy; 
-	box-sizing: border-box;
-	flex-shrink: 0;
-	transition: all .1s;
+.duckImage {
+    width: 117px;
+    height: 117px;
+    border-radius: 8px;
+    border: 2px solid $color-burgundy;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    transition: all .1s;
 }
 
-.duckButtonIcon{
-	width: 30px;
-	height: 30px;
+.duckButtonIcon {
+    width: 30px;
+    height: 30px;
 }
 
-.arrowIcon{
-	width: 35px;
-	height: 35px; 
-	margin-bottom: 5px;
+.arrowIcon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 5px;
 }
 
-.duckLabel{
-	margin: 2px;
+.duckLabel {
+    margin: 2px;
 }
 
-.sortableTableHeader{
-	display: inline-flex;
-	margin: 0px;
+.sortableTableHeader {
+    display: inline-flex;
+    margin: 0px;
 }
 
-.id{
-	&.sortableTableHeader{
-		padding-left: 10px;
-		position: absolute;
-		padding-top: 7px;
+.id {
+    &.sortableTableHeader {
+        padding-left: 10px;
+        position: absolute;
+        padding-top: 7px;
     }
 }
+
 // duck table styling //

@@ -1,41 +1,45 @@
 * {
-	cursor: url("../../public/img/strawberyyCursor.svg"), auto 
+    cursor: url("../../public/img/strawberyyCursor.svg"), auto
 }
 
 a {
-    &:link{ 
-		color: $color-burgundy;
+    &:link {
+        color: $color-burgundy;
     }
-	&:visited {
-		color: $color-burgundy;
+
+    &:visited {
+        color: $color-burgundy;
     }
-	&:hover{ 
-		color: $color-burgundy;
+
+    &:hover {
+        color: $color-burgundy;
     }
-	&:active {
-		color: $color-burgundy;
+
+    &:active {
+        color: $color-burgundy;
     }
 }
 
 input {
-	background: $color-white;
-	border-radius: 10px;
-	border: 2px solid $color-burgundy; 
-	margin: 0 auto;
-	margin-right: 10px; 
-	overflow: hidden; 
-	display: flex; 
-	max-width: 300px; 
-	box-sizing: border-box; 
-	padding: 10px 12px; 
-	font-size: 20px; 
+    background: $color-white;
+    border-radius: 10px;
+    border: 2px solid $color-burgundy;
+    margin: 0 auto;
+    margin-right: 10px;
+    //overflow: hidden;
+    display: flex;
+    max-width: 300px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    font-size: 20px;
 
-	&:focus {
-		outline: none 
+    &:focus {
+        outline: none
     }
 }
 
-.body {
+
+.root {
     margin: auto;
     font-family: $font-text;
     color: #400000;
@@ -43,112 +47,155 @@ input {
     text-align: center;
     font-size: 24px;
     width: 100%;
-    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #400000;
+        border-radius: 10px;
+        border: transparent;
+
+        &:horizontal {
+            visibility: hidden;
+        }
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+
+    scrollbar-color: #400000 transparent;
+    //overflow: overlay;
+    height: 100vh;
+    overflow: overlay;
 }
 
 
 .button {
-	text-transform: uppercase; 
-	text-decoration: none;
-	padding: 24px 30px;
-	font-family: $font-button;
-	margin: 10px 12px;
-	font-weight: $font-weight-medium;
-	font-size: 20px;
-	border-radius: 10px; 
-	border: 2px solid $color-burgundy; 
-	box-shadow: inset 0 -6px $color-box;
-	transition: all .05s;
-	display: block;
-	align-items: center; 
-	justify-content: center;
-	height: 62px;
-	box-sizing: border-box; 
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 24px 30px;
+    font-family: $font-button;
+    margin: 10px 12px;
+    font-weight: $font-weight-medium;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid $color-burgundy;
+    box-shadow: inset 0 -6px $color-box;
+    transition: all .05s;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    height: 62px;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
-	&.small{ 
-		height: auto;
-		padding: 10px 12px ;
-		box-shadow: inset 0 -6px $color-box;
-		margin: 6px;
-		font-size: 14px;
-		height: 40px;
+    &.small {
+        height: auto;
+        padding: 10px 12px;
+        box-shadow: inset 0 -6px $color-box;
+        margin: 6px;
+        font-size: 14px;
+        height: 40px;
     }
-	&:hover{
-		transform: translateY(-5px);
+
+    &:hover {
+        transform: translateY(-5px);
     }
-	&:active{
-		box-shadow: inset 0 0px $color-box;
-		padding: 16px 30px 12px;
-		background: $color-white;
+
+    &:active {
+        box-shadow: inset 0 0px $color-box;
+        padding: 16px 30px 12px;
+        background: $color-white;
     }
-	&.row{ 
-		margin-top: 12px;
-		margin-right: 2px;
-		display: flex; 
+
+    &.row {
+        margin-top: 12px;
+        margin-right: 2px;
+        display: flex;
     }
-    &.red{
-        background: $color-red; 
+
+    &.red {
+        background: $color-red;
         color: $color-white;
     }
-    &.orange{
+
+    &.orange {
         background: $color-orange;
         color: $color-white;
     }
-    &.yellow{
+
+    &.yellow {
         background: $color-yellow;
         color: $color-burgundy;
     }
-    &.teal{ 
+
+    &.teal {
         background: $color-teal;
         color: $color-burgundy;
     }
-    &.pink{ 
+
+    &.pink {
         background: $color-pink;
         color: $color-burgundy;
     }
-    &.purple{
+
+    &.purple {
         background: $color-purple;
         color: $color-burgundy;
     }
-    &.green{
+
+    &.green {
         background: $color-green;
         color: $color-burgundy;
     }
-    &.cotton{ 
-        background: $color-cotton; 
+
+    &.cotton {
+        background: $color-cotton;
         color: $color-burgundy;
     }
-    &.lightPurple{
+
+    &.lightPurple {
         background: $color-lightPurple;
         color: $color-burgundy;
     }
-    &-skyBlue{
+
+    &-skyBlue {
         background: $color-skyBlue;
         color: $color-burgundy;
     }
-    &.grey{
+
+    &.grey {
         background: $color-grey;
         color: $color-burgundy;
-	&.svg{ 
-		border: none;
-		background: none; 
-		cursor: pointer;
-		display: inline-block; 
-		box-shadow: none;
-		padding: 0;
-		margin: 0;
-		padding-left: 10px;
-		height: 0;
-		transition: none;
-    }
-		&:hover {
-			transform: none
+
+        &.svg {
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: none;
+            padding: 0;
+            margin: 0;
+            padding-left: 10px;
+            height: 0;
+            transition: none;
         }
-    } 
+
+        &:hover {
+            transform: none
+        }
+    }
 }
