@@ -240,24 +240,7 @@ function App() {
   }
 
   return (
-      <Box className="tableContainer body scrollable" onScroll={handleScroll} sx={{
-        overflowY: 'overlay',
-        '&::-webkit-scrollbar': {
-          width: '5px',
-          height: '5px',
-        },
-        '&::-webkit-scrollbar-track': {
-          background: 'transparent'
-        },
-        '&::-webkit-scrollbar-thumb': {
-          backgroundColor: '#400000',
-          borderRadius: '10px',
-          border: 'transparent'
-        },
-
-        // Firefox scrollbar
-        scrollbarColor: '#400000 transparent'
-      }}>
+      <div className="tableContainer body scrollable" onScroll={handleScroll}>
         <TopBar/>
 
         <div className="doubleHeader">
@@ -266,7 +249,7 @@ function App() {
 
         <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
           {table}
-      </Box>
+      </div>
   );
 }
 
