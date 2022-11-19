@@ -240,16 +240,16 @@ function App() {
   }
 
   return (
+    <>
+      <TopBar/>
       <div className="tableContainer body scrollable" onScroll={handleScroll}>
-        <TopBar/>
-
         <div className="doubleHeader">
           <p className="screenerTitle"> Duck Screener </p>
         </div>
-
         <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
-          {table}
+        {table}
       </div>
+    </>
   );
 }
 
