@@ -240,11 +240,12 @@ function App() {
   }
 
   return (
-    <div className="body">
-      <Box className="tableContainer" onScroll={handleScroll} sx={{
+    // <div className="body">
+      <Box className="tableContainer body scrollable" onScroll={handleScroll} sx={{
         overflowY: 'overlay',
         '&::-webkit-scrollbar': {
-          width: '5px'
+          width: '5px',
+          height: '5px',
         },
         '&::-webkit-scrollbar-track': {
           background: 'transparent'
@@ -265,11 +266,11 @@ function App() {
         </div>
 
         <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
-        <div className='scrollable'>
+        {/*<div className='scrollable'>*/}
           {table}
-        </div>
+        {/*</div>*/}
       </Box>
-    </div>
+    // </div>
   );
 }
 

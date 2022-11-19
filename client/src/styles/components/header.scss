@@ -1,6 +1,9 @@
 // header //
 .header{
-	width: $max-width;
+	position: sticky;
+	left: 0;
+	//width: $max-width;
+	max-width: 100vw;
 	background: $color-yellow; 
 	text-align: left;
 	border-bottom: 3px solid $color-burgundy;
@@ -100,7 +103,9 @@
 
 
 // double header //
-.doubleHeader{ 
+.doubleHeader{
+	position: sticky;
+	left: 0;
 	text-align: left; 
 	display: flex;
 	padding: 0px 0 0px 0px;
@@ -131,6 +136,7 @@
 	padding-bottom: 2px;
 	position: sticky;
 	top: 0;
+	left: 0;
 	justify-content: space-between;
 	align-content: center;
 	.left{ 
