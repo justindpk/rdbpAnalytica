@@ -87,6 +87,30 @@ const columns = {
     sort: (a, b) => a.duck - b.duck,
     value: (duck) => duck.duck,
   },
+   paintBucket: {
+    name: (<img src="/img/emptyPaint.png" alt="duck" className='traitIcon'/>),
+  },
+   water: {
+    name: (<img src="/img/emptyWater.png" alt="water" className='traitIcon'/>),
+  },
+   sand: {
+    name: (<img src="/img/sandBag.png" alt="sand" className='traitIcon'/>),
+  },
+  egg: {
+    name: (<img src="/img/egg.png" alt="egg" className='traitIcon'/>),
+    sort: (a, b) => a.egg - b.egg,
+    value: (duck) => duck.egg,
+  },
+  seed: {
+    name: (<img src="/img/seed.png" alt="seed" className='traitIcon'/>),
+    sort: (a, b) => a.seed - b.seed,
+    value: (duck) => duck.seed,
+  },
+  chest: {
+    name: (<img src="/img/chest.png" alt="chest" className='traitIcon'/>),
+    sort: (a, b) => a.chest - b.chest,
+    value: (duck) => duck.chest,
+  },
   version: {
     name: 'version',
     sort: (a, b) => a.history[0].version - b.history[0].version,
