@@ -26,7 +26,7 @@ function MultiSelectDropdown({name, databases, filters, setFilters}) {
       total += rarity;
       newOptions.push([key, rarity]);
     }
-    newOptions.sort((a, b) => b[1] - a[1]);
+    newOptions.sort((a, b) => a[0].localeCompare(b[0]));
     newOptions.splice(0, 0, ['None', window['allDucks'].length - total]);
     newOptions.splice(0, 0, ['Select All', window['allDucks'].length]);
     newOptions.splice(0, 0, ['Clear', window['allDucks'].length]);
