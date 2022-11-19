@@ -26,7 +26,6 @@ input {
     border: 2px solid $color-burgundy;
     margin: 0 auto;
     margin-right: 10px;
-    //overflow: hidden;
     display: flex;
     max-width: 300px;
     box-sizing: border-box;
@@ -42,11 +41,14 @@ input {
 .mainContainer {
     margin: auto;
     font-family: $font-text;
-    color: #400000;
+    color: $color-burgundy;
     background: $color-lightYellow;
     text-align: center;
     font-size: 24px;
-    width: 100%;
+    width: $max-width;
+    overflow: scroll;
+    overflow-y: overlay;
+    height: 100vh;
 
     &::-webkit-scrollbar {
         z-index: 2;
@@ -59,7 +61,7 @@ input {
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: #400000;
+        background-color: $color-burgundy;
         border-radius: 10px;
         border: transparent;
 
@@ -71,13 +73,6 @@ input {
     &::-webkit-scrollbar-corner {
         background: transparent;
     }
-
-    //scrollbar-color: #400000 transparent;
-    overflow: scroll;
-    overflow-y: overlay;
-    height: 100vh;
-
-    //-ms-overflow-y: scroll;
 }
 
 body {
