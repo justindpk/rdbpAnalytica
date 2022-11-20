@@ -110,12 +110,19 @@ function App() {
     newDatabases['traitToID'] = traitToID;
 
     let newDucks = []
+    let id = 0;
     for (let duck of newDatabases['allDucks']) {
       duck['traits'] = {};
       duck['attributes'].forEach((attribute) => {
         duck['traits'][attribute['trait_type']] = attribute['value']
       });
+
+      duck['backpacks'] = {};
+      newDatabases['allBackpacks'][id]['attributes'].forEach((backpack) => {
+        duck['backpacks'][backpack['trait_type']] = backpack['value']
+      });
       newDucks.push(duck);
+      id++;
     }
     newDatabases['allDucks'] = newDucks;
 
@@ -242,11 +249,11 @@ function App() {
   return (
     <div className="mainContainer" onScroll={handleScroll}>
       <TopBar/>
-        <div className="doubleHeader">
-          <p className="screenerTitle"> Duck Screener </p>
-        </div>
-        <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
-        {table}
+      <div className="doubleHeader">
+        <p className="screenerTitle"> Duck Screener </p>
+      </div>
+      <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
+      {table}
     </div>
   );
 }

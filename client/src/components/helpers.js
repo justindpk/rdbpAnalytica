@@ -99,17 +99,17 @@ const columns = {
   egg: {
     name: (<img src="/img/egg.png" alt="egg" className='traitIcon'/>),
     sort: (a, b) => a.egg - b.egg,
-    value: (duck) => duck.egg,
+    value: (duck) => duck.backpacks['Egg']?.value || 0,
   },
   seed: {
     name: (<img src="/img/seed.png" alt="seed" className='traitIcon'/>),
     sort: (a, b) => a.seed - b.seed,
-    value: (duck) => duck.seed,
+    value: (duck) => duck.backpacks['Seed']?.value || 0,
   },
   chest: {
     name: (<img src="/img/chest.png" alt="chest" className='traitIcon'/>),
     sort: (a, b) => a.chest - b.chest,
-    value: (duck) => duck.chest,
+    value: (duck) => duck.backpacks['Chest']?.value || 0,
   },
   version: {
     name: 'version',
