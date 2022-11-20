@@ -194,7 +194,7 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
                 <img src={duck.history[0].image} alt="duck" className='duckImage'/>
               </a>
               <p className="duckLabel">{columns['id'].value(duck)}</p>
-              </td>
+            </td>
             <td><img src={getImageURL('background', traitToID['Background'][getTrait(duck, 'Background')])}
                      alt={traitToID['Background'][getTrait(duck)]} className='duckImage'/><p className="duckLabel">{getTraitLabel(duck, 'Background')}</p></td>
             <td><img src={getImageURL('body', traitToID['Body'][getTrait(duck, 'Body')])}

@@ -35,7 +35,8 @@ td {
     border-bottom: 1px solid $color-burgundy;
     border-right: 1px solid $color-burgundy;
     text-align: center;
-    background: $color-lightYellow;
+    background: $color-beige;
+    //background: $color-lightYellow;
     font-size: 16px;
     font-weight: $font-weight-medium;
     padding-top: 8px;
@@ -151,9 +152,57 @@ select {
 
 .id {
     &.sortableTableHeader {
-        padding-left: 10px;
+        padding-left: 16px;
         position: absolute;
         padding-top: 7px;
+    }
+}
+
+.egg {
+    &.sortableTableHeader {
+        padding-left: 10px;
+        position: absolute;
+        padding-top: 22px;
+
+        @include respond-to('medium') {
+		    padding-left: 2px;
+	    }
+
+        @include respond-to('small') {
+		    padding-left: 2px;
+	    }
+    }
+}
+
+.seed {
+    &.sortableTableHeader {
+        padding-left: 10px;
+        position: absolute;
+        padding-top: 22px;
+
+        @include respond-to('medium') {
+		    padding-left: 2px;
+	    }
+
+        @include respond-to('small') {
+            padding-left: 2px;
+        }
+    }
+}
+
+.chest {
+    &.sortableTableHeader {
+        padding-left: 10px;
+        position: absolute;
+        padding-top: 22px;
+
+        @include respond-to('medium') {
+		    padding-left: 2px;
+	    }
+
+        @include respond-to('small') {
+		    padding-left: 2px;
+	    }
     }
 }
 

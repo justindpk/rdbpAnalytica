@@ -88,13 +88,13 @@ const columns = {
     value: (duck) => duck.duck,
   },
    paintBucket: {
-    name: (<img src="/img/emptyPaint.png" alt="duck" className='traitIcon'/>),
+    name: 'Paint Bucket', //(<img src="/img/emptyPaint.png" alt="duck" className='traitIcon'/>),
   },
    water: {
-    name: (<img src="/img/emptyWater.png" alt="water" className='traitIcon'/>),
+    name: 'Water', //(<img src="/img/emptyWater.png" alt="water" className='traitIcon'/>),
   },
    sand: {
-    name: (<img src="/img/sandBag.png" alt="sand" className='traitIcon'/>),
+    name: 'Bag Of Sand', //(<img src="/img/sandBag.png" alt="sand" className='traitIcon'/>),
   },
   egg: {
     name: (<img src="/img/egg.png" alt="egg" className='traitIcon'/>),
