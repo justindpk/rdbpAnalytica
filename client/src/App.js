@@ -13,7 +13,7 @@ function TopBar() {
       <div className="logoAndTitle">
 
         <div className="analyticaLogo">
-          <img src="/img/analyticaStrawberryDuck.png" alt="strawberry duck"/>
+          <img src="/img/analyticaStrawberryDuckSmiling.png" alt="strawberry duck"/>
         </div>
         <div className="analyticaTitle">
           <h1> RDBP Analytica </h1>
