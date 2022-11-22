@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {MultiSelectDropdown, TableHeaderSortable} from "./TableHelpers";
 import columns from "./helpers";
 
-/* 
+
 //e.g duck = 3078, itemType = Bag of Sand
 // return = Beige
 function getItem(duck, itemType) {
@@ -26,13 +26,13 @@ function getItemLabel(duck, itemType) {
 //e.g itemType = Bag of Sand, itemName = Beige
 function getImageURL(itemType, itemName) {
   let extension = 'png';
-  if(itemType === "Bag of Sand")
+  if(itemType === "bagOfSand")
     {
-      itemType = 'bag-of-sand";
+      itemType = 'bag-of-sand';
     }
-  else if(itemType === "Paint Bucket")
+  else if(itemType === "paintBucket")
     {
-      itemType = 'paint-bucket";
+      itemType = 'paint-bucket';
     }
   else if(itemType === "Water")
     {
@@ -41,7 +41,7 @@ function getImageURL(itemType, itemName) {
   
   return `https://duck.art/img/mysterious-items/item-${itemType}-${itemName}.${extension}`;
 }
-*/
+
 
 
 function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, setFilters}) {
@@ -55,9 +55,12 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
       <tr>
         <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
+        
         <MultiSelectDropdown name="paintBucket" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
+        {/*
         <MultiSelectDropdown name="water" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
         <MultiSelectDropdown name="sand" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
+        */}
         <TableHeaderSortable name="egg" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="seed" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="chest" handleSort={handleSort} sorts={sorts}/>
@@ -75,7 +78,13 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
                 </a>
                 <p className="duckLabel">{columns['id'].value(duck)}</p>
             </td>
-
+            
+            <td>
+              <img src={getImageURL('paintBucket', getItem(duck, 'Paint Bucket'))}
+              alt={getItem['Paint Bucket'][getItemLabel(duck)]} className='duckImage'/>
+              <p className="duckLabel">{getItemLabel(duck, 'Paint Bucket')}</p>
+            </td>
+            
             <td>{columns['egg'].value(duck)}</td>
             <td>{columns['seed'].value(duck)}</td>
             <td>{columns['chest'].value(duck)}</td>
