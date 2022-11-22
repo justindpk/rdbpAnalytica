@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import {TableHeaderSortable} from "./TableHelpers";
 import columns from "./helpers";
+import {MultiSelectDropdown} from "./TraitsTable";
 
 /* 
 //e.g duck = 3078, itemType = Bag of Sand
@@ -44,7 +45,7 @@ function getImageURL(itemType, itemName) {
 */
 
 
-function BackpacksTable({databases, amountToLoad, handleSort, sorts}) {
+function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, setFilters}) {
   useEffect(() => {
     console.log("Table loaded");
   }, []);
@@ -55,9 +56,9 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts}) {
       <tr>
         <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
-        {/* <TableHeaderSortable name="paintBucket" /> */}
-       {/* <TableHeaderSortable name="water" /> */}
-       {/* <TableHeaderSortable name="sand" />  */}
+        <MultiSelectDropdown name="paintBucket" databases={databases} filters={filters} setFilters={setFilters} type='backpack'/>
+        <MultiSelectDropdown name="water" databases={databases} filters={filters} setFilters={setFilters} type='backpack'/>
+        <MultiSelectDropdown name="sand" databases={databases} filters={filters} setFilters={setFilters} type='backpack'/>
         <TableHeaderSortable name="egg" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="seed" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="chest" handleSort={handleSort} sorts={sorts}/>
