@@ -17,7 +17,7 @@ function getItemLabel(duck, itemType) {
   if (item === undefined) {
     return 'None';
   }
-  return item;
+  return item.charAt(0).toUpperCase() + item.slice(1);
 }
 
 //e.g itemType = Bag of Sand, itemName = Beige
