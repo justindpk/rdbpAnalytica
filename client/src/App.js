@@ -13,7 +13,7 @@ function TopBar() {
       <div className="logoAndTitle">
 
         <div className="analyticaLogo">
-      <img src="/img/analyticaStrawberryDuckSmiling.png" alt="strawberry duck"/>
+          <img src="/img/analyticaStrawberryDuckSmiling.png" alt="strawberry duck"/>
         </div>
         <div className="analyticaTitle">
           <h1> RDBP Analytica </h1>
@@ -121,9 +121,8 @@ function App() {
       newDatabases['allBackpacks'][id]['attributes'].forEach((backpack) => {
         if (duck['backpacks'][backpack['trait_type']] === undefined) {
           duck['backpacks'][backpack['trait_type']] = [];
-        } else {
-          duck['backpacks'][backpack['trait_type']].push(backpack['value'])
         }
+        duck['backpacks'][backpack['trait_type']].push(backpack['value'])
       });
       newDucks.push(duck);
       id++;
@@ -180,16 +179,23 @@ function App() {
   function runAllFilters(allDucks) {
     let filteredDucks = [...allDucks];
     if (databases) {
-      console.log(filters);
-      for (const [name, values] of Object.entries(filters)) {
-        const upperFirst = upperFirstLetter(name)
+      for (const [name, [attrType, values]] of Object.entries(filters)) {
+        const upperFirst = columns[name].name;
         let passedDucks = [];
         if (values.length > 0) {
           filteredDucks.forEach((duck) => {
-            if (values.includes(duck['traits'][upperFirst])) {
-              passedDucks.push(duck);
-            } else if (values.includes('None') && !duck['traits'][upperFirst]) {
-              passedDucks.push(duck);
+            if (attrType === 'trait') {
+              if (values.includes(duck['traits'][upperFirst])) {
+                passedDucks.push(duck);
+              } else if (values.includes('None') && !duck['traits'][upperFirst]) {
+                passedDucks.push(duck);
+              }
+            } else if (attrType === 'backpack') {
+              if (values.includes(duck['backpacks'][upperFirst][0])) {
+                passedDucks.push(duck);
+              } else if (values.includes('None') && !duck['backpacks'][upperFirst][0]) {
+                passedDucks.push(duck);
+              }
             }
           });
           filteredDucks = passedDucks;

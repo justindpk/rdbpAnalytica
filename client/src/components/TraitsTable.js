@@ -3,7 +3,7 @@ import {Checkbox, FormControl, ListItemText, MenuItem, Select} from "@mui/materi
 import {TableHeaderSortable} from "./TableHelpers";
 import columns, {upperFirstLetter} from "./helpers";
 
-export function MultiSelectDropdown({name, databases, filters, setFilters, type = 'trait'}) {
+export function MultiSelectDropdown({name, databases, filters, setFilters, attrType = 'trait'}) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(['Clear']);
   const [options, setOptions] = useState([]);
@@ -11,7 +11,7 @@ export function MultiSelectDropdown({name, databases, filters, setFilters, type 
   const upperName = columns[name]['name'];
 
   let rarityDatabase = databases['globalRarity'];
-  if (type === 'backpack') {
+  if (attrType === 'backpack') {
     rarityDatabase = databases['backpackRarity'];
   }
 
@@ -28,11 +28,13 @@ export function MultiSelectDropdown({name, databases, filters, setFilters, type 
         continue;
       }
       const rarity = rarityDatabase[upperName][key];
-      total += rarity;
+      total += parseInt(rarity);
       newOptions.push([key, rarity]);
     }
     newOptions.sort((a, b) => a[0].localeCompare(b[0]));
-    newOptions.splice(0, 0, ['None', window['allDucks'].length - total]);
+    if (attrType === 'trait') {
+      newOptions.splice(0, 0, ['None', window['allDucks'].length - total]);
+    }
     newOptions.splice(0, 0, ['Select All', window['allDucks'].length]);
     newOptions.splice(0, 0, ['Clear', window['allDucks'].length]);
     setOptions(newOptions);
@@ -44,7 +46,7 @@ export function MultiSelectDropdown({name, databases, filters, setFilters, type 
       delete newFilters[name];
       setFilters(newFilters);
     } else {
-      setFilters({...filters, [name]: selected});
+      setFilters({...filters, [name]: [attrType, selected]});
     }
   }, [selected]);
 

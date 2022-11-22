@@ -56,9 +56,9 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
       <tr>
         <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
-        <MultiSelectDropdown name="paintBucket" databases={databases} filters={filters} setFilters={setFilters} type='backpack'/>
-        <MultiSelectDropdown name="water" databases={databases} filters={filters} setFilters={setFilters} type='backpack'/>
-        <MultiSelectDropdown name="sand" databases={databases} filters={filters} setFilters={setFilters} type='backpack'/>
+        <MultiSelectDropdown name="paintBucket" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
+        <MultiSelectDropdown name="water" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
+        <MultiSelectDropdown name="sand" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
         <TableHeaderSortable name="egg" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="seed" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="chest" handleSort={handleSort} sorts={sorts}/>
