@@ -98,18 +98,18 @@ const columns = {
   },
   egg: {
     name: (<img src="/img/egg.png" alt="egg" className='traitIcon'/>),
-    sort: (a, b) => this.value(a) - this.value(b),
-    value: (duck) => duck.backpacks['Egg']?.value || 0,
+    sort: (a, b) => columns.egg.value(a) - columns.egg.value(b),
+    value: (duck) => duck.backpacks['Egg']?.length || 0,
   },
   seed: {
     name: (<img src="/img/seed.png" alt="seed" className='traitIcon'/>),
-    sort: (a, b) => this.value(a) - this.value(b),
-    value: (duck) => duck.backpacks['Seed']?.value || 0,
+    sort: (a, b) => columns.seed.value(a) - columns.seed.value(b),
+    value: (duck) => duck.backpacks['Seed']?.length || 0,
   },
   chest: {
     name: (<img src="/img/chest.png" alt="chest" className='traitIcon'/>),
-    sort: (a, b) => this.value(a) - this.value(b),
-    value: (duck) => duck.backpacks['Chest']?.value || 0,
+    sort: (a, b) => columns.chest.value(a) - columns.chest.value(b),
+    value: (duck) => duck.backpacks['Chest']?.length || 0,
   },
   version: {
     name: 'version',

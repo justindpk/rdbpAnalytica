@@ -119,7 +119,11 @@ function App() {
 
       duck['backpacks'] = {};
       newDatabases['allBackpacks'][id]['attributes'].forEach((backpack) => {
-        duck['backpacks'][backpack['trait_type']] = backpack['value']
+        if (duck['backpacks'][backpack['trait_type']] === undefined) {
+          duck['backpacks'][backpack['trait_type']] = [];
+        } else {
+          duck['backpacks'][backpack['trait_type']].push(backpack['value'])
+        }
       });
       newDucks.push(duck);
       id++;
