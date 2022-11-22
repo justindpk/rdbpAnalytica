@@ -91,7 +91,7 @@ export function MultiSelectDropdown({name, databases, filters, setFilters, attrT
   return (
     <th ref={ref}>
       <p className="columnTitle" onClick={() => setOpen(!open)}>
-        {columns[name]['name']}
+        {columns[name]['display']}
       </p>
       <FormControl>
         <Select
