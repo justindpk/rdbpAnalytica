@@ -23,7 +23,7 @@ const columns = {
    water: {
     name: 'Water', //(<img src="/img/emptyWater.png" alt="water" className='traitIcon'/>),
   },
-   sand: {
+   bagOfSand: {
     name: 'Bag of Sand', //(<img src="/img/sandBag.png" alt="sand" className='traitIcon'/>),
   },
   egg: {

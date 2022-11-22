@@ -6,11 +6,8 @@ import columns from "./helpers";
 //e.g duck = 3078, itemType = Bag of Sand
 // return = Beige
 function getItem(duck, itemType) {
-  for (const item of duck['attributes']) {
-    if (item['trait_type'] === itemType) {
-      return item['value'];
-    }
-  }
+  console.log(duck);
+  return duck.backpacks[itemType][0].toLowerCase();
 }
 
 //e.g duck = 3078, itemType = Paint Bucket
@@ -57,10 +54,8 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
         <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
         
         <MultiSelectDropdown name="paintBucket" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
-        {/*
         <MultiSelectDropdown name="water" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
-        <MultiSelectDropdown name="sand" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
-        */}
+        <MultiSelectDropdown name="bagOfSand" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
         <TableHeaderSortable name="egg" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="seed" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="chest" handleSort={handleSort} sorts={sorts}/>
@@ -78,13 +73,22 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
                 </a>
                 <p className="duckLabel">{columns['id'].value(duck)}</p>
             </td>
-            
+           
             <td>
               <img src={getImageURL('paintBucket', getItem(duck, 'Paint Bucket'))}
-              alt={getItem['Paint Bucket'][getItemLabel(duck)]} className='duckImage'/>
+              alt={'paint bucket'} className='duckImage'/>
               <p className="duckLabel">{getItemLabel(duck, 'Paint Bucket')}</p>
             </td>
-            
+            <td>
+              <img src={getImageURL('water', getItem(duck, 'Water'))}
+              alt={'water'} className='duckImage'/>
+              <p className="duckLabel">{getItemLabel(duck, 'Water')}</p>
+            </td>
+            <td>
+              <img src={getImageURL('bagOfSand', getItem(duck, 'Bag of Sand'))}
+              alt={'bag of sand'} className='duckImage'/>
+            <p className="duckLabel">{getItemLabel(duck, 'Bag of Sand')}</p>
+            </td>
             <td>{columns['egg'].value(duck)}</td>
             <td>{columns['seed'].value(duck)}</td>
             <td>{columns['chest'].value(duck)}</td>
