@@ -1,7 +1,6 @@
 import {useEffect} from "react";
-import {TableHeaderSortable} from "./TableHelpers";
+import {MultiSelectDropdown, TableHeaderSortable} from "./TableHelpers";
 import columns from "./helpers";
-import {MultiSelectDropdown} from "./TraitsTable";
 
 /* 
 //e.g duck = 3078, itemType = Bag of Sand
