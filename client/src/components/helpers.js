@@ -20,16 +20,16 @@ const columns = {
     value: (duck) => duck.duck,
   },
    paintBucket: {
-    name: 'Paint Bucket', //(<img src="/img/emptyPaint.png" alt="duck" className='traitIcon'/>),
-     display: (<img src="/img/emptyPaint.png" alt="duck" className='traitIcon'/>),
+    name: 'Paint Bucket',
+     display: (<img src="/img/emptyPaint.png" alt="duck" className='bpIcon'/>),
   },
    water: {
-    name: 'Water', //(<img src="/img/emptyWater.png" alt="water" className='traitIcon'/>),
-     display: (<img src="/img/emptyWater.png" alt="water" className='traitIcon'/>),
+    name: 'Water',
+     display: (<img src="/img/emptyWater.png" alt="water" className='bpIcon'/>),
   },
    bagOfSand: {
-    name: 'Bag of Sand', //(<img src="/img/sandBag.png" alt="sand" className='traitIcon'/>),
-     display: (<img src="/img/sandBag.png" alt="sand" className='traitIcon'/>),
+    name: 'Bag of Sand',
+     display: (<img src="/img/sandBag.png" alt="sand" className='bpIcon'/>),
   },
   egg: {
     name: (<img src="/img/egg.png" alt="egg" className='traitIcon'/>),

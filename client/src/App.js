@@ -140,7 +140,7 @@ function App() {
     if (0.95 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
       setAmountToLoad(amountToLoad + 10);
     }
-    console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight);
+    //console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight);
   }
 
   function handleSort(name) {

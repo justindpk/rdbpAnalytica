@@ -6,7 +6,6 @@ import columns from "./helpers";
 //e.g duck = 3078, itemType = Bag of Sand
 // return = Beige
 function getItem(duck, itemType) {
-  console.log(duck);
   return duck.backpacks[itemType][0].toLowerCase();
 }
 
