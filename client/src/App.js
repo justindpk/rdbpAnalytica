@@ -135,8 +135,11 @@ function App() {
         const history = findHistoryMatch(duck, tag);
         if (history) {
           paddedHistory.push(history);
+          paddedHistory[paddedHistory.length - 1].empty = false;
         } else {
-          paddedHistory.push(null);
+          paddedHistory.push(paddedHistory[paddedHistory.length - 1]);
+          // paddedHistory.push(null);
+          paddedHistory[paddedHistory.length - 1].empty = true;
         }
       }
       duck.paddedHistory = paddedHistory;

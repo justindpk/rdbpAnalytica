@@ -1,6 +1,6 @@
 // table //
 table {
-    border-collapse: separate;
+    border-collapse: collapse;
     border-spacing: 0;
     color: $color-burgundy;
     width: $max-width;
@@ -32,8 +32,9 @@ thead {
 }
 
 td {
-    border-bottom: 1px solid $color-burgundy;
-    border-right: 1px solid $color-burgundy;
+    //border-bottom: 1px solid $color-burgundy;
+    //border-right: 1px solid $color-burgundy;
+    border: 1px solid $color-burgundy;
     text-align: center;
     //background: $color-lightYellow;
     font-size: 16px;
@@ -56,6 +57,27 @@ tbody > tr {
 }
 
 // table //
+.empty {
+    //border: none;
+    //> img {
+    //    animation: bounce 2s infinite;
+    //    &:hover {
+    //        animation: none;
+    //    }
+    //}
+}
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
 
 
 // drop down select (not being used rn) //
@@ -119,7 +141,7 @@ select {
     font-size: 16px;
     text-align: center;
     display: inline;
-    
+
 }
 
 .duckTable {
@@ -225,8 +247,8 @@ select {
     border-bottom: 2px solid $color-burgundy;
 }
 
-.helpMe{
-   padding-right: 40px;
+.helpMe {
+    padding-right: 40px;
 }
 
 

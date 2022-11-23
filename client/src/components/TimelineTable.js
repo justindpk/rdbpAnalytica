@@ -33,8 +33,18 @@ export default function TimelineTable({databases, amountToLoad, sorts, handleSor
             </td>
             {duck.paddedHistory.map((version, index) => {
                 return (
-                  <td key={index}>
-                    {version ? <img src={version.image} alt="duck" className='duckImage'/> : null}
+                  <td key={index} className={version.empty ? "empty" : null}>
+                    {!version.empty
+                      ? <>
+                        <img src={version.image} alt="duck" className='duckImage'/>
+                        <p className="duckLabel">{'Attended'}</p>
+                      </>
+                      : <>
+                        <img src={version.image} alt="duck" className='duckImage'/>
+                        <p className="duckLabel">{'Missed'}</p>
+                        {/*<img src='/img/duckIcon.svg' className='duckIcon' alt='duck icon' style={{height: '50px', width: '100px'}}/>*/}
+                      </>
+                    }
                   </td>
                 )
               }
