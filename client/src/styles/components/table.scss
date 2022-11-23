@@ -113,11 +113,13 @@ select {
 }
 
 .columnTitle {
-    text-decoration: underline;
+    text-decoration: underline 1.5px solid $color-burgundy;
+    text-underline-offset: 5px;
     font-family: $font-text;
     font-size: 16px;
     text-align: center;
     display: inline;
+    
 }
 
 .duckTable {
@@ -223,8 +225,9 @@ select {
     border-bottom: 2px solid $color-burgundy;
 }
 
-.helpMe {
-    padding-right: 40px;
+.helpMe{
+   padding-right: 40px;
 }
+
 
 // duck table styling //
