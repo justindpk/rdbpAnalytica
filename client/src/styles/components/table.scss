@@ -1,6 +1,7 @@
 // table //
 table {
-    border-collapse: collapse;
+    //border-collapse: collapse;
+    border-collapse: separate;
     border-spacing: 0;
     color: $color-burgundy;
     width: $max-width;
@@ -32,9 +33,9 @@ thead {
 }
 
 td {
-    //border-bottom: 1px solid $color-burgundy;
-    //border-right: 1px solid $color-burgundy;
-    border: 1px solid $color-burgundy;
+    border-bottom: 1px solid $color-burgundy;
+    border-right: 1px solid $color-burgundy;
+    //border: 1px solid $color-burgundy;
     text-align: center;
     //background: $color-lightYellow;
     font-size: 16px;

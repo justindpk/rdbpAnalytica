@@ -9,15 +9,15 @@ export default function TimelineTable({databases, amountToLoad, sorts, handleSor
       <tr>
         <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
-        <th>V1</th>
-        <th>V2</th>
-        <th>V3</th>
-        <th>V4</th>
-        <th>V5</th>
-        <th>V6</th>
-        <th>V7</th>
-        <th>V8</th>
-        <th>V9</th>
+        <th>Mint</th>
+        <th>Carnival</th>
+        <th>High Tea</th>
+        <th>Zen</th>
+        <th>Space</th>
+        <th>Jungle</th>
+        <th>Summer</th>
+        <th>Circus</th>
+        <th>Halloween</th>
       </tr>
       </thead>
       <tbody>

@@ -73,7 +73,7 @@ function TableTypeBar({setTableType, setReset, reset}) {
         <button className="button row orange" onClick={() => {
           setTableType("timeline");
           scrollToLeft();
-        }}>Timeline
+        }}>Parties
         </button>
 
       </div>
