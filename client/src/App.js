@@ -126,6 +126,7 @@ function App() {
       duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']].push(backpackAttr['value']);
     }));
     newDatabases['allDucks'] = Object.values(duckDict);
+    newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
 
     setDatabases(newDatabases);
     setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
