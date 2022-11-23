@@ -109,8 +109,7 @@ function App() {
     }
     newDatabases['traitToID'] = traitToID;
 
-    let newDucks = []
-    let id = 0;
+    let duckDict = {}
     for (let duck of newDatabases['allDucks']) {
       duck['traits'] = {};
       duck['attributes'].forEach((attribute) => {
@@ -118,16 +117,15 @@ function App() {
       });
 
       duck['backpacks'] = {};
-      newDatabases['allBackpacks'][id]['attributes'].forEach((backpack) => {
-        if (duck['backpacks'][backpack['trait_type']] === undefined) {
-          duck['backpacks'][backpack['trait_type']] = [];
-        }
-        duck['backpacks'][backpack['trait_type']].push(backpack['value'])
-      });
-      newDucks.push(duck);
-      id++;
+      duckDict[duck['duck']] = duck;
     }
-    newDatabases['allDucks'] = newDucks;
+    newDatabases['allBackpacks'].forEach((duckBackpack) => duckBackpack['attributes'].forEach((backpackAttr) => {
+      if (duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']] === undefined) {
+        duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']] = [];
+      }
+      duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']].push(backpackAttr['value']);
+    }));
+    newDatabases['allDucks'] = Object.values(duckDict);
 
     setDatabases(newDatabases);
     setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
