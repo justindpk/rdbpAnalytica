@@ -12,7 +12,6 @@ td {
     vertical-align: middle;
     border-right: 1px solid $color-burgundy;
     border-bottom: 1px solid $color-burgundy;
-    background: $color-lightYellow;
     user-select: none;
 }
 
@@ -20,6 +19,7 @@ th {
     position: sticky;
     top: 88px;
     border-bottom: 3px solid $color-burgundy;
+    background: $color-lightYellow;
 }
 
 thead {
@@ -35,12 +35,19 @@ td {
     border-bottom: 1px solid $color-burgundy;
     border-right: 1px solid $color-burgundy;
     text-align: center;
-    background: $color-beige;
     //background: $color-lightYellow;
     font-size: 16px;
     font-weight: $font-weight-medium;
     padding-top: 8px;
     padding-bottom: 4px;
+}
+
+tbody > tr {
+    background: $color-beige;
+
+    &:hover {
+        background: $color-lightYellow;
+    }
 }
 
 
@@ -163,12 +170,12 @@ select {
         position: absolute;
         padding-top: 22px;
         @include respond-to('medium') {
-		    padding-left: 2px;
-	    }
+            padding-left: 2px;
+        }
 
         @include respond-to('small') {
-		    padding-left: 2px;
-	    }
+            padding-left: 2px;
+        }
     }
 }
 
@@ -178,8 +185,8 @@ select {
         padding-top: 22px;
 
         @include respond-to('medium') {
-		    padding-left: 2px;
-	    }
+            padding-left: 2px;
+        }
 
         @include respond-to('small') {
             padding-left: 2px;
@@ -193,30 +200,31 @@ select {
         padding-top: 22px;
 
         @include respond-to('medium') {
-		    padding-left: 2px;
-	    }
+            padding-left: 2px;
+        }
 
         @include respond-to('small') {
-		    padding-left: 2px;
-	    }
+            padding-left: 2px;
+        }
     }
 }
 
-.traitIcon{
-	width: 60px;
-	height: 60px;
+.traitIcon {
+    width: 60px;
+    height: 60px;
 }
 
-.bpIcon{
-	width: 60px;
-	height: 60px;
-    border-top:0;
-    border-left:0;
-    border-right:0;
+.bpIcon {
+    width: 60px;
+    height: 60px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
     border-bottom: 2px solid $color-burgundy;
 }
 
-.helpMe{
-   padding-right: 40px;
+.helpMe {
+    padding-right: 40px;
 }
+
 // duck table styling //
