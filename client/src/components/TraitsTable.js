@@ -49,7 +49,6 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
     }
   }
 
-
   return (
     <table>
       <thead>

@@ -19,9 +19,8 @@ function TopBar() {
         <div className="analyticaTitle">
           <h1> RDBP Analytica </h1>
           <p className="description">
-            A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
-                                                 rel="noreferrer">
-            Rubber Duck Bath Party</a> NFT collection.
+            A community project analyzing the <a className="description" href="https://duck.art/" target="_blank" rel="noreferrer">
+            Rubber Duck Bath Party </a> NFT collection.
           </p>
         </div>
       </div>
@@ -93,7 +92,6 @@ function TableTypeBar({setTableType, setReset, reset}) {
   )
 }
 
-
 function App() {
   const [databases, setDatabases] = useState();
   const [originalDatabases, setOriginalDatabases] = useState();
@@ -102,7 +100,6 @@ function App() {
   const [reset, setReset] = useState(0);
   const [sorts, setSorts] = useState({});
   const [filters, setFilters] = useState({});
-
 
   useEffect(() => {
     let newDatabases = {};
@@ -172,7 +169,6 @@ function App() {
     }));
     newDatabases['allDucks'] = Object.values(duckDict);
     newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
-
 
     setDatabases(newDatabases);
     setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
@@ -249,7 +245,6 @@ function App() {
     }
     return filteredDucks;
   }
-
 
   useEffect(() => {
     if (databases) {

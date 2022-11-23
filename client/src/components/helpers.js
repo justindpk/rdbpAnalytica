@@ -18,14 +18,14 @@ const columns = {
     value: (duck) => duck.history[0].rank,
   },
   id: {
-    name: (<img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/>),
-    display: (<img src="/img/duckIcon.svg" alt="duck" className='duckIcon'/>),
+    name: (<img src="/img/duckIcon.svg" alt="id" className='duckIcon'/>),
+    display: (<img src="/img/duckIcon.svg" alt="id" className='duckIcon'/>),
     sort: (a, b) => a.duck - b.duck,
     value: (duck) => duck.duck,
   },
    paintBucket: {
     name: 'Paint Bucket',
-     display: (<img src="/img/emptyPaint.png" alt="duck" className='bpIcon'/>),
+     display: (<img src="/img/emptyPaint.png" alt="paint bucket" className='bpIcon'/>),
   },
    water: {
     name: 'Water',

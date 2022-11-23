@@ -44,7 +44,6 @@ export function MultiSelectDropdown({name, databases, filters, setFilters, attrT
     setSelected(['Clear']);
   }, [rarityDatabase]);
 
-
   useEffect(() => {
     let total = 0;
     let newOptions = [];
@@ -142,19 +141,14 @@ export function MultiSelectDropdown({name, databases, filters, setFilters, attrT
               },
             },
           }}
-
-
         >
           {options.map((option) => (
             <MenuItem disableRipple key={option} value={option[0]} style={{height: 30}}>
               <ListItemText primary={`${option[0]} (${option[1]})`}/>
             </MenuItem>
           ))}
-
         </Select>
       </FormControl>
-
     </th>
   )
-
 }

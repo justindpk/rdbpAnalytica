@@ -2,7 +2,6 @@ import {useEffect} from "react";
 import {MultiSelectDropdown, TableHeaderSortable} from "./TableHelpers";
 import columns from "./helpers";
 
-
 //e.g duck = 3078, itemType = Bag of Sand
 // return = Beige
 function getItem(duck, itemType) {

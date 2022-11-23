@@ -1,3 +1,4 @@
+// gloabls
 * {
     cursor: url("../../public/img/strawberyyCursor.svg"), auto
 }
@@ -37,7 +38,7 @@ input {
     }
 }
 
-
+// body
 .mainContainer {
     margin: auto;
     font-family: $font-text;
@@ -79,7 +80,7 @@ body {
     overflow: hidden;
 }
 
-
+//buttons
 .button {
     text-transform: uppercase;
     text-decoration: none;
