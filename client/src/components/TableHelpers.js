@@ -7,6 +7,7 @@ export function TableHeaderSortable({name, handleSort, sorts}) {
   const [priority, setPriority] = useState(null);
 
   useEffect(() => {
+    console.log(sorts);
     if (sorts[name]) {
       setPriority(sorts[name]['priority']);
       if (sorts[name]['ascending']) {

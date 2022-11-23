@@ -4,6 +4,7 @@ import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
 import columns, {scrollToLeft, scrollToTop, upperFirstLetter} from "./components/helpers";
+import TimelineTable from "./components/TimelineTable";
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
 
@@ -69,6 +70,12 @@ function TableTypeBar({setTableType, setReset, reset}) {
         }}>
           <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
         </button>
+        <button className="button row orange" onClick={() => {
+          setTableType("timeline");
+          scrollToLeft();
+        }}>Timeline
+        </button>
+
       </div>
       <div className='control'>
         <button className="button row grey" onClick={() => {
@@ -103,6 +110,38 @@ function App() {
       newDatabases = {...newDatabases, [databaseName]: JSON.parse(JSON.stringify(window[databaseName]))}
     });
 
+    let fullHistory = [];
+    for (const duck of newDatabases['allDucks']) {
+      if (duck.history.length === 9) {
+        for (const history of duck.history) {
+          fullHistory.push(history.image.split('/')[4]);
+        }
+        break;
+      }
+    }
+    fullHistory.reverse();
+
+    function findHistoryMatch(duck, tag) {
+      for (const history of duck.history) {
+        if (history.image.split('/')[4] === tag) {
+          return history;
+        }
+      }
+    }
+
+    for (const duck of newDatabases['allDucks']) {
+      let paddedHistory = [];
+      for (const tag of fullHistory) {
+        const history = findHistoryMatch(duck, tag);
+        if (history) {
+          paddedHistory.push(history);
+        } else {
+          paddedHistory.push(null);
+        }
+      }
+      duck.paddedHistory = paddedHistory;
+    }
+
     let traitToID = {};
     for (const [traitType, traits] of Object.entries(newDatabases['traits'])) {
       traitToID[traitType] = {};
@@ -130,6 +169,7 @@ function App() {
     }));
     newDatabases['allDucks'] = Object.values(duckDict);
     newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
+
 
     setDatabases(newDatabases);
     setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
@@ -249,6 +289,13 @@ function App() {
                                 filters={filters}
                                 setFilters={setFilters}
         />
+        break;
+      case "timeline":
+        table = <TimelineTable databases={databases}
+                               amountToLoad={amountToLoad}
+                               handleSort={handleSort}
+                               sorts={sorts}
+                               filters={filters}/>
         break;
       default:
         table = <MainTable databases={databases}
