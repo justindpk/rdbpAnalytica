@@ -30,6 +30,16 @@ function getImageURL(traitType, traitName) {
   return `https://duck.art/img/traits/${traitType}/${traitName}.${extension}`;
 }
 
+function getTraitLink(traitType, traitName) {
+  let link = '';
+  if (traitName) {
+    link = `https://duck.art/trait/${traitType}/${traitName.toLowerCase()}`;
+  } else {
+    link = `https://duck.art/traits/#${traitType}`;
+  }
+  return link;
+}
+
 function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFilters}) {
   let traitToID = {};
   for (const [traitType, traits] of Object.entries(databases['traits'])) {
@@ -60,6 +70,12 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
       </thead>
       <tbody>
       {databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
+        let traitLabels = {};
+        let traits = {};
+        for (const traitType of ['Background', 'Body', 'Tattoo', 'Head', 'Shirt', 'Neck', 'Beak', 'Eyes', 'Cover']) {
+          traitLabels[traitType] = getTraitLabel(duck, traitType);
+          traits[traitType] = getTrait(duck, traitType);
+        }
         return (
           <tr key={index}>
             <td>{columns['rank'].value(duck)}</td>
@@ -69,33 +85,62 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
               </a>
               <p className="duckLabel">{columns['id'].value(duck)}</p>
             </td>
-            <td><img src={getImageURL('background', traitToID['Background'][getTrait(duck, 'Background')])}
-                     alt={traitToID['Background'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Background')}</p></td>
-            <td><img src={getImageURL('body', traitToID['Body'][getTrait(duck, 'Body')])}
-                     alt={traitToID['Body'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Body')}</p></td>
-            <td><img src={getImageURL('tattoo', traitToID['Tattoo'][getTrait(duck, 'Tattoo')])}
-                     alt={traitToID['Tattoo'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Tattoo')}</p></td>
-            <td><img src={getImageURL('head', traitToID['Head'][getTrait(duck, 'Head')])}
-                     alt={traitToID['Head'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Head')}</p></td>
-            <td><img src={getImageURL('shirt', traitToID['Shirt'][getTrait(duck, 'Shirt')])}
-                     alt={traitToID['Shirt'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Shirt')}</p></td>
-            <td><img src={getImageURL('neck', traitToID['Neck'][getTrait(duck, 'Neck')])}
-                     alt={traitToID['Neck'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Neck')}</p></td>
-            <td><img src={getImageURL('beak', traitToID['Beak'][getTrait(duck, 'Beak')])}
-                     alt={traitToID['Beak'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Beak')}</p></td>
-            <td><img src={getImageURL('eyes', traitToID['Eyes'][getTrait(duck, 'Eyes')])}
-                     alt={traitToID['Eyes'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Eyes')}</p></td>
-            <td><img src={getImageURL('cover', traitToID['Cover'][getTrait(duck, 'Cover')])}
-                     alt={traitToID['Cover'][getTrait(duck)]} className='duckImage'/><p
-              className="duckLabel">{getTraitLabel(duck, 'Cover')}</p></td>
+            <td>
+              <a href={getTraitLink('background', traits['Background'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('background', traitToID['Background'][traits['Background']])} alt="background"
+                     className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Background']}</p></td>
+
+            <td>
+              <a href={getTraitLink('body', traits['Body'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('body', traitToID['Body'][traits['Body']])} alt="body" className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Body']}</p></td>
+
+            <td>
+              <a href={getTraitLink('tattoo', traits['Tattoo'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('tattoo', traitToID['Tattoo'][traits['Tattoo']])} alt="tattoo"
+                     className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Tattoo']}</p></td>
+
+                          <td>
+              <a href={getTraitLink('head', traits['Head'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('head', traitToID['Head'][traits['Head']])} alt="head" className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Head']}</p></td>
+
+            <td>
+              <a href={getTraitLink('shirt', traits['Shirt'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('shirt', traitToID['Shirt'][traits['Shirt']])} alt="shirt" className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Shirt']}</p></td>
+
+            <td>
+              <a href={getTraitLink('neck', traits['Neck'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('neck', traitToID['Neck'][traits['Neck']])} alt="neck" className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Neck']}</p></td>
+
+            <td>
+              <a href={getTraitLink('beak', traits['Beak'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('beak', traitToID['Beak'][traits['Beak']])} alt="beak" className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Beak']}</p></td>
+
+            <td>
+              <a href={getTraitLink('eyes', traits['Eyes'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('eyes', traitToID['Eyes'][traits['Eyes']])} alt="eyes" className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Eyes']}</p></td>
+
+            <td>
+              <a href={getTraitLink('cover', traits['Cover'])} target="_blank" rel="noreferrer">
+                <img src={getImageURL('cover', traitToID['Cover'][traits['Cover']])} alt="cover" className='duckImage'/>
+              </a>
+              <p className="duckLabel">{traitLabels['Cover']}</p></td>
+
             <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                    target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
                                                          style={{width: '45px'}}/></a></td>
