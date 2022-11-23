@@ -3,7 +3,7 @@ import './styles/main.scss';
 import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
-import columns, {scrollToTop, upperFirstLetter} from "./components/helpers";
+import columns, {scrollToLeft, scrollToTop, upperFirstLetter} from "./components/helpers";
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
 
@@ -54,15 +54,18 @@ function TableTypeBar({setTableType, setReset, reset}) {
       <div className='left'>
         <button className="button row yellow" onClick={() => {
           setTableType("main");
+          scrollToLeft();
         }}>
           <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
         </button>
         <button className="button row red" onClick={() => {
           setTableType("traits");
+          scrollToLeft();
         }}>Traits
         </button>
         <button className="button row lightPurple" onClick={() => {
           setTableType("backpacks");
+          scrollToLeft();
         }}>
           <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
         </button>

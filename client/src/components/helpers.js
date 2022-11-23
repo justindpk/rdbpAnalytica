@@ -2,6 +2,10 @@ export function scrollToTop() {
   document.getElementsByClassName("mainContainer")[0].scrollTo(0, 0);
 }
 
+export function scrollToLeft() {
+  document.getElementsByClassName("mainContainer")[0].scrollLeft = 0;
+}
+
 export function upperFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
