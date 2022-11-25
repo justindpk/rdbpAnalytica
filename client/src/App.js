@@ -3,8 +3,8 @@ import './styles/main.scss';
 import MainTable from "./components/MainTable";
 import BackpacksTable from "./components/BackpacksTable";
 import TraitsTable from "./components/TraitsTable";
-import columns, {scrollToLeft, scrollToTop, upperFirstLetter} from "./components/helpers";
-import TimelineTable from "./components/TimelineTable";
+import columns, {scrollToLeft, scrollToTop} from "./components/helpers";
+//import TimelineTable from "./components/TimelineTable";
 
 const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
 
@@ -69,12 +69,13 @@ function TableTypeBar({setTableType, setReset, reset}) {
         }}>
           <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
         </button>
+        {/*
         <button className="button row orange" onClick={() => {
           setTableType("timeline");
           scrollToLeft();
         }}>Parties
         </button>
-
+        */}
       </div>
       <div className='control'>
         <button className="button row grey" onClick={() => {
@@ -135,7 +136,6 @@ function App() {
           paddedHistory[paddedHistory.length - 1].empty = false;
         } else {
           paddedHistory.push(paddedHistory[paddedHistory.length - 1]);
-          // paddedHistory.push(null);
           paddedHistory[paddedHistory.length - 1].empty = true;
         }
       }
@@ -288,6 +288,7 @@ function App() {
                                 setFilters={setFilters}
         />
         break;
+      /*
       case "timeline":
         table = <TimelineTable databases={databases}
                                amountToLoad={amountToLoad}
@@ -295,6 +296,7 @@ function App() {
                                sorts={sorts}
                                filters={filters}/>
         break;
+      */
       default:
         table = <MainTable databases={databases}
                            amountToLoad={amountToLoad}/>;
