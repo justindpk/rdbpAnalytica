@@ -1,8 +1,0 @@
-<svg width="27px" height="32px" viewBox="0 0 27 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>cursor</title>
-    <g id="cursor" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M10.7527355,30.5094982 C34.8509338,30.5094982 14.696077,-0.160935977 11.1908845,-0.160935977 C7.68569207,-0.160935977 -13.3454628,30.5094982 10.7527355,30.5094982 Z" id="Oval" stroke="#400000" stroke-width="2" fill="#FF426E" stroke-linecap="round" stroke-linejoin="round" transform="translate(10.881236, 15.174281) rotate(-30.000000) translate(-10.881236, -15.174281) "/>
-        <path d="M3,2 C3,10.6666667 4.33333333,17 7,21 C9.66666667,25 12.3333333,28 15,30 C11,31.3333333 7.66666667,30.6666667 5,28 C1,24 1,10 1,8 C1,6.66666667 1.66666667,4.66666667 3,2 Z" id="Path-62" fill="#400000" opacity="0.100000001"/>
-    </g>
-</svg>
-
