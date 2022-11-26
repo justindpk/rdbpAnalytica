@@ -55,7 +55,7 @@ export function MultiSelectDropdown({name, databases, filters, setFilters, attrT
       total += parseInt(rarity);
       newOptions.push([key, rarity]);
     }
-    newOptions.sort((a, b) => a[0].localeCompare(b[0]));
+    newOptions.sort((a, b) => b[1] - a[1]);
     if (attrType === 'trait') {
       newOptions.splice(0, 0, ['None', window['allDucks'].length - total]);
     }
