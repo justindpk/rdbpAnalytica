@@ -136,9 +136,8 @@ function App() {
           paddedHistory.push(history);
           paddedHistory[paddedHistory.length - 1].empty = false;
         }  else {
-          paddedHistory.push(paddedHistory[paddedHistory.length - 1]);
-          paddedHistory[paddedHistory.length - 1].empty = true;
-        } 
+          paddedHistory.push({...paddedHistory[paddedHistory.length - 1], empty: true});
+        }
       }
       duck.paddedHistory = paddedHistory;
     }
