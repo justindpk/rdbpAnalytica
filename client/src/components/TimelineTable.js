@@ -2,7 +2,6 @@ import columns from "./helpers";
 import {TableHeaderSortable} from "./TableHelpers";
 
 export default function TimelineTable({databases, amountToLoad, sorts, handleSort}) {
-  //console.log(databases);
   return (
     <table>
       <thead>
