@@ -12,6 +12,7 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
           <TableHeaderSortable name="parties" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="totalTraits" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="rankChange" handleSort={handleSort} sorts={sorts}/>
+          <th>Owner</th>
           <th>Opensea</th>
         </tr>
         </thead>
@@ -30,6 +31,7 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
               <td>{columns['parties'].value(duck)}</td>
               <td>{columns['totalTraits'].value(duck)} / 9</td>
               <td>{columns['rankChange'].value(duck)}</td>
+              <td>{duck['owner']}</td>
               <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                      target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
                                                            style={{width: '45px'}}/></a></td>
