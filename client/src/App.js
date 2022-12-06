@@ -104,100 +104,103 @@ function App() {
   const [sorts, setSorts] = useState({});
   const [filters, setFilters] = useState({});
 
-  useEffect(async () => {
-    let newDatabases = {};
-    databaseNames.forEach((databaseName) => {
-      newDatabases = {...newDatabases, [databaseName]: JSON.parse(JSON.stringify(window[databaseName]))}
-    });
-
-
-    let fullHistory = [];
-    for (const duck of newDatabases['allDucks']) {
-      if (duck.history.length === 10) {
-        for (const history of duck.history) {
-          fullHistory.push(history.image.split('/')[4]);
-        }
-        break;
-      }
-    }
-    fullHistory.reverse();
-
-    function findHistoryMatch(duck, tag) {
-      for (const history of duck.history) {
-        if (history.image.split('/')[4] === tag) {
-          return history;
-        }
-      }
-    }
-
-    for (const duck of newDatabases['allDucks']) {
-      let paddedHistory = [];
-      for (const tag of fullHistory) {
-        const history = findHistoryMatch(duck, tag);
-        if (history) {
-          paddedHistory.push(history);
-          paddedHistory[paddedHistory.length - 1].empty = false;
-        } else {
-          paddedHistory.push({...paddedHistory[paddedHistory.length - 1], empty: true});
-        }
-      }
-      duck.paddedHistory = paddedHistory;
-    }
-
-    let traitToID = {};
-    for (const [traitType, traits] of Object.entries(newDatabases['traits'])) {
-      traitToID[traitType] = {};
-      for (const trait of traits) {
-        traitToID[traitType][trait['name']] = (trait['id'].length < 2 ? '0' + trait['id'] : trait['id']);
-      }
-    }
-    newDatabases['traitToID'] = traitToID;
-
-    let duckDict = {}
-    for (let duck of newDatabases['allDucks']) {
-      duck['traits'] = {};
-      duck['attributes'].forEach((attribute) => {
-        duck['traits'][attribute['trait_type']] = attribute['value']
+  useEffect(() => {
+    async function fetchData() {
+      let newDatabases = {};
+      databaseNames.forEach((databaseName) => {
+        newDatabases = {...newDatabases, [databaseName]: JSON.parse(JSON.stringify(window[databaseName]))}
       });
 
-      duck['backpacks'] = {};
-      duckDict[duck['duck']] = duck;
-    }
-    newDatabases['allBackpacks'].forEach((duckBackpack) => duckBackpack['attributes'].forEach((backpackAttr) => {
-      if (duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']] === undefined) {
-        duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']] = [];
-      }
-      duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']].push(backpackAttr['value']);
-    }));
-    newDatabases['allDucks'] = Object.values(duckDict);
-    // newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
-    let owners = [];
-    await fetch('https://eth-mainnet.g.alchemy.com/nft/v2/_kvvDJ6IbZMKDb_OY5d57rqteprc3NdK/getOwnersForCollection?contractAddress=0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6&withTokenBalances=true',
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
+
+      let fullHistory = [];
+      for (const duck of newDatabases['allDucks']) {
+        if (duck.history.length === 10) {
+          for (const history of duck.history) {
+            fullHistory.push(history.image.split('/')[4]);
+          }
+          break;
         }
-      })
-      .then(response => response.json())
-      .then(data => owners = data['ownerAddresses'])
-      .catch(err => console.error(err));
-    for (const owner of owners) {
-      for (const token of owner['tokenBalances']) {
-        newDatabases['allDucks'][parseInt(token['tokenId'], 16) - 1]['owner'] = owner['ownerAddress'];
-        token['duck'] = parseInt(token['tokenId'], 16);
       }
+      fullHistory.reverse();
+
+      function findHistoryMatch(duck, tag) {
+        for (const history of duck.history) {
+          if (history.image.split('/')[4] === tag) {
+            return history;
+          }
+        }
+      }
+
+      for (const duck of newDatabases['allDucks']) {
+        let paddedHistory = [];
+        for (const tag of fullHistory) {
+          const history = findHistoryMatch(duck, tag);
+          if (history) {
+            history['empty'] = false;
+            paddedHistory.push(history);
+          } else {
+            paddedHistory.push({...paddedHistory[paddedHistory.length - 1], empty: true});
+          }
+        }
+        duck.paddedHistory = paddedHistory;
+      }
+
+      let traitToID = {};
+      for (const [traitType, traits] of Object.entries(newDatabases['traits'])) {
+        traitToID[traitType] = {};
+        for (const trait of traits) {
+          traitToID[traitType][trait['name']] = (trait['id'].length < 2 ? '0' + trait['id'] : trait['id']);
+        }
+      }
+      newDatabases['traitToID'] = traitToID;
+
+      let duckDict = {}
+      for (let duck of newDatabases['allDucks']) {
+        duck['traits'] = {};
+        duck['attributes'].forEach((attribute) => {
+          duck['traits'][attribute['trait_type']] = attribute['value']
+        });
+
+        duck['backpacks'] = {};
+        duckDict[duck['duck']] = duck;
+      }
+      newDatabases['allBackpacks'].forEach((duckBackpack) => duckBackpack['attributes'].forEach((backpackAttr) => {
+        if (duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']] === undefined) {
+          duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']] = [];
+        }
+        duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']].push(backpackAttr['value']);
+      }));
+      newDatabases['allDucks'] = Object.values(duckDict);
+      // newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
+      let owners = [];
+      await fetch('https://eth-mainnet.g.alchemy.com/nft/v2/_kvvDJ6IbZMKDb_OY5d57rqteprc3NdK/getOwnersForCollection?contractAddress=0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6&withTokenBalances=true',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+        .then(response => response.json())
+        .then(data => owners = data['ownerAddresses'])
+        .catch(err => console.error(err));
+      for (const owner of owners) {
+        for (const token of owner['tokenBalances']) {
+          newDatabases['allDucks'][parseInt(token['tokenId'], 16) - 1]['owner'] = owner['ownerAddress'];
+          token['duck'] = newDatabases['allDucks'][parseInt(token['tokenId'], 16) - 1];
+        }
+      }
+      newDatabases['owners'] = owners;
+
+      newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
+
+      setDatabases(newDatabases);
+      setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
+      setSorts({});
+      setFilters({});
+      setAmountToLoad(20);
     }
-    newDatabases['owners'] = owners;
 
-    newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
-
-    setDatabases(newDatabases);
-    console.log(newDatabases);
-    setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
-    setSorts({});
-    setFilters({});
-    setAmountToLoad(20);
+    fetchData().catch(err => console.error(err));
   }, [reset]);
 
   function handleScroll(e) {
