@@ -19,7 +19,8 @@ function TopBar() {
         <div className="analyticaTitle">
           <h1> RDBP Analytica </h1>
           <p className="description">
-            A community project analyzing the <a className="description" href="https://duck.art/" target="_blank" rel="noreferrer">
+            A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
+                                                 rel="noreferrer">
             Rubber Duck Bath Party </a> NFT collection.
           </p>
         </div>
@@ -69,7 +70,7 @@ function TableTypeBar({setTableType, setReset, reset}) {
         }}>
           <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
         </button>
-        
+
         <button className="button row orange" onClick={() => {
           setTableType("timeline");
           scrollToLeft();
@@ -103,11 +104,12 @@ function App() {
   const [sorts, setSorts] = useState({});
   const [filters, setFilters] = useState({});
 
-  useEffect(() => {
+  useEffect(async () => {
     let newDatabases = {};
     databaseNames.forEach((databaseName) => {
       newDatabases = {...newDatabases, [databaseName]: JSON.parse(JSON.stringify(window[databaseName]))}
     });
+
 
     let fullHistory = [];
     for (const duck of newDatabases['allDucks']) {
@@ -135,7 +137,7 @@ function App() {
         if (history) {
           paddedHistory.push(history);
           paddedHistory[paddedHistory.length - 1].empty = false;
-        }  else {
+        } else {
           paddedHistory.push({...paddedHistory[paddedHistory.length - 1], empty: true});
         }
       }
@@ -168,9 +170,30 @@ function App() {
       duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']].push(backpackAttr['value']);
     }));
     newDatabases['allDucks'] = Object.values(duckDict);
+    // newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
+    let owners = [];
+    await fetch('https://eth-mainnet.g.alchemy.com/nft/v2/_kvvDJ6IbZMKDb_OY5d57rqteprc3NdK/getOwnersForCollection?contractAddress=0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6&withTokenBalances=true',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(response => response.json())
+      .then(data => owners = data['ownerAddresses'])
+      .catch(err => console.error(err));
+    for (const owner of owners) {
+      for (const token of owner['tokenBalances']) {
+        newDatabases['allDucks'][parseInt(token['tokenId'], 16) - 1]['owner'] = owner['ownerAddress'];
+        token['duck'] = parseInt(token['tokenId'], 16);
+      }
+    }
+    newDatabases['owners'] = owners;
+
     newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
 
     setDatabases(newDatabases);
+    console.log(newDatabases);
     setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
     setSorts({});
     setFilters({});
@@ -288,7 +311,7 @@ function App() {
                                 setFilters={setFilters}
         />
         break;
-      
+
       case "timeline":
         table = <TimelineTable databases={databases}
                                amountToLoad={amountToLoad}
@@ -296,7 +319,7 @@ function App() {
                                sorts={sorts}
                                filters={filters}/>
         break;
-      
+
       default:
         table = <MainTable databases={databases}
                            amountToLoad={amountToLoad}/>;
