@@ -24,7 +24,7 @@ const columns = {
     value: (duck) => duck.duck,
   },
    paintBucket: {
-    name: 'Paint Bucket',
+    name: 'Paint',
      display: (<img src="/img/emptyPaint.png" alt="paint bucket" className='bpIcon'/>),
   },
    water: {
@@ -32,7 +32,7 @@ const columns = {
      display: (<img src="/img/emptyWater.png" alt="water" className='bpIcon'/>),
   },
    bagOfSand: {
-    name: 'Bag of Sand',
+    name: 'Sand',
      display: (<img src="/img/sandBag.png" alt="sand" className='bpIcon'/>),
   },
   egg: {

@@ -25,9 +25,9 @@ function getImageURL(traitType, traitName) {
     extension = 'gif';
   }
   if (traitName === undefined) {
-    return `https://duck.art/img/traits/body/01.png`;
+    return `https://duck.art/img/preview/body/01.png`;
   }
-  return `https://duck.art/img/traits/${traitType}/${traitName}.${extension}`;
+  return `https://duck.art/img/preview/${traitType}/${traitName}.${extension}`;
 }
 
 function getTraitLink(traitType, traitName) {

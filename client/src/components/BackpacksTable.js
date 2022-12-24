@@ -2,13 +2,16 @@ import {useEffect} from "react";
 import {MultiSelectDropdown, TableHeaderSortable} from "./TableHelpers";
 import columns from "./helpers";
 
-//e.g duck = 3078, itemType = Bag of Sand
+//e.g duck = 3078, itemType = Sand
 // return = Beige
 function getItem(duck, itemType) {
+  console.log(duck.backpacks);
+  console.log(itemType);
+ 
   return duck.backpacks[itemType][0].toLowerCase();
 }
 
-//e.g duck = 3078, itemType = Paint Bucket
+//e.g duck = 3078, itemType = Paint
 // return = Peach
 function getItemLabel(duck, itemType) {
   const item = getItem(duck, itemType);
@@ -18,22 +21,9 @@ function getItemLabel(duck, itemType) {
   return item.charAt(0).toUpperCase() + item.slice(1);
 }
 
-//e.g itemType = Bag of Sand, itemName = Beige
+//e.g itemType = Sand, itemName = Beige
 function getImageURL(itemType, itemName) {
   let extension = 'png';
-  if(itemType === "bagOfSand")
-    {
-      itemType = 'bag-of-sand';
-    }
-  else if(itemType === "paintBucket")
-    {
-      itemType = 'paint-bucket';
-    }
-  else if(itemType === "Water")
-    {
-      itemType = 'water';
-    }
-  
   return `https://duck.art/img/mysterious-items/item-${itemType}-${itemName}.${extension}`;
 }
 
@@ -50,7 +40,6 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
       <tr>
         <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
-        
         <MultiSelectDropdown name="paintBucket" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
         <MultiSelectDropdown name="water" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
         <MultiSelectDropdown name="bagOfSand" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
@@ -73,9 +62,9 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
             </td>
            
             <td>
-              <img src={getImageURL('paintBucket', getItem(duck, 'Paint Bucket'))}
+              <img src={getImageURL('paint', getItem(duck, 'Paint'))}
               alt={'paint bucket'} className='duckImage'/>
-              <p className="duckLabel">{getItemLabel(duck, 'Paint Bucket')}</p>
+              <p className="duckLabel">{getItemLabel(duck, 'Paint')}</p>
             </td>
             <td>
               <img src={getImageURL('water', getItem(duck, 'Water'))}
@@ -83,9 +72,9 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
               <p className="duckLabel">{getItemLabel(duck, 'Water')}</p>
             </td>
             <td>
-              <img src={getImageURL('bagOfSand', getItem(duck, 'Bag of Sand'))}
+              <img src={getImageURL('sand', getItem(duck, 'Sand'))}
               alt={'bag of sand'} className='duckImage'/>
-            <p className="duckLabel">{getItemLabel(duck, 'Bag of Sand')}</p>
+            <p className="duckLabel">{getItemLabel(duck, 'Sand')}</p>
             </td>
             <td>{columns['egg'].value(duck)}</td>
             <td>{columns['seed'].value(duck)}</td>

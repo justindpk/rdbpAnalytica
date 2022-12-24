@@ -70,12 +70,13 @@ function TableTypeBar({setTableType, setReset, reset}) {
         }}>
           <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
         </button>
-
+        {
         <button className="button row orange" onClick={() => {
           setTableType("timeline");
           scrollToLeft();
         }}>Parties
         </button>
+        }
       </div>
 
       <div className='control'>
@@ -115,6 +116,7 @@ function App() {
       let fullHistory = [];
       for (const duck of newDatabases['allDucks']) {
         if (duck.history.length === 10) {
+          console.log(duck.history[7418]);
           for (const history of duck.history) {
             fullHistory.push(history.image.split('/')[4]);
           }
@@ -314,7 +316,7 @@ function App() {
                                 setFilters={setFilters}
         />
         break;
-
+      
       case "timeline":
         table = <TimelineTable databases={databases}
                                amountToLoad={amountToLoad}
@@ -322,7 +324,7 @@ function App() {
                                sorts={sorts}
                                filters={filters}/>
         break;
-
+      
       default:
         table = <MainTable databases={databases}
                            amountToLoad={amountToLoad}/>;
