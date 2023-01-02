@@ -10,12 +10,14 @@ export function upperFirstLetter(string) {
   return string[0].toUpperCase() + string.slice(1).toLowerCase();
 }
 
+const findPartiesAttendedAttribute = (attributes) => attributes.find(attr => attr.trait_type === 'Parties Attended');
+
 const columns = {
   rank: {
     name: 'rank',
     display: 'rank',
-    sort: (a, b) => a.history[0].rank - b.history[0].rank,
-    value: (duck) => duck.history[0].rank,
+    sort: (a, b) => a.rank - b.rank,
+    value: (duck) => duck.rank,
   },
   id: {
     name: (<img src="/img/duckIcon.svg" alt="id" className='duckIcon'/>),
@@ -62,22 +64,29 @@ const columns = {
   parties: {
     name: 'parties',
     display: 'parties',
-    sort: (a, b) => a.attributes[0].value - b.attributes[0].value,
-    value: (duck) => `${duck.attributes[0].value} / ${duck.attributes[0].max_value}`,
-  },
+   sort: (a, b) =>  a.attributes.find(attr => attr.trait_type === 'Parties Attended').max_value - b.attributes.find(attr => attr.trait_type === 'Parties Attended').max_value,
+  value: (duck) => `${findPartiesAttendedAttribute(duck.attributes).max_value} / ${findPartiesAttendedAttribute(duck.attributes).value}`,
+},
   rankChange: {
     name: 'rank change',
     display: 'rank change',
     sort: (a, b) =>
-      (a.history.length > 1 ? a.history[1].rank - a.history[0].rank : 0) -
-      (b.history.length > 1 ? b.history[1].rank - b.history[0].rank : 0),
-    value: (duck) => (duck.history.length > 1 ? duck.history[1].rank - duck.history[0].rank : 0),
+      (a.history.length > 1 ? a.rank - a.history[0].rank : 0) -
+      (b.history.length > 1 ? b.rank - b.history[0].rank : 0),
+    value: (duck) => (duck.history.length > 1 ? duck.rank - duck.history[0].rank : 0),
   },
   totalTraits: {
     name: 'total traits',
     display: 'total traits',
     sort: (a, b) => a.attributes.length - b.attributes.length,
     value: (duck) => duck.attributes.length - 1,
+  },
+  
+  totalDucks:{
+    name: 'total ducks',
+    display: 'tub count',
+    sort: (a, b) => a.numOwned - b.numOwned,
+    value: (duck) => duck.numOwned,
   },
   background: {
     name: 'Background',

@@ -25,9 +25,9 @@ function getImageURL(traitType, traitName) {
     extension = 'gif';
   }
   if (traitName === undefined) {
-    return `https://duck.art/img/preview/body/01.png`;
+    return `https://duck.art/img/preview-23/body/01.png`;
   }
-  return `https://duck.art/img/preview/${traitType}/${traitName}.${extension}`;
+  return `https://duck.art/img/preview-23/${traitType}/${traitName}.${extension}`;
 }
 
 function getTraitLink(traitType, traitName) {
@@ -75,12 +75,13 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
           traitLabels[traitType] = getTraitLabel(duck, traitType);
           traits[traitType] = getTrait(duck, traitType);
         }
+        console.log(duck.history);
         return (
           <tr key={index}>
             <td>{columns['rank'].value(duck)}</td>
             <td>
               <a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
-                <img src={duck.history[0].image} alt="duck" className='duckImage'/>
+                <img src={duck.image} alt="duck" className='duckImage'/>
               </a>
               <p className="duckLabel">{columns['id'].value(duck)}</p>
             </td>

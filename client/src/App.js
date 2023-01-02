@@ -70,13 +70,13 @@ function TableTypeBar({setTableType, setReset, reset}) {
         }}>
           <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
         </button>
-        {
+        {/*
         <button className="button row orange" onClick={() => {
           setTableType("timeline");
           scrollToLeft();
         }}>Parties
         </button>
-        }
+        */}
       </div>
 
       <div className='control'>
@@ -116,7 +116,6 @@ function App() {
       let fullHistory = [];
       for (const duck of newDatabases['allDucks']) {
         if (duck.history.length === 10) {
-          console.log(duck.history[7418]);
           for (const history of duck.history) {
             fullHistory.push(history.image.split('/')[4]);
           }
@@ -173,7 +172,7 @@ function App() {
         duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']].push(backpackAttr['value']);
       }));
       newDatabases['allDucks'] = Object.values(duckDict);
-      // newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
+
       let owners = [];
       await fetch('https://eth-mainnet.g.alchemy.com/nft/v2/_kvvDJ6IbZMKDb_OY5d57rqteprc3NdK/getOwnersForCollection?contractAddress=0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6&withTokenBalances=true',
         {
@@ -187,14 +186,17 @@ function App() {
         .catch(err => console.error(err));
       for (const owner of owners) {
         for (const token of owner['tokenBalances']) {
-          newDatabases['allDucks'][parseInt(token['tokenId'], 16) - 1]['owner'] = owner['ownerAddress'];
-          token['duck'] = newDatabases['allDucks'][parseInt(token['tokenId'], 16) - 1];
+          const numDucks = owner['tokenBalances'].length;
+          const duckIndex = parseInt(token['tokenId'], 16) - 1;
+            //console.log(`Owner ${owner['ownerAddress']} has ${numDucks} ducks`);
+          newDatabases['allDucks'][duckIndex]['owner'] = owner['ownerAddress'];
+          newDatabases['allDucks'][duckIndex]['numOwned'] = numDucks;
+          token['duck'] = newDatabases['allDucks'][duckIndex];
         }
       }
       newDatabases['owners'] = owners;
-
-      newDatabases['allDucks'].sort((a, b) => a['history'][0]['rank'] - b['history'][0]['rank']);
-
+      newDatabases['allDucks'].sort((a, b) => a['rank'] - b['rank']);
+     
       setDatabases(newDatabases);
       setOriginalDatabases(JSON.parse(JSON.stringify(newDatabases)));
       setSorts({});
@@ -273,7 +275,7 @@ function App() {
     }
     return filteredDucks;
   }
-
+  
   useEffect(() => {
     if (databases) {
       setDatabases({...databases, allDucks: runAllSorts(databases['allDucks'])});
@@ -316,7 +318,7 @@ function App() {
                                 setFilters={setFilters}
         />
         break;
-      
+      /*
       case "timeline":
         table = <TimelineTable databases={databases}
                                amountToLoad={amountToLoad}
@@ -324,7 +326,7 @@ function App() {
                                sorts={sorts}
                                filters={filters}/>
         break;
-      
+        */
       default:
         table = <MainTable databases={databases}
                            amountToLoad={amountToLoad}/>;

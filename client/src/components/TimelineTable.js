@@ -1,4 +1,3 @@
-import { version } from "react";
 import columns from "./helpers";
 import {TableHeaderSortable} from "./TableHelpers";
 

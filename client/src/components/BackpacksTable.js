@@ -56,7 +56,7 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
             <td>{columns['rank'].value(duck)}</td>
             <td>
                 <a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
-                  <img src={duck.history[0].image} alt="duck" className='duckImage'/>
+                  <img src={duck.image} alt="duck" className='duckImage'/>
                 </a>
                 <p className="duckLabel">{columns['id'].value(duck)}</p>
             </td>
