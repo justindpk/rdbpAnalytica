@@ -57,7 +57,7 @@ const columns = {
   },
   version: {
     name: 'version',
-    display: 'version',
+    display: 'versions',
     sort: (a, b) => a.history[0].version - b.history[0].version,
     value: (duck) => duck.history[0].version,
   },
@@ -77,7 +77,7 @@ const columns = {
   },
   totalTraits: {
     name: 'total traits',
-    display: 'total traits',
+    display: 'traits',
     sort: (a, b) => a.attributes.length - b.attributes.length,
     value: (duck) => duck.attributes.length - 1,
   },
@@ -85,7 +85,8 @@ const columns = {
   totalDucks:{
     name: 'total ducks',
     display: 'tub count',
-    sort: (a, b) => a.numOwned - b.numOwned,
+    sort: (a, b) =>{
+},
     value: (duck) => duck.numOwned,
   },
   background: {

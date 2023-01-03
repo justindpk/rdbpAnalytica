@@ -11,16 +11,22 @@ th,
 td {
     padding: 10px 15px;
     vertical-align: middle;
-    border-right: 1px solid $color-burgundy;
-    border-bottom: 1px solid $color-burgundy;
+    border-right: 0px solid $color-burgundy;
+    border-bottom: 0px solid $color-burgundy;
     user-select: none;
+    
+ 
 }
 
 th {
     position: sticky;
     top: 88px;
-    border-bottom: 3px solid $color-burgundy;
-    background: $color-lightYellow;
+    border-bottom: 2px solid $color-burgundy;
+    background: $color-beige;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 0px;
+
+
+   // box-shadow:0px 2px 0px $color-burgundy;
 }
 
 thead {
@@ -33,14 +39,13 @@ thead {
 }
 
 td {
-    border-bottom: 1px solid $color-burgundy;
-    border-right: 1px solid $color-burgundy;
+    border-bottom: 0px solid $color-burgundy;
+    border-right: 0px solid $color-burgundy;
     //border: 1px solid $color-burgundy;
     text-align: center;
     //background: $color-lightYellow;
     font-size: 16px;
     font-weight: $font-weight-medium;
-    padding-top: 8px;
     padding-bottom: 4px;
 }
 
@@ -136,14 +141,18 @@ select {
 }
 
 .columnTitle {
-    text-decoration: underline 1.5px solid $color-burgundy;
+   // text-decoration: underline 1.5px solid $color-burgundy;
     text-underline-offset: 5px;
     font-family: $font-text;
     font-size: 16px;
     text-align: center;
+    margin: 0px;
     display: inline;
-
+    &:hover {
+        color: $color-red ;
+    }
 }
+
 
 .duckTable {
     display: flex;
@@ -153,8 +162,8 @@ select {
 }
 
 .duckImage {
-    width: 117px;
-    height: 117px;
+    width: 82px;
+    height: 82px;
     border-radius: 8px;
     border: 2px solid $color-burgundy;
     box-sizing: border-box;
@@ -166,6 +175,12 @@ select {
     width: 30px;
     height: 30px;
 }
+
+.crownButtonIcon {
+    width: 35px;
+    height: 35px;
+}
+
 
 .arrowIcon {
     width: 35px;
@@ -184,7 +199,6 @@ select {
 
 .id {
     &.sortableTableHeader {
-        padding-left: 16px;
         position: absolute;
         padding-top: 7px;
     }
@@ -193,7 +207,7 @@ select {
 .egg {
     &.sortableTableHeader {
         position: absolute;
-        padding-top: 22px;
+        padding-top: 16px;
         @include respond-to('medium') {
             padding-left: 2px;
         }
@@ -207,7 +221,7 @@ select {
 .seed {
     &.sortableTableHeader {
         position: absolute;
-        padding-top: 22px;
+        padding-top: 16px;
 
         @include respond-to('medium') {
             padding-left: 2px;
@@ -222,7 +236,7 @@ select {
 .chest {
     &.sortableTableHeader {
         position: absolute;
-        padding-top: 22px;
+        padding-top: 16px;
 
         @include respond-to('medium') {
             padding-left: 2px;
@@ -235,21 +249,25 @@ select {
 }
 
 .traitIcon {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 }
 
 .bpIcon {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 2px solid $color-burgundy;
+    //border-bottom: 2px solid $color-burgundy;
+
 }
 
 .helpMe {
-    padding-right: 40px;
+    padding-right: 10px;
+    &:hover {
+        color: $color-red ;
+    }
 }
 
 

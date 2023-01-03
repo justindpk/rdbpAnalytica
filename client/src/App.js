@@ -14,7 +14,7 @@ function TopBar() {
       <div className="logoAndTitle">
 
         <div className="analyticaLogo">
-          <img src="/img/analyticaStrawberryDuckSmiling.png" alt="strawberry duck"/>
+          <img src="/img/analyticaStrawberryDuckWinking.png" alt="strawberry duck"/>
         </div>
         <div className="analyticaTitle">
           <h1> RDBP Analytica </h1>
@@ -62,7 +62,8 @@ function TableTypeBar({setTableType, setReset, reset}) {
         <button className="button row red" onClick={() => {
           setTableType("traits");
           scrollToLeft();
-        }}>Traits
+        }}>
+        <img className="crownButtonIcon" src="/img/kingHead.png" alt="ducks"/>
         </button>
         <button className="button row lightPurple" onClick={() => {
           setTableType("backpacks");
@@ -338,9 +339,11 @@ function App() {
   return (
     <div className="mainContainer" onScroll={handleScroll}>
       <TopBar/>
+      
       <div className="doubleHeader">
         <p className="screenerTitle"> Duck Screener </p>
       </div>
+      
       <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
       {table}
     </div>

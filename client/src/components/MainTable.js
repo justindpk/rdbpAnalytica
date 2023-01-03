@@ -11,7 +11,7 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
           <TableHeaderSortable name="version" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="parties" handleSort={handleSort} sorts={sorts}/>
           <TableHeaderSortable name="totalTraits" handleSort={handleSort} sorts={sorts}/>
-          <TableHeaderSortable name="totalDucks" handleSort={handleSort} sorts={sorts}/>
+          <th>Tub Size</th>
           <th>Owner's Tub</th>
           <th>Opensea</th>
         </tr>
@@ -33,7 +33,7 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
               <td>{columns['totalTraits'].value(duck)} / 9</td>
                <td>{columns['totalDucks'].value(duck)}</td>    
               <td><a href = {`https://duck.art/tub#${duck['owner']}`} target="_blank" rel="noreferrer"> <img src={"/img/tubCutout.png"} alt="opensea"
-                                                           style={{width: '180px'}}/> </a> </td>                                         
+                                                           style={{width: '140px'}}/> </a> </td>                                         
               <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                      target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
                                                            style={{width: '45px'}}/></a></td>
