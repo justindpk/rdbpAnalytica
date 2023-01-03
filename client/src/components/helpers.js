@@ -64,8 +64,8 @@ const columns = {
   parties: {
     name: 'parties',
     display: 'parties',
-   sort: (a, b) =>  a.attributes.find(attr => attr.trait_type === 'Parties Attended').max_value - b.attributes.find(attr => attr.trait_type === 'Parties Attended').max_value,
-  value: (duck) => `${findPartiesAttendedAttribute(duck.attributes).max_value} / ${findPartiesAttendedAttribute(duck.attributes).value}`,
+   sort: (a, b) =>  a.attributes.find(attr => attr.trait_type === 'Parties Attended').value - b.attributes.find(attr => attr.trait_type === 'Parties Attended').value,
+  value: (duck) => `${findPartiesAttendedAttribute(duck.attributes).value} / ${findPartiesAttendedAttribute(duck.attributes).max_value}`,
 },
   rankChange: {
     name: 'rank change',
