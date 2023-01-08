@@ -15,13 +15,25 @@ const findPartiesAttendedAttribute = (attributes) => attributes.find(attr => att
 const columns = {
   rank: {
     name: 'rank',
-    display: 'rank',
+    display: 'duck rank',
     sort: (a, b) => a.rank - b.rank,
     value: (duck) => duck.rank,
+  },
+  cubeRank: {
+    name: 'cube rank',
+    display: 'cube rank',
+    sort: (a, b) => a.cubeRank - b.cubeRank,
+    value: (duck) => duck.cubeRank,
   },
   id: {
     name: (<img src="/img/duckIcon.svg" alt="id" className='duckIcon'/>),
     display: (<img src="/img/duckIcon.svg" alt="id" className='duckIcon'/>),
+    sort: (a, b) => a.duck - b.duck,
+    value: (duck) => duck.duck,
+  },
+  cube: {
+    name: (<img src="/img/dirtSkyCube.png" alt="cube" className='cubeIcon'/>),
+    display: (<img src="/img/dirtSkyCube.png" alt="cube" className='cubeIcon'/>),
     sort: (a, b) => a.duck - b.duck,
     value: (duck) => duck.duck,
   },

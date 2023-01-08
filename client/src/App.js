@@ -6,22 +6,22 @@ import TraitsTable from "./components/TraitsTable";
 import columns, {scrollToLeft, scrollToTop} from "./components/helpers";
 import TimelineTable from "./components/TimelineTable";
 
-const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits'];
+const databaseNames = ['allDucks', 'globalRarity', 'allBackpacks', 'backpackRarity', 'traits', 'allCubes', 'cubeRarity'];
 
 function TopBar() {
   return (
     <header className="header">
       <div className="logoAndTitle">
-
-        <div className="analyticaLogo">
+        
+        <a className="analyticaLogo" href="https://twitter.com/bludmoneyy" target="_blank" rel="noreferrer">
           <img src="/img/analyticaStrawberryDuckWinking.png" alt="strawberry duck"/>
-        </div>
+        </a>
         <div className="analyticaTitle">
-          <h1> RDBP Analytica </h1>
+        <h1 > Duck Analytica </h1>
           <p className="description">
-            A community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
+            a community project analyzing the <a className="description" href="https://duck.art/" target="_blank"
                                                  rel="noreferrer">
-            Rubber Duck Bath Party </a> NFT collection.
+            Rubber Duck Bath Party </a> NFT collection
           </p>
         </div>
       </div>
@@ -49,27 +49,30 @@ function TopBar() {
   )
 }
 
-function TableTypeBar({setTableType, setReset, reset}) {
+function TableTypeBar({setTableType, setReset, reset, setScreenerTitle}) {
   return (
     <div className="filterBar">
       <div className='left'>
         <button className="button row yellow" onClick={() => {
           setTableType("main");
+          setScreenerTitle("Duck Screener");
           scrollToLeft();
         }}>
           <img className="duckButtonIcon" src="/img/duckIcon.svg" alt="ducks"/>
         </button>
         <button className="button row red" onClick={() => {
           setTableType("traits");
+          setScreenerTitle("Trait Screener");
           scrollToLeft();
         }}>
         <img className="crownButtonIcon" src="/img/kingHead.png" alt="ducks"/>
         </button>
-        <button className="button row lightPurple" onClick={() => {
+        <button className="button row skyBlue" onClick={() => {
           setTableType("backpacks");
+          setScreenerTitle("Cube Screener");
           scrollToLeft();
         }}>
-          <img className="backpackIcon" src="/img/backpack.png" alt="backpacks"/>
+          <img className="cubeButton" src="/img/dirtSkyCube.png" alt="cubes"/>
         </button>
         {/*
         <button className="button row orange" onClick={() => {
@@ -105,6 +108,8 @@ function App() {
   const [reset, setReset] = useState(0);
   const [sorts, setSorts] = useState({});
   const [filters, setFilters] = useState({});
+
+  const [screenerTitle, setScreenerTitle] = useState('Duck Screener');
 
   useEffect(() => {
     async function fetchData() {
@@ -145,8 +150,8 @@ function App() {
           }
         }
         duck.paddedHistory = paddedHistory;
+        console.log(duck);
       }
-
       let traitToID = {};
       for (const [traitType, traits] of Object.entries(newDatabases['traits'])) {
         traitToID[traitType] = {};
@@ -165,6 +170,7 @@ function App() {
 
         duck['backpacks'] = {};
         duckDict[duck['duck']] = duck;
+        duck['cubeImage'] = `https://arweave.net/D2Ob3xpeNg2GAOuA4PhZAiaU31zfohubsW4ERAl52_Q/${duck.duck}.png`;
       }
       newDatabases['allBackpacks'].forEach((duckBackpack) => duckBackpack['attributes'].forEach((backpackAttr) => {
         if (duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']] === undefined) {
@@ -172,7 +178,22 @@ function App() {
         }
         duckDict[duckBackpack['duck']]['backpacks'][backpackAttr['trait_type']].push(backpackAttr['value']);
       }));
+
+      const sortedCubes = newDatabases['allCubes'].sort((a, b) => b.rarityScore - a.rarityScore);
+      sortedCubes.forEach((duckCube, index) => {
+      duckDict[duckCube['cube']]['cubeRank'] = index + 1;
+      duckCube['attributes'].forEach((cubeAttr) => {
+        if (duckDict[duckCube['cube']]['cubes'] === undefined) {
+          duckDict[duckCube['cube']]['cubes'] = {};
+        }
+        if (duckDict[duckCube['cube']]['cubes'][cubeAttr['trait_type']] === undefined) {
+          duckDict[duckCube['cube']]['cubes'][cubeAttr['trait_type']] = [];
+        }
+        duckDict[duckCube['cube']]['cubes'][cubeAttr['trait_type']].push(cubeAttr['value']);
+      });
+      });
       newDatabases['allDucks'] = Object.values(duckDict);
+      console.log(newDatabases['allDucks']);
 
       let owners = [];
       await fetch('https://eth-mainnet.g.alchemy.com/nft/v2/_kvvDJ6IbZMKDb_OY5d57rqteprc3NdK/getOwnersForCollection?contractAddress=0x7A4D1b54dD21ddE804c18B7a830B5Bc6e586a7F6&withTokenBalances=true',
@@ -189,7 +210,6 @@ function App() {
         for (const token of owner['tokenBalances']) {
           const numDucks = owner['tokenBalances'].length;
           const duckIndex = parseInt(token['tokenId'], 16) - 1;
-            //console.log(`Owner ${owner['ownerAddress']} has ${numDucks} ducks`);
           newDatabases['allDucks'][duckIndex]['owner'] = owner['ownerAddress'];
           newDatabases['allDucks'][duckIndex]['numOwned'] = numDucks;
           token['duck'] = newDatabases['allDucks'][duckIndex];
@@ -212,7 +232,6 @@ function App() {
     if (0.95 * (e.target.scrollHeight - e.target.scrollTop) <= e.target.clientHeight) {
       setAmountToLoad(amountToLoad + 10);
     }
-    //console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight);
   }
 
   function handleSort(name) {
@@ -259,7 +278,7 @@ function App() {
             if (attrType === 'trait') {
               if (values.includes(duck['traits'][upperFirst])) {
                 passedDucks.push(duck);
-              } else if (values.includes('None') && !duck['traits'][upperFirst]) {
+            } else if (values.includes('None') && !duck['traits'][upperFirst]) {
                 passedDucks.push(duck);
               }
             } else if (attrType === 'backpack') {
@@ -341,10 +360,10 @@ function App() {
       <TopBar/>
       
       <div className="doubleHeader">
-        <p className="screenerTitle"> Duck Screener </p>
+        <p className="screenerTitle"> {screenerTitle} </p>
       </div>
       
-      <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset}/>
+      <TableTypeBar setTableType={setTableType} reset={reset} setReset={setReset} setScreenerTitle={setScreenerTitle}/>
       {table}
     </div>
   );

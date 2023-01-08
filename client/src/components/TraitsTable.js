@@ -53,10 +53,9 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
     <table>
       <thead>
       <tr>
-        <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
+        <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
         <MultiSelectDropdown name="background" databases={databases} filters={filters} setFilters={setFilters}/>
-        <MultiSelectDropdown name="body" databases={databases} filters={filters} setFilters={setFilters}/>
         <MultiSelectDropdown name="tattoo" databases={databases} filters={filters} setFilters={setFilters}/>
         <MultiSelectDropdown name="head" databases={databases} filters={filters} setFilters={setFilters}/>
         <MultiSelectDropdown name="shirt" databases={databases} filters={filters} setFilters={setFilters}/>
@@ -78,25 +77,19 @@ function TraitsTable({databases, amountToLoad, handleSort, sorts, filters, setFi
         console.log(duck.history);
         return (
           <tr key={index}>
-            <td>{columns['rank'].value(duck)}</td>
             <td>
               <a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
                 <img src={duck.image} alt="duck" className='duckImage'/>
               </a>
               <p className="duckLabel">{columns['id'].value(duck)}</p>
             </td>
+            <td>{columns['rank'].value(duck)}</td>
             <td>
               <a href={getTraitLink('background', traits['Background'])} target="_blank" rel="noreferrer">
                 <img src={getImageURL('background', traitToID['Background'][traits['Background']])} alt="background"
                      className='duckImage'/>
               </a>
               <p className="duckLabel">{traitLabels['Background']}</p></td>
-
-            <td>
-              <a href={getTraitLink('body', traits['Body'])} target="_blank" rel="noreferrer">
-                <img src={getImageURL('body', traitToID['Body'][traits['Body']])} alt="body" className='duckImage'/>
-              </a>
-              <p className="duckLabel">{traitLabels['Body']}</p></td>
 
             <td>
               <a href={getTraitLink('tattoo', traits['Tattoo'])} target="_blank" rel="noreferrer">

@@ -171,6 +171,16 @@ select {
     transition: all .1s;
 }
 
+.cubeImage {
+    width: 82px;
+    height: 82px;
+    border-radius: 8px;
+    border: 2px solid $color-burgundy;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    transition: all .1s;
+}
+
 .duckButtonIcon {
     width: 30px;
     height: 30px;
@@ -195,6 +205,13 @@ select {
 .sortableTableHeader {
     display: inline-flex;
     margin: 0px;
+}
+
+.cube{
+     &.sortableTableHeader {
+        position: absolute;
+        padding-top: 15px;
+    }
 }
 
 .id {

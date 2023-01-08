@@ -5,9 +5,6 @@ import columns from "./helpers";
 //e.g duck = 3078, itemType = Sand
 // return = Beige
 function getItem(duck, itemType) {
-  console.log(duck.backpacks);
-  console.log(itemType);
- 
   return duck.backpacks[itemType][0].toLowerCase();
 }
 
@@ -38,8 +35,8 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
     <table>
       <thead>
       <tr>
-        <TableHeaderSortable name="rank" handleSort={handleSort} sorts={sorts}/>
-        <TableHeaderSortable name="id" handleSort={handleSort} sorts={sorts}/>
+        <TableHeaderSortable name="cube" handleSort={handleSort} sorts={sorts}/>
+        <TableHeaderSortable name="cubeRank" handleSort={handleSort} sorts={sorts}/>
         <MultiSelectDropdown name="paintBucket" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
         <MultiSelectDropdown name="water" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
         <MultiSelectDropdown name="bagOfSand" databases={databases} filters={filters} setFilters={setFilters} attrType='backpack'/>
@@ -53,14 +50,15 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
       {databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
         return (
           <tr key={index}>
-            <td>{columns['rank'].value(duck)}</td>
-            <td>
+             <td>
                 <a href={`https://duck.art/${duck.duck}`} target="_blank" rel="noreferrer">
-                  <img src={duck.image} alt="duck" className='duckImage'/>
+                  <img src={duck.cubeImage} alt="duck" className='cubeImage'/>
                 </a>
                 <p className="duckLabel">{columns['id'].value(duck)}</p>
             </td>
            
+            <td>{columns['cubeRank'].value(duck)}</td>
+          
             <td>
               <img src={getImageURL('paint', getItem(duck, 'Paint'))}
               alt={'paint bucket'} className='duckImage'/>
@@ -78,7 +76,7 @@ function BackpacksTable({databases, amountToLoad, handleSort, sorts, filters, se
             </td>
             <td>{columns['egg'].value(duck)}</td>
             <td>{columns['seed'].value(duck)}</td>
-            <td>{columns['chest'].value(duck)}</td>
+            <td>{columns['chest'].value(duck)}</td> 
             <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                    target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
                                                          style={{width: '45px'}}/></a></td>
