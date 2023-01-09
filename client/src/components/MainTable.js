@@ -22,6 +22,31 @@ function loadLand(ducks) {
   return src;
 }
 
+function loadTub(ducks) {
+  let src;
+  const duck = ducks[0];
+  if (duck) {
+    const count = duck.numOwned;
+    if (count <= 1 ) {
+      src = '/img/tubCutout0.png';
+    } else if (count >= 2 && count <= 10) {
+      src = '/img/tubCutout1.png';
+    } else if (count >= 11 && count <= 20) {
+      src = '/img/tubCutout2.png';
+    } else if (count >= 21 && count <= 99) {
+      src = '/img/tubCutout3.png';
+    } else if (count >= 100) {
+      src = '/img/tubCutout4.png';
+    }
+  }
+
+  if (!src) {
+    src = '/img/dirt.png';
+  }
+
+  return src;
+}
+
 function MainTable({databases, amountToLoad, handleSort, sorts}) {
   return (
       <table>
@@ -41,7 +66,8 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
         <tbody>
         {databases['allDucks'].slice(0, amountToLoad).map((duck, index) => {
           const owner = duck['owner'];
-          const src = loadLand(databases['allDucks'].filter((duck) => duck.owner === owner));
+          const srcLand = loadLand(databases['allDucks'].filter((duck) => duck.owner === owner));
+          const srcTub = loadTub(databases['allDucks'].filter((duck) => duck.owner === owner));
           return (
             <tr key={index}>
             <td>
@@ -55,9 +81,9 @@ function MainTable({databases, amountToLoad, handleSort, sorts}) {
               <td>{columns['parties'].value(duck)}</td>
               <td>{columns['totalTraits'].value(duck)} / 9</td>
               <td>{columns['totalDucks'].value(duck)}</td>    
-              <td><a href = {`https://duck.art/tub#${duck['owner']}`} target="_blank" rel="noreferrer"> <img src={"/img/tubCutout.png"} alt="opensea"
+              <td><a href = {`https://duck.art/tub#${duck['owner']}`} target="_blank" rel="noreferrer"> <img src={srcTub} alt="opensea"
                                                            style={{width: '140px'}}/> </a> </td>
-              <td><a href = {`https://duck.art/land/${duck['owner']}`} target="_blank" rel="noreferrer"> <img src={src} alt="opensea"
+              <td><a href = {`https://duck.art/land/${duck['owner']}`} target="_blank" rel="noreferrer"> <img src={srcLand} alt="opensea"
                                                            style={{width: '75px'}}/> </a> </td>     
                <td><a href={`https://opensea.io/assets/0x7a4d1b54dd21dde804c18b7a830b5bc6e586a7f6/${duck.duck}`}
                    target="_blank" rel="noreferrer"><img src={"/img/opensea.svg"} alt="opensea"
